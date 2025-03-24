@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../colors.dart';
-import '../icons.dart';
-import '../navigator.dart';
+import '../generated/assets.dart';
+import '../util/colors.dart';
+import '../util/icons.dart';
+import '../util/navigator.dart';
 import 'widgets/gradient_button.dart';
 import 'widgets/text_form.dart';
 
@@ -49,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const Image(
                   height: 190,
-                  image: AssetImage('assets/onboarding1.png'),
+                  image: AssetImage(Assets.assetsOnboarding1),
                 ),
                 const SizedBox(height: 16),
                 const Text(

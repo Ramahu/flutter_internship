@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../navigator.dart';
+import '../network/local/cache_helper.dart';
+import '../util/navigator.dart';
 import 'login_screen.dart';
 import 'widgets/onboarding_widget.dart';
 
@@ -73,8 +74,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     onLastPage
                         ? ElevatedButton(
-                      onPressed: () {
-                        navigateAndReplace( context,const LoginScreen());
+                      onPressed: () async{
+                        await CacheHelper.saveData(key: 'onboarding_done', value: true);
+                        navigateAndReplace(context,const LoginScreen());
                       },
                       child: const Text('Get Started'),
                     )

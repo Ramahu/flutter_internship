@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../colors.dart';
+import '../../util/colors.dart';
 
 Widget defaultGradientBottom({
   required double width,
