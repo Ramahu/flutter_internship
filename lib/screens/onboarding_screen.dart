@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../navigator.dart';
-import 'home_screen.dart';
+import 'login_screen.dart';
 import 'widgets/onboarding_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -74,7 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     onLastPage
                         ? ElevatedButton(
                       onPressed: () {
-                        navigateAndReplace( context,const HomeScreen());
+                        navigateAndReplace( context,const LoginScreen());
                       },
                       child: const Text('Get Started'),
                     )
