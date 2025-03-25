@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'core/router/app_router.dart';
+
 import 'core/network/local/cache_helper.dart';
+import 'core/router/app_router.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      // home: showOnboarding ? const OnboardingScreen() : const LoginScreen(),
     );
   }
 }

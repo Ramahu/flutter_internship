@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/util/colors.dart';
-import '../../../generated/assets.dart';
 import '../../../core/util/icons.dart';
+
+import '../../../generated/assets.dart';
+
 import '../widgets/gradient_button.dart';
 import '../widgets/text_form.dart';
 

@@ -20,7 +20,6 @@ class AppRouter {
   late final GoRouter router = GoRouter(
     initialLocation: showOnboarding ? AppRoutes.onboarding : AppRoutes.login,
     navigatorKey: rootNavigatorKey,
-    // debugLogDiagnostics: AppConfigs.routerLogger,
     routes: [
       GoRoute(
         path: AppRoutes.onboarding,
