@@ -9,11 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:intern/main.dart';
+import 'package:intern/core/network/local/cache_helper.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    bool onboardingDone= CacheHelper.getData(key: 'onboarding_done') ?? false;
+    await tester.pumpWidget(MyApp(showOnboarding: !onboardingDone));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

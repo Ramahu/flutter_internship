@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'network/local/cache_helper.dart';
-import 'screens/login_screen.dart';
-import 'screens/onboarding_screen.dart';
+import 'core/router/app_router.dart';
+import 'core/network/local/cache_helper.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,17 +10,19 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-  final bool showOnboarding;
   const MyApp({super.key, required this.showOnboarding});
+  final bool showOnboarding;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final AppRouter appRouter = AppRouter(showOnboarding);
+    return MaterialApp.router(
+      routerConfig: appRouter.router,
       title: 'intern app',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: showOnboarding ? const OnboardingScreen() : const LoginScreen(),
+      // home: showOnboarding ? const OnboardingScreen() : const LoginScreen(),
     );
   }
 }

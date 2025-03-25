@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../generated/assets.dart';
-import '../util/colors.dart';
-import '../util/icons.dart';
-import '../util/navigator.dart';
-import 'widgets/gradient_button.dart';
-import 'widgets/text_form.dart';
+import '../../../core/util/colors.dart';
+import '../../../generated/assets.dart';
+import '../../../core/util/icons.dart';
+import '../widgets/gradient_button.dart';
+import '../widgets/text_form.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -33,7 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _handleLogin() {
-    print('Login pressed with: ${emailController.text}, ${passwordController.text}');
+    // print('Login pressed with: ${emailController.text},
+    // ${passwordController.text}');
   }
 
   @override
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: grey,
                   ),
                   prefix: const Icon(
-                    mail_outline_outlined,
+                    mailOutlineOutlined,
                     color: indigoAccent,
                   ),
                   onSubmit: (_) {
@@ -105,10 +105,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: grey,
                   ),
                   prefix: const Icon(
-                    key_outlined,
+                    keyOutlined,
                     color: indigoAccent,
                   ),
-                  suffix: isVisible ? visibility : visibility_off,
+                  suffix: isVisible ? visibility : visibilityOff,
                   suffixPressed: () {
                     setState(() {
                       isVisible = !isVisible;
@@ -141,13 +141,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Need an account ?" , style: TextStyle(fontSize: 15,)),
+                    const Text('Need an account ?' ,
+                        style: TextStyle(fontSize: 15,)),
                     Flexible(
                       child: TextButton(
                         onPressed: () {
-                          // navigateAndReplace(context, const SignUp());
                         },
-                        child: const Text("Sign Up"),
+                        child: const Text('Sign Up'),
                       ),
                     ),
                   ],

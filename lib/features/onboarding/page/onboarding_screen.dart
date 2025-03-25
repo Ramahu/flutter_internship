@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../network/local/cache_helper.dart';
-import '../util/navigator.dart';
-import 'login_screen.dart';
-import 'widgets/onboarding_widget.dart';
+import '../../../core/network/local/cache_helper.dart';
+import '../../../core/router/app_router.dart';
+import '../../../generated/assets.dart';
+import '../widgets/onboarding_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -15,6 +16,14 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _controller = PageController();
   bool onLastPage = false;
+
+  Future<void> _completeOnboarding(BuildContext context) async {
+    await CacheHelper.saveData(key: 'onboarding_done',
+        value: true);
+    if (context.mounted) {
+      context.go(AppRoutes.login);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +39,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
             children: const [
               OnboardingPage(
-                imagePath: 'assets/onboarding1.png',
+                imagePath: Assets.assetsOnboarding1,
                 title: 'Welcome',
                 description: 'Experience our app with a clean and fast UI.',
               ),
               OnboardingPage(
-                imagePath:  'assets/onboarding2.png',
+                imagePath:  Assets.assetsOnboarding2,
                 title: 'Secure',
                 description: 'Your data is safe with us at all times.',
               ),
               OnboardingPage(
-                imagePath:  'assets/onboarding3.png',
+                imagePath:  Assets.assetsOnboarding3,
                 title: 'Fast Performance',
                 description: 'Enjoy blazing fast speed across all platforms.',
               ),
@@ -74,10 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     onLastPage
                         ? ElevatedButton(
-                      onPressed: () async{
-                        await CacheHelper.saveData(key: 'onboarding_done', value: true);
-                        navigateAndReplace(context,const LoginScreen());
-                      },
+                      onPressed: () => _completeOnboarding(context),
                       child: const Text('Get Started'),
                     )
                         : ElevatedButton(
