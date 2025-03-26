@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../core/router/app_routes.dart';
 import '../../../core/util/colors.dart';
 import '../../../core/util/icons.dart';
 
 import '../../../generated/assets.dart';
 
+import '../provider/auth_notifier.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/text_form.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
 
@@ -34,14 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _handleLogin() {
-    // print('Login pressed with: ${emailController.text},
-    // ${passwordController.text}');
-  }
 
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    // final authStatus = ref.watch(authProvider);
 
     return Scaffold(
       body: Center(
@@ -138,7 +139,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   context: context,
                   color1: indigoAccent,
                   color2: defaultBlue2,
-                  function: _handleLogin,
+                  function: (){
+                    ref.read(authProvider.notifier).login(emailController.text,
+                        passwordController.text);
+                    context.go(AppRoutes.home);
+                  },
                 ),
                 const SizedBox(height: 30),
                 Row(

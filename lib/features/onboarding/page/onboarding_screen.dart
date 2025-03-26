@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../core/network/local/cache_helper.dart';
-import '../../../core/router/app_router.dart';
 
+import '../../../core/router/app_routes.dart';
 import '../../../generated/assets.dart';
 
 import '../widgets/onboarding_widget.dart';
@@ -24,9 +24,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _completeOnboarding(BuildContext context) async {
     await CacheHelper.saveData(key: 'onboarding_done',
         value: true);
-    if (context.mounted) {
-      context.go(AppRoutes.login);
-    }
   }
 
   @override
