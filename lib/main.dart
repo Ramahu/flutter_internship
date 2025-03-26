@@ -3,14 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/network/local/cache_helper.dart';
 import 'core/router/app_router.dart';
-import 'features/auth/provider/auth_notifier.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   bool onboardingDone = CacheHelper.getData(key: 'onboarding_done') ?? false;
-  final authNotifier = AuthNotifier();
-  authNotifier.isLoggedIn();
+
   runApp(ProviderScope(
       child: MyApp(showOnboarding: !onboardingDone)
   ));
