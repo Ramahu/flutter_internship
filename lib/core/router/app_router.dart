@@ -41,19 +41,9 @@ class AppRouter {
     redirect: (context, state) {
       final authStatus = ref.read(authProvider);
       // final bool isLoggedIn = ref.read(authProvider.notifier).isLoggedIn();
-
       if (!showOnboarding && state.fullPath == AppRoutes.onboarding) {
         return authStatus == AuthStatus.authenticated ?
         AppRoutes.home : AppRoutes.login;
-      }
-      else if (authStatus == AuthStatus.authenticated) {
-        // print ('$authStatus');
-        return AppRoutes.home;
-      }
-      else if (authStatus == AuthStatus.unauthenticated &&
-          state.fullPath != AppRoutes.login &&
-          state.fullPath != AppRoutes.signup) {
-        return AppRoutes.login;
       }
       return null;
     },

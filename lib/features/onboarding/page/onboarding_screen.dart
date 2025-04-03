@@ -24,6 +24,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _completeOnboarding(BuildContext context) async {
     await CacheHelper.saveData(key: 'onboarding_done',
         value: true);
+    if (context.mounted) {
+      context.go(AppRoutes.login);
+    }
   }
 
   @override
@@ -84,7 +87,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     onLastPage
                         ? ElevatedButton(
-                      onPressed: () => _completeOnboarding(context),
+                      onPressed: () {
+                        _completeOnboarding(context);
+                      },
                       child: const Text('Get Started'),
                     )
                         : ElevatedButton(
