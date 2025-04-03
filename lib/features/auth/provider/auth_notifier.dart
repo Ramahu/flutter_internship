@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/enums/auth_status.dart';
@@ -15,14 +17,14 @@ class AuthNotifier extends StateNotifier<AuthStatus> {
         password: password,
       );
       if (response['success']) {
-        print('✅ Login Successful ');
+        state = AuthStatus.authenticated;
+        log('✅ Login Successful ');
+        // await CacheHelper.saveData(key: 'isLoggedIn',
+        //     value: true);
       } else {
-        print('❌ Login Failed: ${response['message']}');
+        state = AuthStatus.unauthenticated;
+        log('❌ Login Failed: ${response['message']}');
       }
-      // await CacheHelper.saveData(key: 'isLoggedIn',
-      //     value: true);
-      state = AuthStatus.authenticated;
-
   }
 
   void logout() async{
@@ -33,8 +35,8 @@ class AuthNotifier extends StateNotifier<AuthStatus> {
 
   bool isLoggedIn() {
     // bool isLoggedIn = CacheHelper.getData(key: 'isLoggedIn') ?? false;
-    return state == AuthStatus.authenticated;
     // return isLoggedIn;
+    return state == AuthStatus.authenticated;
   }
 
 }

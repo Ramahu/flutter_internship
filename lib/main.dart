@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/network/local/cache_helper.dart';
 import 'core/network/remote/api_client.dart';
 import 'core/router/app_router.dart';
+import 'core/theme_notifier.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,12 +25,15 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AppRouter appRouter = AppRouter(showOnboarding,ref);
+    final themeMode = ref.watch(themeProvider);
+
     return MaterialApp.router(
       routerConfig: appRouter.router,
       title: 'intern app',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
+      themeMode: themeMode,
     );
   }
 }

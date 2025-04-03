@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/router/app_routes.dart';
+import '../core/theme_notifier.dart';
 import '../core/util/colors.dart';
 import '../core/util/icons.dart';
 import 'auth/provider/auth_notifier.dart';
@@ -31,10 +32,23 @@ Widget drawer(WidgetRef ref,BuildContext context) => Drawer(
         child: DrawerHeader(
           decoration: BoxDecoration(color: defaultBlue2),
           child: Text('Menu',
-            style: TextStyle(color: Colors.white, fontSize: 24),
+            style: TextStyle(color: white, fontSize: 24),
           ),
         ),
       ),
+      const SizedBox(height: 10),
+      ListTile(
+        leading: Icon(
+          ref.watch(themeProvider) == ThemeMode.dark
+              ? darkMode
+              : darkModeOutlined,
+        ),
+        title: const Text('Dark Mode'),
+        onTap: () {
+          ref.read(themeProvider.notifier).toggleTheme();
+        },
+      ),
+
       const SizedBox(height: 10),
       ListTile(
         leading: const Icon(logout),

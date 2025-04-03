@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/enums/auth_status.dart';
 import '../../../core/router/app_routes.dart';
 import '../../../core/util/colors.dart';
 import '../../../core/util/icons.dart';
 
 import '../../../generated/assets.dart';
 
+import '../provider/auth_notifier.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/text_form.dart';
 
@@ -56,8 +58,12 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     // final authStatus = ref.watch(authProvider);
+    ref.listen<AuthStatus>(authProvider, (previous, next) {
+      if (next == AuthStatus.authenticated) {
+        context.go(AppRoutes.home);
+      }
+    });
 
     return Scaffold(
       body: Center(
@@ -69,18 +75,18 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 20),
                   const Image(
-                    height: 190,
+                    height: 180,
                     image: AssetImage(Assets.assetsOnboarding1),
                   ),
                   const SizedBox(height: 16),
                   const Text(
                     'Sign Up',
-                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 30),
                   defaultTextForm(
-                    bgColor:  isDarkMode ? grey[800] :grey[200],
                     controller: nameController,
                     type: TextInputType.text,
                     focusNode: nameFocusNode,
@@ -111,7 +117,6 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   ),
                   const SizedBox(height: 15,),
                   defaultTextForm(
-                    bgColor:  isDarkMode ? grey[800] :grey[200],
                     controller: emailController,
                     type: TextInputType.emailAddress,
                     focusNode: emailFocusNode,
@@ -142,7 +147,6 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   ),
                   const SizedBox(height: 15,),
                   defaultTextForm(
-                    bgColor:  isDarkMode ? grey[800] :grey[200],
                     controller: passwordController,
                     type: TextInputType.visiblePassword,
                     focusNode: passwordFocusNode,
@@ -173,6 +177,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       if (value!.isEmpty) {
                         return 'Please enter password';
                       }
+                      if (value.length < 8) {
+                        return 'Short password';
+                      }
                       return null;
                     },
                     border: outlineBorder,
@@ -181,12 +188,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   ),
                   const SizedBox(height: 15,),
                   defaultTextForm(
-                    bgColor:  isDarkMode ? grey[800] :grey[200],
                     controller: verPasswordController,
                     type: TextInputType.visiblePassword,
                     focusNode: verPasswordFocusNode,
                     textInputAction: TextInputAction.done,
-                    label: 'Ver Password',
+                    label: 'confirm Password',
                     labelStyle: const TextStyle(
                       fontSize: 18,
                       color: grey,
@@ -207,7 +213,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     autofillHints: [AutofillHints.password],
                     validate: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter password';
+                        return 'Please enter confirm password';
+                      }
+                      if(passwordController.value.text != value){
+                        return 'Mast match' ;
                       }
                       return null;
                     },
@@ -224,7 +233,6 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     color2: defaultBlue2,
                     function: (){
                       if (formKey.currentState!.validate()) {
-                        context.go(AppRoutes.home);
                       }
                     },
                   ),
@@ -244,6 +252,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),

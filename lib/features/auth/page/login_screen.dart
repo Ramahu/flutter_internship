@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/enums/auth_status.dart';
 import '../../../core/router/app_routes.dart';
 import '../../../core/util/colors.dart';
 import '../../../core/util/icons.dart';
@@ -49,8 +50,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     // final authStatus = ref.watch(authProvider);
+    ref.listen<AuthStatus>(authProvider, (previous, next) {
+      if (next == AuthStatus.authenticated) {
+        context.go(AppRoutes.home);
+      }
+    });
 
     return Scaffold(
       body: Center(
@@ -69,11 +74,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 16),
                   const Text(
                     'Login',
-                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 30),
                   defaultTextForm(
-                    bgColor:  isDarkMode ? grey[800] :grey[200],
                     controller: emailController,
                     type: TextInputType.emailAddress,
                     focusNode: emailFocusNode,
@@ -105,7 +109,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   const SizedBox(height: 20,),
                   defaultTextForm(
-                    bgColor:  isDarkMode ? grey[800] :grey[200],
                     controller: passwordController,
                     type: TextInputType.visiblePassword,
                     focusNode: passwordFocusNode,
@@ -151,7 +154,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ref.read(authProvider.notifier).login(
                             emailController.text,
                             passwordController.text);
-                        context.go(AppRoutes.home);
                       }
                     },
                   ),
