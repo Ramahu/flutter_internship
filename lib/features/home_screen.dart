@@ -27,7 +27,7 @@ Widget drawer(WidgetRef ref,BuildContext context) => Drawer(
     padding: EdgeInsets.zero,
     children: [
       const SizedBox(
-        height: 80,
+        height: 95,
         child: DrawerHeader(
           decoration: BoxDecoration(color: defaultBlue2),
           child: Text('Menu',

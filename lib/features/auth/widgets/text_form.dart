@@ -29,14 +29,7 @@ Widget defaultTextForm({
   double? height,
   double radius = 35.0,
 
-}) => Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius),
-          color: bgColor),
-      child: TextFormField(
+}) => TextFormField(
         controller: controller,
         keyboardType: type,
         focusNode: focusNode,
@@ -67,5 +60,4 @@ Widget defaultTextForm({
           focusedBorder: focusedBorder,
           border: border,
         ),
-      ),
     );

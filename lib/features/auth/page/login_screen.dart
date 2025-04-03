@@ -26,8 +26,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  var formKey = GlobalKey<FormState>();
+
   bool isVisible = false;
   InputBorder noneBorder = InputBorder.none;
+  InputBorder outlineBorder = const OutlineInputBorder(
+  borderRadius:
+  BorderRadius.all(Radius.circular(25)),
+  borderSide: BorderSide(
+  color: defaultBlue2,
+  ),
+  );
 
   @override
   void dispose() {
@@ -49,118 +58,126 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Image(
-                  height: 190,
-                  image: AssetImage(Assets.assetsOnboarding1),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Login',
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 30),
-                defaultTextForm(
-                  width: 350,
-                  height: 50,
-                  bgColor:  isDarkMode ? grey[800] :grey[200],
-                  controller: emailController,
-                  type: TextInputType.emailAddress,
-                  focusNode: emailFocusNode,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  autofillHints: [AutofillHints.email],
-                  textInputAction: TextInputAction.next,
-                  label: 'Email Address',
-                  labelStyle: const TextStyle(
-                    fontSize: 18,
-                    color: grey,
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Image(
+                    height: 190,
+                    image: AssetImage(Assets.assetsOnboarding1),
                   ),
-                  prefix: const Icon(
-                    mailOutlineOutlined,
-                    color: indigoAccent,
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Login',
+                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                   ),
-                  onSubmit: (_) {
-                    FocusScope.of(context).requestFocus(passwordFocusNode);
-                  },
-                  validate: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter email address';
-                    }
-                    return null;
-                  },
-                  border:noneBorder,
-                  focusedBorder: noneBorder,
-                  enableBorder: noneBorder,
-                ),
-                const SizedBox(height: 20,),
-                defaultTextForm(
-                  width:350,
-                  height: 50,
-                  bgColor:  isDarkMode ? grey[800] :grey[200],
-                  controller: passwordController,
-                  type: TextInputType.visiblePassword,
-                  focusNode: passwordFocusNode,
-                  textInputAction: TextInputAction.done,
-                  label: 'Password',
-                  labelStyle: const TextStyle(
-                    fontSize: 18,
-                    color: grey,
-                  ),
-                  prefix: const Icon(
-                    keyOutlined,
-                    color: indigoAccent,
-                  ),
-                  suffix: isVisible ? visibility : visibilityOff,
-                  suffixPressed: () {
-                    setState(() {
-                      isVisible = !isVisible;
-                    });
-                  },
-                  isPassword: isVisible?false : true,
-                  maxLines: 1,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  autofillHints: [AutofillHints.password],
-                  validate: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter password';
-                    }
-                    return null;
-                  },
-                  border: noneBorder,
-                  focusedBorder: noneBorder,
-                  enableBorder: noneBorder,
-                ),
-                const SizedBox(height: 20),
-                defaultGradientBottom(
-                  text: ' Log In',
-                  width: 350, height: 50,
-                  context: context,
-                  color1: indigoAccent,
-                  color2: defaultBlue2,
-                  function: (){
-                    ref.read(authProvider.notifier).login(emailController.text,
-                        passwordController.text);
-                    context.go(AppRoutes.home);
-                  },
-                ),
-                const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Need an account ?' ,
-                        style: TextStyle(fontSize: 15,)),
-                    Flexible(
-                      child: TextButton(
-                        onPressed: () {
-                        },
-                        child: const Text('Sign Up'),
-                      ),
+                  const SizedBox(height: 30),
+                  defaultTextForm(
+                    width: 350,
+                    height: 65,
+                    bgColor:  isDarkMode ? grey[800] :grey[200],
+                    controller: emailController,
+                    type: TextInputType.emailAddress,
+                    focusNode: emailFocusNode,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    autofillHints: [AutofillHints.email],
+                    textInputAction: TextInputAction.next,
+                    maxLines: 1,
+                    label: 'Email Address',
+                    labelStyle: const TextStyle(
+                      fontSize: 18,
+                      color: grey,
                     ),
-                  ],
-                ),
-              ],
+                    prefix: const Icon(
+                      mailOutlineOutlined,
+                      color: indigoAccent,
+                    ),
+                    onSubmit: (_) {
+                      FocusScope.of(context).requestFocus(passwordFocusNode);
+                    },
+                    validate: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter email address';
+                      }
+                      return null;
+                    },
+                    border: outlineBorder,
+                    focusedBorder: outlineBorder,
+                    enableBorder: outlineBorder,
+                  ),
+                  const SizedBox(height: 20,),
+                  defaultTextForm(
+                    width:350,
+                    height: 65,
+                    bgColor:  isDarkMode ? grey[800] :grey[200],
+                    controller: passwordController,
+                    type: TextInputType.visiblePassword,
+                    focusNode: passwordFocusNode,
+                    textInputAction: TextInputAction.done,
+                    label: 'Password',
+                    labelStyle: const TextStyle(
+                      fontSize: 18,
+                      color: grey,
+                    ),
+                    prefix: const Icon(
+                      keyOutlined,
+                      color: indigoAccent,
+                    ),
+                    suffix: isVisible ? visibility : visibilityOff,
+                    suffixPressed: () {
+                      setState(() {
+                        isVisible = !isVisible;
+                      });
+                    },
+                    isPassword: isVisible?false : true,
+                    maxLines: 1,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    autofillHints: [AutofillHints.password],
+                    validate: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter password';
+                      }
+                      return null;
+                    },
+                    border: outlineBorder,
+                    focusedBorder: outlineBorder,
+                    enableBorder: outlineBorder,
+                  ),
+                  const SizedBox(height: 20),
+                  defaultGradientBottom(
+                    text: ' Log In',
+                    width: 350, height: 50,
+                    context: context,
+                    color1: indigoAccent,
+                    color2: defaultBlue2,
+                    function: (){
+                      if (formKey.currentState!.validate()) {
+                        ref.read(authProvider.notifier).login(
+                            emailController.text,
+                            passwordController.text);
+                        context.go(AppRoutes.home);
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Need an account ?' ,
+                          style: TextStyle(fontSize: 15,)),
+                      Flexible(
+                        child: TextButton(
+                          onPressed: () {
+                            context.go(AppRoutes.signup);
+                          },
+                          child: const Text('Sign Up'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
