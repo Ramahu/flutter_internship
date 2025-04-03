@@ -15,7 +15,7 @@ class AuthNotifier extends StateNotifier<AuthStatus> {
         password: password,
       );
       if (response['success']) {
-        print('✅ Login Successful: ${response['data']}');
+        print('✅ Login Successful ');
       } else {
         print('❌ Login Failed: ${response['message']}');
       }

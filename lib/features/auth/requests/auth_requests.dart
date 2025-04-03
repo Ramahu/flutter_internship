@@ -2,6 +2,7 @@
 
 import '../../../app_configs.dart';
 import '../../../core/network/remote/api_client.dart';
+import '../model/user_model.dart';
 
 class AuthRequests {
   final ApiClient apiClient = ApiClient();
@@ -20,23 +21,19 @@ class AuthRequests {
         endpoint: AppConfigs.login,
         data: data,
       );
+      UserModel user = UserModel.fromJson(response.data);
 
-      // print('============ RESPONSE ===========');
-      // print(response.data);
       // print('========== STATUS CODE ==========');
       // print(response.statusCode);
 
       return {
         'success': true,
-        'data': response.data,
+        'user' : user,
       };
     } on DioException catch (e) {
-      // print('=========== ERROR ============');
-      // print(e.response?.data ?? e.message);
-
       return {
         'success': false,
-        'message': e.response?.data['message'] ?? 'Login failed',
+        'message': e.response?.statusMessage ?? 'Login failed',
       };
     }
   }
