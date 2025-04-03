@@ -29,7 +29,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   var formKey = GlobalKey<FormState>();
 
   bool isVisible = false;
-  InputBorder noneBorder = InputBorder.none;
   InputBorder outlineBorder = const OutlineInputBorder(
   borderRadius:
   BorderRadius.all(Radius.circular(25)),
@@ -74,8 +73,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   const SizedBox(height: 30),
                   defaultTextForm(
-                    width: 350,
-                    height: 65,
                     bgColor:  isDarkMode ? grey[800] :grey[200],
                     controller: emailController,
                     type: TextInputType.emailAddress,
@@ -108,8 +105,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   const SizedBox(height: 20,),
                   defaultTextForm(
-                    width:350,
-                    height: 65,
                     bgColor:  isDarkMode ? grey[800] :grey[200],
                     controller: passwordController,
                     type: TextInputType.visiblePassword,
@@ -169,7 +164,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Flexible(
                         child: TextButton(
                           onPressed: () {
-                            context.go(AppRoutes.signup);
+                            GoRouter.of(context).push(AppRoutes.signup);
                           },
                           child: const Text('Sign Up'),
                         ),

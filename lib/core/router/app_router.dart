@@ -51,7 +51,8 @@ class AppRouter {
         return AppRoutes.home;
       }
       else if (authStatus == AuthStatus.unauthenticated &&
-          state.fullPath != AppRoutes.login) {
+          state.fullPath != AppRoutes.login &&
+          state.fullPath != AppRoutes.signup) {
         return AppRoutes.login;
       }
       return null;
