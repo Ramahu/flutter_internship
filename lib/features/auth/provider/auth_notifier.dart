@@ -1,15 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../core/enums/auth_status.dart';
+import '../../../core/network/local/secure_storage.dart';
 import '../requests/auth_requests.dart';
 
 
 class AuthNotifier extends StateNotifier<AuthStatus> {
   AuthNotifier() : super(AuthStatus.unauthenticated);
-  final secureStorage = const FlutterSecureStorage();
+  final secureStorage = SecureStorage();
 
   void login(String email, String password) async{
       final authRequests = AuthRequests();
@@ -19,17 +17,17 @@ class AuthNotifier extends StateNotifier<AuthStatus> {
       );
       if (response['success']) {
         state = AuthStatus.authenticated;
-        log('${response['message']}');
 
-        await secureStorage.write(key: 'token', value: response['token']);
+        await secureStorage.saveData(key: 'token',
+            value: response['token']);
 
       } else {
         state = AuthStatus.unauthenticated;
-        log('${response['message']}');
       }
   }
 
   void logout() async{
+    await secureStorage.delete(key: 'token');
     state = AuthStatus.unauthenticated;
   }
 

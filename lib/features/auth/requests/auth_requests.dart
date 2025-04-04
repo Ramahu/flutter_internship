@@ -24,10 +24,6 @@ class AuthRequests {
       UserModel user = UserModel.fromJson(response.data);
       String token = response.data['token'];
 
-      // print('========== STATUS CODE ==========');
-      // print(response.statusCode);
-      // print(response.data);
-
       return {
         'success': true,
         'message': response.data['message'],

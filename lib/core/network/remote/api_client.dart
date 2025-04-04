@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../app_configs.dart';
 import '../../../features/auth/requests/auth_interceptor.dart';
@@ -20,24 +22,30 @@ class ApiClient {
           },
         )
     );
-    dio.interceptors.add(AuthInterceptor());
+
+    dio.interceptors.addAll([
+      AuthInterceptor(),
+      PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          responseHeader: true,
+          error: true,
+          compact: true,
+          maxWidth: 90,
+          enabled: kDebugMode,
+          filter: (options, args){
+            if(options.path.contains('/posts')){
+              return false;
+            }
+            return !args.isResponse || !args.hasUint8ListData;
+          }
+          ),
+    ]);
   }
+
   late Dio dio;
 
-  // static init() {
-  //   dio = Dio(
-  //     BaseOptions(
-  //       baseUrl: AppConfigs.baseUrl,
-  //       connectTimeout: const Duration(seconds: 5),
-  //       receiveTimeout: const Duration(seconds: 3),
-  //       receiveDataWhenStatusError: true,
-  //       headers: {
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json',
-  //       },
-  //     ),
-  //   );
-  // }
 
   Future<Response> postRequest(
       {required String endpoint,
