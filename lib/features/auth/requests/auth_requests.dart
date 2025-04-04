@@ -1,4 +1,4 @@
-  import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 
 import '../../../app_configs.dart';
 import '../../../core/network/remote/api_client.dart';
@@ -22,18 +22,22 @@ class AuthRequests {
         data: data,
       );
       UserModel user = UserModel.fromJson(response.data);
+      String token = response.data['token'];
 
       // print('========== STATUS CODE ==========');
       // print(response.statusCode);
+      // print(response.data);
 
       return {
         'success': true,
+        'message': response.data['message'],
+        'token': token,
         'user' : user,
       };
     } on DioException catch (e) {
       return {
         'success': false,
-        'message': e.response?.statusMessage ?? 'Login failed',
+        'message': e.response?.data['message'] ,
       };
     }
   }
