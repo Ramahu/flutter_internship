@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,9 +7,7 @@ import '../../../core/enums/auth_status.dart';
 import '../../../core/router/app_routes.dart';
 import '../../../core/util/colors.dart';
 import '../../../core/util/icons.dart';
-
 import '../../../generated/assets.dart';
-
 import '../provider/auth_notifier.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/text_form.dart';
@@ -50,7 +49,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final authStatus = ref.watch(authProvider);
     ref.listen<AuthStatus>(authProvider, (previous, next) {
       if (next == AuthStatus.authenticated) {
         context.go(AppRoutes.home);

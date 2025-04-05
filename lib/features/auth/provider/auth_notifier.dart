@@ -26,12 +26,11 @@ class AuthNotifier extends StateNotifier<AuthStatus> {
       }
   }
 
-  void logout() async{
-    await secureStorage.delete(key: 'token');
+  void logout() {
     state = AuthStatus.unauthenticated;
   }
 
-  bool isLoggedIn() {
+  bool isAuth() {
     return state == AuthStatus.authenticated;
   }
 

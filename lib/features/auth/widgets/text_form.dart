@@ -25,8 +25,6 @@ Widget defaultTextForm({
   Color? fillColor,
   Color? suffixIconColor,
   Color? bgColor,
-  // double? width,
-  // double? height,
   double radius = 35.0,
 
 }) => Padding(

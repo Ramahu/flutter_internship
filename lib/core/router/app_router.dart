@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../features/auth/page/login_screen.dart';
 import '../../features/auth/page/signup_screen.dart';
@@ -8,6 +9,7 @@ import '../../features/auth/provider/auth_notifier.dart';
 import '../../features/home_screen.dart';
 import '../../features/onboarding/page/onboarding_screen.dart';
 import '../enums/auth_status.dart';
+
 import 'app_routes.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();

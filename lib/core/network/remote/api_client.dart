@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+
+import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../app_configs.dart';
@@ -34,12 +35,6 @@ class ApiClient {
           compact: true,
           maxWidth: 90,
           enabled: kDebugMode,
-          filter: (options, args){
-            if(options.path.contains('/posts')){
-              return false;
-            }
-            return !args.isResponse || !args.hasUint8ListData;
-          }
           ),
     ]);
   }
@@ -47,9 +42,10 @@ class ApiClient {
   late Dio dio;
 
 
-  Future<Response> postRequest(
-      {required String endpoint,
-      required dynamic data }) async {
+  Future<Response> postRequest({
+    required String endpoint,
+    required dynamic data
+  }) async {
     try {
       final Response response = await dio.post(
         endpoint,
@@ -61,9 +57,10 @@ class ApiClient {
     }
   }
 
-  Future<Response> getRequest(
-    {required String endpoint,
-    Map<String, dynamic>? queryParams }) async {
+  Future<Response> getRequest({
+    required String endpoint,
+    Map<String, dynamic>? queryParams
+  }) async {
     try {
       Response response = await dio.get(endpoint, queryParameters: queryParams);
       return response;
@@ -72,9 +69,10 @@ class ApiClient {
     }
   }
 
-  Future<Response> putRequest(
-    {required String endpoint,
-    required dynamic data }) async {
+  Future<Response> putRequest({
+    required String endpoint,
+    required dynamic data
+  }) async {
     try {
       Response response = await dio.put(endpoint, data: data);
       return response;
@@ -83,7 +81,9 @@ class ApiClient {
     }
   }
 
-  Future<Response> deleteRequest({required String endpoint }) async {
+  Future<Response> deleteRequest({
+    required String endpoint
+  }) async {
     try {
       Response response = await dio.delete(endpoint);
       return response;

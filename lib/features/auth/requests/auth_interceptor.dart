@@ -1,20 +1,20 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/network/local/secure_storage.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/util/storage_keys.dart';
+import '../provider/auth_notifier.dart';
 
 class AuthInterceptor extends Interceptor {
   final secureStorage = SecureStorage();
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler)
-  async {
-
-    String? token = await secureStorage.getData(key: 'token');
-
+  void onRequest(
+    RequestOptions options, 
+    RequestInterceptorHandler handler
+    ) async {
+    String? token = await secureStorage.getData(key: tokenKey);
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
     }
@@ -22,12 +22,18 @@ class AuthInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-
+  void onError(
+    DioException err,
+   ErrorInterceptorHandler handler
+   ) async {
     if (err.response?.statusCode == 401) {
-      rootNavigatorKey.currentContext?.go('/login');
-      log('Unauthorized: Token may be expired.');
+      await secureStorage.delete(key: tokenKey);
+      ProviderScope.containerOf(rootNavigatorKey.currentContext!)
+              .read(authProvider.notifier)
+              .logout();
     }
-    return super.onError(err, handler);
+    return handler.next(err);
   }
+
+  
 }
