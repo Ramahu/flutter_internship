@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatelessWidget {
-
   const OnboardingPage({
     super.key,
     required this.imagePath,
@@ -9,7 +8,7 @@ class OnboardingPage extends StatelessWidget {
     required this.description,
   });
 
-  final  String imagePath;
+  final String imagePath;
   final String title;
   final String description;
 

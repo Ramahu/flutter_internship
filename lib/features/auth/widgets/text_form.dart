@@ -26,10 +26,10 @@ Widget defaultTextForm({
   Color? suffixIconColor,
   Color? bgColor,
   double radius = 35.0,
-
-}) => Padding(
-  padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-  child: TextFormField(
+}) =>
+    Padding(
+      padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      child: TextFormField(
         controller: controller,
         keyboardType: type,
         focusNode: focusNode,
@@ -60,5 +60,5 @@ Widget defaultTextForm({
           focusedBorder: focusedBorder,
           border: border,
         ),
-  ),
+      ),
     );

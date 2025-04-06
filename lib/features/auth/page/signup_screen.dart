@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/enums/auth_status.dart';
 import '../../../core/router/app_routes.dart';
 import '../../../core/util/colors.dart';
 import '../../../core/util/icons.dart';
 import '../../../generated/assets.dart';
-import '../provider/auth_notifier.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/text_form.dart';
 
@@ -34,8 +32,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   bool isVisible = false;
   InputBorder outlineBorder = const OutlineInputBorder(
-    borderRadius:
-    BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.all(Radius.circular(25)),
     borderSide: BorderSide(
       color: defaultBlue2,
     ),
@@ -54,22 +51,14 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    // final authStatus = ref.watch(authProvider);
-    ref.listen<AuthStatus>(authProvider, (previous, next) {
-      if (next == AuthStatus.authenticated) {
-        context.go(AppRoutes.home);
-      }
-    });
-
     return Scaffold(
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: SingleChildScrollView(
-            child:Form(
+            child: Form(
               key: formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -110,11 +99,13 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       }
                       return null;
                     },
-                    border:outlineBorder,
+                    border: outlineBorder,
                     focusedBorder: outlineBorder,
                     enableBorder: outlineBorder,
                   ),
-                  const SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   defaultTextForm(
                     controller: emailController,
                     type: TextInputType.emailAddress,
@@ -140,11 +131,13 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       }
                       return null;
                     },
-                    border:outlineBorder,
+                    border: outlineBorder,
                     focusedBorder: outlineBorder,
                     enableBorder: outlineBorder,
                   ),
-                  const SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   defaultTextForm(
                     controller: passwordController,
                     type: TextInputType.visiblePassword,
@@ -168,7 +161,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                         isVisible = !isVisible;
                       });
                     },
-                    isPassword: isVisible?false : true,
+                    isPassword: isVisible ? false : true,
                     maxLines: 1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     autofillHints: [AutofillHints.password],
@@ -185,7 +178,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     focusedBorder: outlineBorder,
                     enableBorder: outlineBorder,
                   ),
-                  const SizedBox(height: 15,),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   defaultTextForm(
                     controller: verPasswordController,
                     type: TextInputType.visiblePassword,
@@ -206,7 +201,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                         isVisible = !isVisible;
                       });
                     },
-                    isPassword: isVisible?false : true,
+                    isPassword: isVisible ? false : true,
                     maxLines: 1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     autofillHints: [AutofillHints.password],
@@ -214,8 +209,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       if (value!.isEmpty) {
                         return 'Please enter confirm password';
                       }
-                      if(passwordController.value.text != value){
-                        return 'Mast match' ;
+                      if (passwordController.value.text != value) {
+                        return 'Mast match';
                       }
                       return null;
                     },
@@ -226,21 +221,23 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   const SizedBox(height: 20),
                   defaultGradientBottom(
                     text: ' Sign Up',
-                    width: 350, height: 50,
+                    width: 350,
+                    height: 50,
                     context: context,
                     color1: indigoAccent,
                     color2: defaultBlue2,
-                    function: (){
-                      if (formKey.currentState!.validate()) {
-                      }
+                    function: () {
+                      if (formKey.currentState!.validate()) {}
                     },
                   ),
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Already have an account ?' ,
-                          style: TextStyle(fontSize: 15,)),
+                      const Text('Already have an account ?',
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
                       Flexible(
                         child: TextButton(
                           onPressed: () {

@@ -24,5 +24,4 @@ class CacheHelper {
   static dynamic remove({required String key}) {
     return sharedPref?.remove(key);
   }
-
 }

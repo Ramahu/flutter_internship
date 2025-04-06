@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'package:intern/core/router/app_routes.dart';
+
 import '../../../core/network/local/cache_helper.dart';
-import '../../../core/router/app_routes.dart';
 import '../../../generated/assets.dart';
 import '../widgets/onboarding_widget.dart';
 
@@ -20,8 +21,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool onLastPage = false;
 
   Future<void> _completeOnboarding(BuildContext context) async {
-    await CacheHelper.saveData(key: 'onboarding_done',
-        value: true);
+    await CacheHelper.saveData(key: 'onboarding_done', value: true);
     if (context.mounted) {
       context.go(AppRoutes.login);
     }
@@ -46,18 +46,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 description: 'Experience our app with a clean and fast UI.',
               ),
               OnboardingPage(
-                imagePath:  Assets.assetsOnboarding2,
+                imagePath: Assets.assetsOnboarding2,
                 title: 'Secure',
                 description: 'Your data is safe with us at all times.',
               ),
               OnboardingPage(
-                imagePath:  Assets.assetsOnboarding3,
+                imagePath: Assets.assetsOnboarding3,
                 title: 'Fast Performance',
                 description: 'Enjoy blazing fast speed across all platforms.',
               ),
             ],
           ),
-
           Positioned(
             bottom: 40,
             left: 20,
@@ -85,20 +84,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     onLastPage
                         ? ElevatedButton(
-                      onPressed: () {
-                        _completeOnboarding(context);
-                      },
-                      child: const Text('Get Started'),
-                    )
+                            onPressed: () {
+                              _completeOnboarding(context);
+                            },
+                            child: const Text('Get Started'),
+                          )
                         : ElevatedButton(
-                      onPressed: () {
-                        _controller.nextPage(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                      child: const Text('Next'),
-                    ),
+                            onPressed: () {
+                              _controller.nextPage(
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.easeInOut,
+                              );
+                            },
+                            child: const Text('Next'),
+                          ),
                   ],
                 ),
               ],
@@ -109,5 +108,3 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
-
-

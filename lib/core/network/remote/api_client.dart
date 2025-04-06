@@ -9,43 +9,37 @@ import '../../../app_configs.dart';
 import '../../../features/auth/requests/auth_interceptor.dart';
 
 class ApiClient {
-
   ApiClient() {
-    dio = Dio(
-        BaseOptions(
-          baseUrl: AppConfigs.baseUrl,
-          connectTimeout: const Duration(seconds: 5),
-          receiveTimeout: const Duration(seconds: 3),
-          receiveDataWhenStatusError: true,
-          headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-          },
-        )
-    );
+    dio = Dio(BaseOptions(
+      baseUrl: AppConfigs.baseUrl,
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 3),
+      receiveDataWhenStatusError: true,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    ));
 
     dio.interceptors.addAll([
       AuthInterceptor(),
       PrettyDioLogger(
-          requestHeader: true,
-          requestBody: true,
-          responseBody: true,
-          responseHeader: true,
-          error: true,
-          compact: true,
-          maxWidth: 90,
-          enabled: kDebugMode,
-          ),
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: true,
+        error: true,
+        compact: true,
+        maxWidth: 90,
+        enabled: kDebugMode,
+      ),
     ]);
   }
 
   late Dio dio;
 
-
-  Future<Response> postRequest({
-    required String endpoint,
-    required dynamic data
-  }) async {
+  Future<Response> postRequest(
+      {required String endpoint, required dynamic data}) async {
     try {
       final Response response = await dio.post(
         endpoint,
@@ -57,10 +51,8 @@ class ApiClient {
     }
   }
 
-  Future<Response> getRequest({
-    required String endpoint,
-    Map<String, dynamic>? queryParams
-  }) async {
+  Future<Response> getRequest(
+      {required String endpoint, Map<String, dynamic>? queryParams}) async {
     try {
       Response response = await dio.get(endpoint, queryParameters: queryParams);
       return response;
@@ -69,10 +61,8 @@ class ApiClient {
     }
   }
 
-  Future<Response> putRequest({
-    required String endpoint,
-    required dynamic data
-  }) async {
+  Future<Response> putRequest(
+      {required String endpoint, required dynamic data}) async {
     try {
       Response response = await dio.put(endpoint, data: data);
       return response;
@@ -81,9 +71,7 @@ class ApiClient {
     }
   }
 
-  Future<Response> deleteRequest({
-    required String endpoint
-  }) async {
+  Future<Response> deleteRequest({required String endpoint}) async {
     try {
       Response response = await dio.delete(endpoint);
       return response;
@@ -91,5 +79,4 @@ class ApiClient {
       rethrow;
     }
   }
-
 }

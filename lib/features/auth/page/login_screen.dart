@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/enums/auth_status.dart';
 import '../../../core/router/app_routes.dart';
 import '../../../core/util/colors.dart';
 import '../../../core/util/icons.dart';
@@ -30,11 +29,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   bool isVisible = false;
   InputBorder outlineBorder = const OutlineInputBorder(
-  borderRadius:
-  BorderRadius.all(Radius.circular(25)),
-  borderSide: BorderSide(
-  color: defaultBlue2,
-  ),
+    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderSide: BorderSide(
+      color: defaultBlue2,
+    ),
   );
 
   @override
@@ -46,15 +44,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    ref.listen<AuthStatus>(authProvider, (previous, next) {
-      if (next == AuthStatus.authenticated) {
-        context.go(AppRoutes.home);
-      }
-    });
-
     return Scaffold(
       body: Center(
         child: Padding(
@@ -105,7 +96,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     focusedBorder: outlineBorder,
                     enableBorder: outlineBorder,
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   defaultTextForm(
                     controller: passwordController,
                     type: TextInputType.visiblePassword,
@@ -126,7 +119,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         isVisible = !isVisible;
                       });
                     },
-                    isPassword: isVisible?false : true,
+                    isPassword: isVisible ? false : true,
                     maxLines: 1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     autofillHints: [AutofillHints.password],
@@ -143,15 +136,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 20),
                   defaultGradientBottom(
                     text: ' Log In',
-                    width: 350, height: 50,
+                    width: 350,
+                    height: 50,
                     context: context,
                     color1: indigoAccent,
                     color2: defaultBlue2,
-                    function: (){
+                    function: () {
                       if (formKey.currentState!.validate()) {
                         ref.read(authProvider.notifier).login(
-                            emailController.text,
-                            passwordController.text);
+                            emailController.text, passwordController.text);
                       }
                     },
                   ),
@@ -159,8 +152,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Need an account ?' ,
-                          style: TextStyle(fontSize: 15,)),
+                      const Text('Need an account ?',
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
                       Flexible(
                         child: TextButton(
                           onPressed: () {

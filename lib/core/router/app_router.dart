@@ -3,24 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:intern/core/network/local/cache_helper.dart';
+
 import '../../features/auth/page/login_screen.dart';
 import '../../features/auth/page/signup_screen.dart';
 import '../../features/auth/provider/auth_notifier.dart';
 import '../../features/home_screen.dart';
 import '../../features/onboarding/page/onboarding_screen.dart';
-import '../enums/auth_status.dart';
 
 import 'app_routes.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
-class AppRouter {
-  AppRouter(this.showOnboarding,this.ref);
-  final bool showOnboarding;
-  final WidgetRef ref;
+final routerProvider = Provider<GoRouter>((ref) {
+  final isAuth = ValueNotifier<AsyncValue<bool>>(const AsyncLoading());
+  final onboardingDone = CacheHelper.getData(key: 'onboarding_done') ?? false;
 
-  late final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.onboarding ,
+  ref.onDispose(isAuth.dispose);
+
+  ref.listen<AsyncValue<bool>>(
+    authProvider,
+    (_, next) => isAuth.value = next,
+  );
+
+  return GoRouter(
+    initialLocation: AppRoutes.onboarding,
     navigatorKey: rootNavigatorKey,
     routes: [
       GoRoute(
@@ -40,14 +47,19 @@ class AppRouter {
         builder: (context, state) => const HomeScreen(),
       ),
     ],
+    refreshListenable: isAuth,
     redirect: (context, state) {
-      final authStatus = ref.read(authProvider);
+      final authValue = isAuth.value;
+      final loggedIn = authValue.value ?? false;
 
-      if (!showOnboarding && state.fullPath == AppRoutes.onboarding) {
-        return authStatus == AuthStatus.authenticated ?
-        AppRoutes.home : AppRoutes.login;
+      if (onboardingDone && !loggedIn && state.fullPath != AppRoutes.login) {
+        return AppRoutes.login;
       }
+      if (loggedIn && state.fullPath == AppRoutes.login) {
+        return AppRoutes.home;
+      }
+
       return null;
     },
   );
-}
+});

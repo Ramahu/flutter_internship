@@ -10,7 +10,7 @@ Widget defaultGradientBottom({
   required String text,
   required function,
   double radius = 35.0,
-  required context ,
+  required context,
 }) =>
     Container(
       alignment: Alignment.center,
@@ -36,6 +36,6 @@ Widget defaultGradientBottom({
               borderRadius: BorderRadius.circular(radius)),
         ),
         onPressed: function,
-        child: Text(text, style:  const TextStyle(color: white, fontSize: 23)),
+        child: Text(text, style: const TextStyle(color: white, fontSize: 23)),
       ),
     );

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
-import '../core/router/app_routes.dart';
 import '../core/theme_notifier.dart';
 import '../core/util/colors.dart';
 import '../core/util/icons.dart';
@@ -17,49 +15,48 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
-      drawer: drawer(ref,context),
+      drawer: drawer(ref, context),
       body: const Center(
-        child: Text('HOME'),
+        child: Text('home'),
       ),
     );
   }
 }
 
-Widget drawer(WidgetRef ref,BuildContext context) => Drawer(
-  child: ListView(
-    padding: EdgeInsets.zero,
-    children: [
-      const SizedBox(
-        height: 95,
-        child: DrawerHeader(
-          decoration: BoxDecoration(color: defaultBlue2),
-          child: Text('Menu',
-            style: TextStyle(color: white, fontSize: 24),
+Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const SizedBox(
+            height: 95,
+            child: DrawerHeader(
+              decoration: BoxDecoration(color: defaultBlue2),
+              child: Text(
+                'Menu',
+                style: TextStyle(color: white, fontSize: 24),
+              ),
+            ),
           ),
-        ),
+          const SizedBox(height: 10),
+          ListTile(
+            leading: Icon(
+              ref.watch(themeProvider) == ThemeMode.dark
+                  ? darkMode
+                  : darkModeOutlined,
+            ),
+            title: const Text('Dark Mode'),
+            onTap: () {
+              ref.read(themeProvider.notifier).toggleTheme();
+            },
+          ),
+          const SizedBox(height: 10),
+          ListTile(
+            leading: const Icon(logout),
+            title: const Text('Logout'),
+            onTap: () {
+              ref.read(authProvider.notifier).logout();
+            },
+          ),
+        ],
       ),
-      const SizedBox(height: 10),
-      ListTile(
-        leading: Icon(
-          ref.watch(themeProvider) == ThemeMode.dark
-              ? darkMode
-              : darkModeOutlined,
-        ),
-        title: const Text('Dark Mode'),
-        onTap: () {
-          ref.read(themeProvider.notifier).toggleTheme();
-        },
-      ),
-
-      const SizedBox(height: 10),
-      ListTile(
-        leading: const Icon(logout),
-        title: const Text('Logout'),
-        onTap: () {
-          ref.read(authProvider.notifier).logout();
-          context.go(AppRoutes.login);
-          },
-      ),
-    ],
-  ),
-);
+    );

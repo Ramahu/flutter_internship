@@ -1,41 +1,41 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/enums/auth_status.dart';
+import 'package:intern/core/util/storage_keys.dart';
+
 import '../../../core/network/local/secure_storage.dart';
 import '../requests/auth_requests.dart';
 
-
-class AuthNotifier extends StateNotifier<AuthStatus> {
-  AuthNotifier() : super(AuthStatus.unauthenticated);
+class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
+  AuthNotifier() : super(const AsyncValue.loading());
   final secureStorage = SecureStorage();
 
-  void login(String email, String password) async{
+  Future<void> login(String email, String password) async {
+    state = const AsyncValue.loading();
+    try {
       final authRequests = AuthRequests();
       var response = await authRequests.login(
         email: email,
         password: password,
       );
       if (response['success']) {
-        state = AuthStatus.authenticated;
+        await secureStorage.saveData(key: tokenKey, value: response['token']);
 
-        await secureStorage.saveData(key: 'token',
-            value: response['token']);
-
+        state = const AsyncValue.data(true);
       } else {
-        state = AuthStatus.unauthenticated;
+        state = const AsyncValue.data(false);
       }
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
   }
 
-  void logout() {
-    state = AuthStatus.unauthenticated;
+  void logout() async {
+    await secureStorage.delete(key: tokenKey);
+    state = const AsyncValue.data(false);
   }
-
-  bool isAuth() {
-    return state == AuthStatus.authenticated;
-  }
-
 }
 
-final authProvider = StateNotifierProvider<AuthNotifier, AuthStatus>((ref) {
+final authProvider =
+    StateNotifierProvider<AuthNotifier, AsyncValue<bool>>((ref) {
   return AuthNotifier();
 });

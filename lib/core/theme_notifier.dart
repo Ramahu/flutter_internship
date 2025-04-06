@@ -16,8 +16,7 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
 
   Future<void> toggleTheme() async {
     bool isDark = state == ThemeMode.dark;
-    await CacheHelper.saveData(key: 'isDarkMode',
-        value: !isDark);
+    await CacheHelper.saveData(key: 'isDarkMode', value: !isDark);
     state = isDark ? ThemeMode.light : ThemeMode.dark;
   }
 }

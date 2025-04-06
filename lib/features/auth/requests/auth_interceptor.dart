@@ -11,10 +11,9 @@ class AuthInterceptor extends Interceptor {
 
   @override
   void onRequest(
-    RequestOptions options, 
-    RequestInterceptorHandler handler
-    ) async {
+      RequestOptions options, RequestInterceptorHandler handler) async {
     String? token = await secureStorage.getData(key: tokenKey);
+
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
     }
@@ -22,18 +21,12 @@ class AuthInterceptor extends Interceptor {
   }
 
   @override
-  void onError(
-    DioException err,
-   ErrorInterceptorHandler handler
-   ) async {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
-      await secureStorage.delete(key: tokenKey);
       ProviderScope.containerOf(rootNavigatorKey.currentContext!)
-              .read(authProvider.notifier)
-              .logout();
+          .read(authProvider.notifier)
+          .logout();
     }
     return handler.next(err);
   }
-
-  
 }

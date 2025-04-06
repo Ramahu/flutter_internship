@@ -28,14 +28,13 @@ class AuthRequests {
         'success': true,
         'message': response.data['message'],
         'token': token,
-        'user' : user,
+        'user': user,
       };
     } on DioException catch (e) {
       return {
         'success': false,
-        'message': e.response?.data['message'] ,
+        'message': e.response?.data['message'],
       };
     }
   }
-
 }
