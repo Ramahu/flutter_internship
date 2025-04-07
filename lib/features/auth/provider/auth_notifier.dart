@@ -19,7 +19,6 @@ class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
       );
       if (response['success']) {
         await secureStorage.saveData(key: tokenKey, value: response['token']);
-
         state = const AsyncValue.data(true);
       } else {
         state = const AsyncValue.data(false);
@@ -32,6 +31,10 @@ class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
   void logout() async {
     await secureStorage.delete(key: tokenKey);
     state = const AsyncValue.data(false);
+  }
+
+  Future<void> setLoggedIn(bool value) async {
+    state = AsyncData(value);
   }
 }
 
