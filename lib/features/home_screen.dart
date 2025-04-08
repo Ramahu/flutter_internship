@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../core/router/app_routes.dart';
 import '../core/theme_notifier.dart';
 import '../core/util/colors.dart';
 import '../core/util/icons.dart';
@@ -14,10 +16,19 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: AppBar(
+        title: const Text('Home'),
+        elevation: 2,
+      ),
       drawer: drawer(ref, context),
-      body: const Center(
-        child: Text('home'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            lessonsCard(ref, context),
+          ],
+        ),
       ),
     );
   }
@@ -58,5 +69,31 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
             },
           ),
         ],
+      ),
+    );
+
+Widget lessonsCard(WidgetRef ref, BuildContext context) => GestureDetector(
+      onTap: () {
+        context.push(AppRoutes.lessons);
+      },
+      child: Card(
+        color: defaultBlue2,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: const Padding(
+          padding: EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Icon(book, size: 40),
+              SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  'Online Lessons',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );

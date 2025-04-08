@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../app_configs.dart';
-import '../../../features/auth/requests/auth_interceptor.dart';
+import '../../../features/auth/Service/auth_interceptor.dart';
 
 class ApiClient {
   ApiClient() {

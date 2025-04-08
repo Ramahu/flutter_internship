@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intern/core/util/storage_keys.dart';
 
 import '../../../core/network/local/secure_storage.dart';
-import '../requests/auth_requests.dart';
+import '../Service/auth_requests.dart';
 
 class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
   AuthNotifier() : super(const AsyncValue.loading());
