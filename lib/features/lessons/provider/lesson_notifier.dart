@@ -12,11 +12,13 @@ class LessonNotifier extends StateNotifier<AsyncValue<List<LessonModel>>> {
   final int perPage = 10;
   bool hasMore = true;
   bool isFetching = false;
+  String? currentQuery;
 
   Future<void> initial() async {
     lessons.clear();
     currentPage = 1;
     hasMore = true;
+    currentQuery = null;
     await getLessons();
   }
 
@@ -37,6 +39,7 @@ class LessonNotifier extends StateNotifier<AsyncValue<List<LessonModel>>> {
       var response = await lessonRequests.getLessons(
         page: currentPage,
         perPage: perPage,
+        query: currentQuery,
       );
       if (response['success']) {
         final List<LessonModel> newLessons =
@@ -55,6 +58,14 @@ class LessonNotifier extends StateNotifier<AsyncValue<List<LessonModel>>> {
     } finally {
       isFetching = false;
     }
+  }
+
+  Future<void> search(String query) async {
+    lessons.clear();
+    currentQuery = query;
+    currentPage = 1;
+    hasMore = true;
+    await getLessons();
   }
 }
 

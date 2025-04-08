@@ -7,11 +7,21 @@ import '../model/lesson_model.dart';
 class LessonRequests {
   final ApiClient apiClient = ApiClient();
 
-  Future<Map<String, dynamic>> getLessons(
-      {required int page, int perPage = 10}) async {
+  Future<Map<String, dynamic>> getLessons({
+    required int page,
+    int perPage = 10,
+    String? query,
+  }) async {
     try {
+      final queryString = query != null && query.isNotEmpty
+          ? '&query=$query'
+          : '';
+
+      final String endpoint =
+          '${AppConfigs.lesson}?page=$page&per_page=$perPage$queryString';
+
       Response response = await apiClient.getRequest(
-        endpoint: '${AppConfigs.lesson}?page=$page&per_page=$perPage',
+        endpoint: endpoint,
       );
       final data = response.data;
 

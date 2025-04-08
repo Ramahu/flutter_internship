@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // icons used in this app
 
 const book = Icons.book;
+const search = Icons.search;
 const logout = Icons.logout;
 const darkMode = Icons.dark_mode;
 const visibility = Icons.visibility;
