@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../model/lesson_model.dart';
 import '../provider/lesson_notifier.dart';
 import '../widget/lesson_item_widget.dart';
-import '../widget/loading_widget.dart';
+import '../widget/state_widget.dart';
 
 class LessonScreen extends ConsumerStatefulWidget {
   const LessonScreen({super.key});
@@ -52,12 +52,11 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
       ),
       body: lessonState.when(
         loading: loadingWidget,
-        error: (e, _) => Center(child: Text('Error: $e')),
+        error: (e, _) => errorWidget(e),
         data: (lessons) {
           if (lessons.isEmpty) {
             return const Center(child: Text('No lessons available.'));
           }
-
           return lessonsListWidget(_scrollController, lessons, ref);
         },
       ),
@@ -65,7 +64,8 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
   }
 }
 
-Widget lessonsListWidget(scrollController, List<LessonModel> lessons, ref) =>
+Widget lessonsListWidget(
+        ScrollController scrollController, List<LessonModel> lessons, ref) =>
     ListView.separated(
       controller: scrollController,
       padding: const EdgeInsets.all(16),
