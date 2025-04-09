@@ -33,7 +33,7 @@ class LessonModel {
       startUrl: json['start_url'],
       joinUrl: json['join_url'],
       sectionId: json['section_id'],
-      subject: SubjectModel.fromJson(json['subject']),
+      subject: SubjecttModel.fromJson(json['subject']),
     );
   }
   final int id;
@@ -50,14 +50,14 @@ class LessonModel {
   final String startUrl;
   final String joinUrl;
   final int sectionId;
-  final SubjectModel subject;
+  final SubjecttModel subject;
 }
 
-class SubjectModel {
-  SubjectModel({required this.id, required this.name});
+class SubjecttModel {
+  SubjecttModel({required this.id, required this.name});
 
-  factory SubjectModel.fromJson(Map<String, dynamic> json) {
-    return SubjectModel(
+  factory SubjecttModel.fromJson(Map<String, dynamic> json) {
+    return SubjecttModel(
       id: json['id'],
       name: json['name'],
     );

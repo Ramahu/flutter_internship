@@ -134,11 +134,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     enableBorder: outlineBorder,
                   ),
                   const SizedBox(height: 20),
-                  defaultGradientBottom(
+                  defaultGradientButton(
                     text: ' Log In',
                     width: 350,
                     height: 50,
-                    context: context,
                     color1: indigoAccent,
                     color2: defaultBlue2,
                     function: () {

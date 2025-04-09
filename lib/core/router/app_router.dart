@@ -11,6 +11,7 @@ import '../../features/auth/page/signup_screen.dart';
 import '../../features/auth/provider/auth_notifier.dart';
 import '../../features/home_screen.dart';
 import '../../features/lessons/page/lesson_screen.dart';
+import '../../features/lessons/page/subject_filter_screen.dart';
 import '../../features/onboarding/page/onboarding_screen.dart';
 import '../../features/splash/page/splash_screen.dart';
 
@@ -55,6 +56,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.lessons,
         builder: (context, state) => const LessonScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.subjectFilter,
+        builder: (context, state) => const SubjectFilterScreen(),
       ),
     ],
     refreshListenable: isAuth,

@@ -2,40 +2,49 @@ import 'package:flutter/material.dart';
 
 import '../../../core/util/colors.dart';
 
-Widget defaultGradientBottom({
+Widget defaultGradientButton({
   required double width,
   required double height,
   required Color color1,
   required Color color2,
   required String text,
-  required function,
+  required VoidCallback function,
   double radius = 35.0,
-  required context,
-}) =>
-    Container(
-      alignment: Alignment.center,
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            color1,
-            color2,
-          ],
+}) {
+  return SizedBox(
+    width: width,
+    height: height,
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        backgroundColor: transparent,
+        shadowColor:transparent,
+        padding: EdgeInsets.zero,
+      ).copyWith(
+        backgroundColor: WidgetStateProperty.resolveWith((states) {
+          return null; 
+        }),
+      ),
+      onPressed: function,
+      child: Ink(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [color1, color2],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: Container(
+          alignment: Alignment.center,
+          child: Text(
+            text,
+            style: const TextStyle(color: white, fontSize: 23),
+          ),
         ),
       ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: transparent,
-          disabledForegroundColor: transparent,
-          shadowColor: transparent,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(radius)),
-        ),
-        onPressed: function,
-        child: Text(text, style: const TextStyle(color: white, fontSize: 23)),
-      ),
-    );
+    ),
+  );
+}

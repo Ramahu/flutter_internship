@@ -4,10 +4,11 @@ import '../Service/lesson_requests.dart';
 import '../model/lesson_model.dart';
 
 class LessonNotifier extends StateNotifier<AsyncValue<List<LessonModel>>> {
-  LessonNotifier() : super(const AsyncLoading()) {
-    initial();
-  }
+  LessonNotifier() : super(const AsyncLoading());
+
   final lessons = <LessonModel>[];
+  final filterdLessons = <LessonModel>[];
+
   int currentPage = 1;
   final int perPage = 10;
   bool hasMore = true;
@@ -66,6 +67,51 @@ class LessonNotifier extends StateNotifier<AsyncValue<List<LessonModel>>> {
     currentPage = 1;
     hasMore = true;
     await getLessons();
+  }
+
+  Future<void> getFilterdLesson(subjectId, query,
+      {bool clearOld = false}) async {
+    isFetching = true;
+    try {
+      if (clearOld) {
+        filterdLessons.clear();
+        currentPage = 1;
+        hasMore = true;
+      }
+      if (filterdLessons.isEmpty) {
+        state = const AsyncLoading();
+      }
+      final lessonRequests = LessonRequests();
+      var response = await lessonRequests.getFilterdLesson(
+        page: currentPage,
+        perPage: perPage,
+        subjectId: subjectId,
+        query: query,
+      );
+      if (response['success']) {
+        final List<LessonModel> newLessons =
+            response['lessons'] as List<LessonModel>;
+        final meta = response['meta'];
+
+        filterdLessons.addAll(newLessons);
+        hasMore = meta.hasMore;
+
+        state = AsyncValue.data([...filterdLessons]);
+      } else {
+        state = AsyncValue.error(response['message'], StackTrace.current);
+      }
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    } finally {
+      isFetching = false;
+    }
+  }
+
+  Future<void> nextFilter(subjectId, query) async {
+    if (hasMore && !isFetching) {
+      currentPage++;
+      await getFilterdLesson(subjectId, query);
+    }
   }
 }
 

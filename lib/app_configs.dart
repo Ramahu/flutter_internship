@@ -3,4 +3,5 @@ class AppConfigs {
 
   static const String login = '/login';
   static const String lesson = '/student/online-lesson';
+  static const String subject = '/student/my-subjects';
 }
