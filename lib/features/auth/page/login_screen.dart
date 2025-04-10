@@ -136,7 +136,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: 20),
                   defaultGradientButton(
                     text: ' Log In',
-                    width: 350,
+                    width: 280,
                     height: 50,
                     color1: indigoAccent,
                     color2: defaultBlue2,

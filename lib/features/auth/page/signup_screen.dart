@@ -221,7 +221,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   const SizedBox(height: 20),
                   defaultGradientButton(
                     text: ' Sign Up',
-                    width: 350,
+                    width: 280,
                     height: 50,
                     color1: indigoAccent,
                     color2: defaultBlue2,

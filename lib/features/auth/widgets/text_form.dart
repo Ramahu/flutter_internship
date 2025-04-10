@@ -28,7 +28,7 @@ Widget defaultTextForm({
   double radius = 35.0,
 }) =>
     Padding(
-      padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      padding: const EdgeInsets.only(left: 15.0, right: 15.0),
       child: TextFormField(
         controller: controller,
         keyboardType: type,
