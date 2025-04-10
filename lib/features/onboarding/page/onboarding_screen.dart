@@ -7,6 +7,7 @@ import 'package:intern/core/router/app_routes.dart';
 import 'package:intern/core/util/storage_keys.dart';
 
 import '../../../core/network/local/cache_helper.dart';
+import '../../../core/util/colors.dart';
 import '../../../generated/assets.dart';
 import '../widgets/onboarding_widget.dart';
 
@@ -64,13 +65,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             right: 20,
             child: Column(
               children: [
+                const SizedBox(height: 10),
                 SmoothPageIndicator(
                   controller: _controller,
                   count: 3,
-                  effect: WormEffect(
+                  effect: const WormEffect(
                     dotHeight: 12,
                     dotWidth: 12,
-                    activeDotColor: Theme.of(context).colorScheme.primary,
+                    activeDotColor: defaultBlue2,
                   ),
                 ),
                 const SizedBox(height: 20),

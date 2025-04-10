@@ -20,11 +20,11 @@ Widget defaultGradientButton({
           borderRadius: BorderRadius.circular(radius),
         ),
         backgroundColor: transparent,
-        shadowColor:transparent,
+        shadowColor: transparent,
         padding: EdgeInsets.zero,
       ).copyWith(
         backgroundColor: WidgetStateProperty.resolveWith((states) {
-          return null; 
+          return null;
         }),
       ),
       onPressed: function,

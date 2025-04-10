@@ -2,37 +2,39 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Service/lesson_requests.dart';
 import '../model/lesson_model.dart';
+import '../model/subject_model.dart';
 
 class LessonNotifier extends StateNotifier<AsyncValue<List<LessonModel>>> {
   LessonNotifier() : super(const AsyncLoading());
 
   final lessons = <LessonModel>[];
   final filterdLessons = <LessonModel>[];
+  final subjects = <SubjectModel>[];
 
   int currentPage = 1;
-  final int perPage = 10;
+  int perPage = 10;
   bool hasMore = true;
   bool isFetching = false;
   String? currentQuery;
+  int? subjectId;
 
   Future<void> initial() async {
-    lessons.clear();
-    currentPage = 1;
-    hasMore = true;
     currentQuery = null;
-    await getLessons();
+    subjectId = null;
+    await Future.wait([
+      getSubjects(),
+      getLessons(clear: true),
+    ]);
   }
 
-  Future<void> next() async {
-    if (hasMore && !isFetching) {
-      currentPage++;
-      await getLessons();
-    }
-  }
-
-  Future<void> getLessons() async {
+  Future<void> getLessons({bool clear = false}) async {
     isFetching = true;
     try {
+      if (clear) {
+        lessons.clear();
+        currentPage = 1;
+        hasMore = true;
+      }
       if (lessons.isEmpty) {
         state = const AsyncLoading();
       }
@@ -41,6 +43,7 @@ class LessonNotifier extends StateNotifier<AsyncValue<List<LessonModel>>> {
         page: currentPage,
         perPage: perPage,
         query: currentQuery,
+        subjectId: subjectId,
       );
       if (response['success']) {
         final List<LessonModel> newLessons =
@@ -61,56 +64,31 @@ class LessonNotifier extends StateNotifier<AsyncValue<List<LessonModel>>> {
     }
   }
 
-  Future<void> search(String query) async {
-    lessons.clear();
-    currentQuery = query;
-    currentPage = 1;
-    hasMore = true;
-    await getLessons();
-  }
-
-  Future<void> getFilterdLesson(subjectId, query,
-      {bool clearOld = false}) async {
-    isFetching = true;
-    try {
-      if (clearOld) {
-        filterdLessons.clear();
-        currentPage = 1;
-        hasMore = true;
-      }
-      if (filterdLessons.isEmpty) {
-        state = const AsyncLoading();
-      }
-      final lessonRequests = LessonRequests();
-      var response = await lessonRequests.getFilterdLesson(
-        page: currentPage,
-        perPage: perPage,
-        subjectId: subjectId,
-        query: query,
-      );
-      if (response['success']) {
-        final List<LessonModel> newLessons =
-            response['lessons'] as List<LessonModel>;
-        final meta = response['meta'];
-
-        filterdLessons.addAll(newLessons);
-        hasMore = meta.hasMore;
-
-        state = AsyncValue.data([...filterdLessons]);
-      } else {
-        state = AsyncValue.error(response['message'], StackTrace.current);
-      }
-    } catch (e, st) {
-      state = AsyncValue.error(e, st);
-    } finally {
-      isFetching = false;
+  Future<void> next() async {
+    if (hasMore && !isFetching) {
+      currentPage++;
+      await getLessons();
     }
   }
 
-  Future<void> nextFilter(subjectId, query) async {
-    if (hasMore && !isFetching) {
-      currentPage++;
-      await getFilterdLesson(subjectId, query);
+  void setSearchQuery(String? query) {
+    currentQuery = query;
+    getLessons(clear: true);
+  }
+
+  void setSubjectFilter(int? selectedSubjectId) {
+    subjectId = selectedSubjectId;
+    getLessons(clear: true);
+  }
+
+  Future<void> getSubjects() async {
+    try {
+      final result = await LessonRequests().getSubjects();
+      subjects
+        ..clear()
+        ..addAll(result);
+    } catch (e) {
+      //
     }
   }
 }

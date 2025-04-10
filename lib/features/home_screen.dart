@@ -25,7 +25,7 @@ class HomeScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: [lessonsCard(ref, context), subjectCard(ref, context)],
+          children: [lessonsCard(ref, context)],
         ),
       ),
     );
@@ -86,31 +86,6 @@ Widget lessonsCard(WidgetRef ref, BuildContext context) => GestureDetector(
               Expanded(
                 child: Text(
                   'Online Lessons',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-
-Widget subjectCard(WidgetRef ref, BuildContext context) => GestureDetector(
-      onTap: () {
-        context.push(AppRoutes.subjectFilter);
-      },
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: const Padding(
-          padding: EdgeInsets.all(20),
-          child: Row(
-            children: [
-              Icon(book, size: 40),
-              SizedBox(width: 16),
-              Expanded(
-                child: Text(
-                  'Subject',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),

@@ -1,11 +1,11 @@
 class SubjectModel {
   SubjectModel({
-    required this.id,
-    required this.curriculumId,
+    this.id,
+    this.curriculumId,
     required this.name,
-    required this.level,
-    required this.file,
-    required this.numberSession,
+    this.level,
+    this.file,
+    this.numberSession,
   });
 
   factory SubjectModel.fromJson(Map<String, dynamic> json) {
@@ -18,12 +18,12 @@ class SubjectModel {
       numberSession: json['number_session'],
     );
   }
-  final int id;
-  final int curriculumId;
+  final int? id;
+  final int? curriculumId;
   final String name;
-  final String level;
+  final String? level;
   final String? file;
-  final int numberSession;
+  final int? numberSession;
 
   Map<String, dynamic> toJson() {
     return {

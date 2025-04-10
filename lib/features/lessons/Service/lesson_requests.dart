@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import '../../../app_configs.dart';
 import '../../../core/network/remote/api_client.dart';
 import '../model/lesson_model.dart';
+import '../model/subject_model.dart';
 
 class LessonRequests {
   final ApiClient apiClient = ApiClient();
@@ -11,13 +12,20 @@ class LessonRequests {
     required int page,
     int perPage = 10,
     String? query,
+    int? subjectId,
   }) async {
     try {
-      final queryString =
-          query != null && query.isNotEmpty ? '&query=$query' : '';
+      final base = '${AppConfigs.lesson}?page=$page&per_page=$perPage';
+      late final String endpoint;
 
-      final String endpoint =
-          '${AppConfigs.lesson}?page=$page&per_page=$perPage$queryString';
+      if (subjectId == null && (query == null || query.isEmpty)) {
+        endpoint = base;
+      } else if (query != null && subjectId == null) {
+        endpoint = '$base&query=$query';
+      } else {
+        final queryParam = '&query=${query ?? ''}';
+        endpoint = '$base&subject_id=$subjectId$queryParam';
+      }
 
       Response response = await apiClient.getRequest(endpoint: endpoint);
       final data = response.data;
@@ -36,40 +44,24 @@ class LessonRequests {
     } on DioException catch (e) {
       return {
         'success': false,
-        'message': e.response?.data['message'],
+        'message': e.response?.data['message'] ?? 'Something went wrong',
       };
     }
   }
 
-  Future<Map<String, dynamic>> getFilterdLesson({
-    required int page,
-    int perPage = 10,
-    required String query,
-    required int subjectId,
-  }) async {
+  Future<List<SubjectModel>> getSubjects() async {
     try {
-      final queryString =
-          'page=$page&per_page=$perPage&subject_id=$subjectId&query=$query';
-
       final response = await apiClient.getRequest(
-          endpoint: '${AppConfigs.lesson}?$queryString');
-      final data = response.data;
+        endpoint: AppConfigs.subject,
+      );
 
-      final lessons = (data['data'] as List)
-          .map((item) => LessonModel.fromJson(item))
+      final subjects = (response.data['subjects'] as List)
+          .map((item) => SubjectModel.fromJson(item))
           .toList();
 
-      final meta = MetaModel.fromJson(data['meta']);
-      return {
-        'success': true,
-        'lessons': lessons,
-        'meta': meta,
-      };
-    } on DioException catch (e) {
-      return {
-        'success': false,
-        'message': e.response?.data['message'],
-      };
+      return subjects;
+    } catch (_) {
+      return [];
     }
   }
 }
