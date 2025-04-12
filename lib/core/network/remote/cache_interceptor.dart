@@ -8,7 +8,7 @@ class CacheInterceptor {
 
   final CacheOptions options = CacheOptions(
     store: MemCacheStore(),
-    policy: CachePolicy.request,
+    policy: CachePolicy.forceCache,
     hitCacheOnErrorCodes: [401, 403],
     priority: CachePriority.high,
     maxStale: const Duration(days: 7),
