@@ -53,6 +53,7 @@ class LessonRequests {
     try {
       final response = await apiClient.getRequest(
         endpoint: AppConfigs.subject,
+        isCached: true,
       );
 
       final subjects = (response.data['subjects'] as List)

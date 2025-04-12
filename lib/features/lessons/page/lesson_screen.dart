@@ -74,51 +74,36 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
     return Scaffold(
       // subject drop down
       appBar: AppBar(
-        title: PreferredSize(
-          preferredSize: const Size.fromHeight(70),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Online Lessons',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: SizedBox(
+            height: 48,
+            child: DropdownButtonFormField<SubjectModel>(
+              value: selectedSubject,
+              hint: const Text('Select Subject'),
+              items: lessonNotifier.subjects.map((subject) {
+                return DropdownMenuItem<SubjectModel>(
+                  value: subject,
+                  child: Text(subject.name),
+                );
+              }).toList(),
+              onChanged: (subject) {
+                setState(() => selectedSubject = subject);
+                lessonNotifier.setSubjectFilter(subject?.id);
+              },
+              decoration: const InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
-                const SizedBox(width: 15),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: DropdownButtonFormField<SubjectModel>(
-                      value: selectedSubject,
-                      hint: const Text('Select Subject'),
-                      items: lessonNotifier.subjects.map((subject) {
-                        return DropdownMenuItem<SubjectModel>(
-                          value: subject,
-                          child: Text(subject.name),
-                        );
-                      }).toList(),
-                      onChanged: (subject) {
-                        setState(() => selectedSubject = subject);
-                        lessonNotifier.setSubjectFilter(subject?.id);
-                      },
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ),
         elevation: 2,
       ),
+
       body: Column(
         children: [
           // search text field
@@ -141,6 +126,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
               ),
             ),
           ),
+          const SizedBox(height: 5),
           // lesson list
           Expanded(
             child: lessonState.when(

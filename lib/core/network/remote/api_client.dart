@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import 'package:intern/core/network/remote/cache_interceptor.dart';
 
 import '../../../app_configs.dart';
 import '../../../features/auth/Service/auth_interceptor.dart';
@@ -33,6 +36,7 @@ class ApiClient {
         maxWidth: 90,
         enabled: kDebugMode,
       ),
+      CacheInterceptor().dioCacheInterceptor,
     ]);
   }
 
@@ -51,10 +55,21 @@ class ApiClient {
     }
   }
 
-  Future<Response> getRequest(
-      {required String endpoint, Map<String, dynamic>? queryParams}) async {
+  Future<Response> getRequest({
+    required String endpoint,
+    Map<String, dynamic>? queryParams,
+    bool isCached = false,
+  }) async {
     try {
-      Response response = await dio.get(endpoint, queryParameters: queryParams);
+      final cacheOptions = isCached
+          ? CacheInterceptor().options
+          : const CacheOptions(policy: CachePolicy.noCache, store: null);
+
+      Response response = await dio.get(
+        endpoint,
+        queryParameters: queryParams,
+        options: cacheOptions.toOptions(),
+      );
       return response;
     } catch (e) {
       rethrow;
