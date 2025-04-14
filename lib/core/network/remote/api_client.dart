@@ -6,10 +6,19 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import 'package:intern/core/network/remote/cache_interceptor.dart';
-
 import '../../../app_configs.dart';
 import '../../../features/auth/Service/auth_interceptor.dart';
+
+final cacheOptions = CacheOptions(
+    store: MemCacheStore(),
+    policy: CachePolicy.forceCache,
+    priority: CachePriority.high,
+    maxStale: const Duration(days: 7),
+    hitCacheOnErrorCodes: [401, 403, 404, 422],
+    cipher: null,
+    allowPostMethod: false,
+    hitCacheOnNetworkFailure: true,
+    keyBuilder: CacheOptions.defaultCacheKeyBuilder);
 
 class ApiClient {
   ApiClient() {
@@ -26,8 +35,7 @@ class ApiClient {
 
     dio.interceptors.addAll([
       AuthInterceptor(),
-      RemoveCacheControlInterceptor(),
-      CacheInterceptor.dioCacheInterceptor,
+      DioCacheInterceptor(options: cacheOptions),
       PrettyDioLogger(
         requestHeader: true,
         requestBody: true,
@@ -43,6 +51,15 @@ class ApiClient {
 
   late Dio dio;
 
+  Future<void> clearCache() async {
+    try {
+      await cacheOptions.store?.clean(); // Clears all cache
+      print('Cache cleared successfully');
+    } catch (e) {
+      print('Error clearing cache: $e');
+    }
+  }
+
   Future<Response> postRequest(
       {required String endpoint, required dynamic data}) async {
     try {
@@ -56,19 +73,44 @@ class ApiClient {
     }
   }
 
+  /// Merges custom options with cache settings based on `isCached`
+  Options _mergeOptions(Options? options, bool isCached) {
+    // Define the caching policy based on the `isCached` flag
+    final cacheOption = cacheOptions
+        .copyWith(
+          // Enable/disable caching
+          policy: isCached ? CachePolicy.forceCache : CachePolicy.noCache,
+          // Ensures cache duration remains as default
+          maxStale: null,
+        )
+        .toOptions();
+
+    // Merge user-defined options with the cache options
+    return options?.copyWith(
+          extra: {
+            ...?options.extra,
+            ...?cacheOption.extra
+          }, // Merge extra fields
+          headers: {
+            ...?options.headers,
+            ...?cacheOption.headers
+          }, // Merge headers
+        ) ??
+        cacheOption; // If no custom options, return cache settings
+  }
+
   Future<Response> getRequest({
     required String endpoint,
     Map<String, dynamic>? queryParams,
     bool isCached = false,
+    Options? options,
   }) async {
     try {
-      final cacheOptions = isCached
-          ? CacheInterceptor.cacheOptions.toOptions()
-          : CacheInterceptor.noCacheOptions.toOptions();
+      final effectiveOptions = _mergeOptions(options, true);
       Response response = await dio.get(
         endpoint,
         queryParameters: queryParams,
-        options: cacheOptions,
+        options: effectiveOptions,
       );
       return response;
     } catch (e) {
