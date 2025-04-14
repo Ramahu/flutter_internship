@@ -26,6 +26,8 @@ class ApiClient {
 
     dio.interceptors.addAll([
       AuthInterceptor(),
+      RemoveCacheControlInterceptor(),
+      // CacheInterceptor.dioCacheInterceptor,
       PrettyDioLogger(
         requestHeader: true,
         requestBody: true,
@@ -36,7 +38,7 @@ class ApiClient {
         maxWidth: 90,
         enabled: kDebugMode,
       ),
-      CacheInterceptor().dioCacheInterceptor,
+      CacheInterceptor.dioCacheInterceptor,
     ]);
   }
 
@@ -62,13 +64,12 @@ class ApiClient {
   }) async {
     try {
       final cacheOptions = isCached
-          ? CacheInterceptor().options
-          : const CacheOptions(policy: CachePolicy.noCache, store: null);
-
+          ? CacheInterceptor.cacheOptions.toOptions()
+          : CacheInterceptor.noCacheOptions.toOptions();
       Response response = await dio.get(
         endpoint,
         queryParameters: queryParams,
-        options: cacheOptions.toOptions(),
+        options: cacheOptions,
       );
       return response;
     } catch (e) {

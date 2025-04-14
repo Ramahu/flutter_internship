@@ -45,17 +45,21 @@ Widget lessonsListWidget(
 Widget lessonItem(LessonModel lesson) => Card(
       child: Padding(
         padding: const EdgeInsets.all(6.0),
-        child: ListTile(
-          title: Text(
-            lesson.topic,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: ListTile(
+            title: Text(
+              lesson.topic,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              '${lesson.subject.name}\n'
+              'Start: ${lesson.startTime}\n'
+              'End: ${lesson.endTime}',
+            ),
+            onTap: () {},
           ),
-          subtitle: Text(
-            '${lesson.subject.name}\n'
-            'Start: ${lesson.startTime}\n'
-            'End: ${lesson.endTime}',
-          ),
-          onTap: () {},
         ),
       ),
     );
+

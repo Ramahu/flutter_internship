@@ -61,7 +61,7 @@ class LessonRequests {
           .toList();
 
       return subjects;
-    } catch (_) {
+    } catch (e) {
       return [];
     }
   }

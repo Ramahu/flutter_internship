@@ -31,7 +31,8 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
 
     Future.microtask(() async {
       await lessonNotifier.initial();
-      final allSubject = SubjectModel(id: null, name: 'All');
+      
+      final allSubject = SubjectModel(id: null, name: 'الكل');
       if (!lessonNotifier.subjects.any((s) => s.id == null)) {
         lessonNotifier.subjects.insert(0, allSubject);
       }
@@ -84,7 +85,13 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
               items: lessonNotifier.subjects.map((subject) {
                 return DropdownMenuItem<SubjectModel>(
                   value: subject,
-                  child: Text(subject.name),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      subject.name,
+                      textDirection: TextDirection.rtl,
+                    ),
+                  ),
                 );
               }).toList(),
               onChanged: (subject) {

@@ -72,6 +72,8 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
 
 Widget lessonsCard(WidgetRef ref, BuildContext context) => GestureDetector(
       onTap: () {
+        // final lessonNotifier = ref.read(lessonProvider.notifier);
+        // lessonNotifier.getSubjects();
         context.push(AppRoutes.lessons);
       },
       child: Card(

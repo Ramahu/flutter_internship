@@ -9,6 +9,7 @@ import 'core/theme_notifier.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
+  //  await Hive.initFlutter(); 
 
   runApp(const ProviderScope(child: MyApp()));
 }
