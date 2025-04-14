@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 import '../../../app_configs.dart';
 import '../../../core/network/remote/api_client.dart';
+import '../../../core/network/remote/cache_interceptor.dart';
 import '../model/lesson_model.dart';
 import '../model/subject_model.dart';
 
@@ -51,16 +55,31 @@ class LessonRequests {
 
   Future<List<SubjectModel>> getSubjects() async {
     try {
-      final response = await apiClient.getRequest(
-        endpoint: AppConfigs.subject,
-        isCached: true,
-      );
+      final cachedResponse =
+          await CacheInterceptor.cacheOptions.store!.get('subjects');
 
-      final subjects = (response.data['subjects'] as List)
-          .map((item) => SubjectModel.fromJson(item))
-          .toList();
+      if (cachedResponse != null) {
+        log('Returning cached response');
+        final decodedResponse = utf8.decode(cachedResponse.content ?? []);
+        final decodedJson = jsonDecode(decodedResponse);
 
-      return subjects;
+        log('Cached data: $decodedJson');
+
+        final subjects = (decodedJson['subjects'] as List)
+            .map((item) => SubjectModel.fromJson(item))
+            .toList();
+        return subjects;
+      } else {
+        log('No cached data found');
+        final response = await apiClient.getRequest(
+          endpoint: AppConfigs.subject,
+          isCached: true,
+        );
+        final subjects = (response.data['subjects'] as List)
+            .map((item) => SubjectModel.fromJson(item))
+            .toList();
+        return subjects;
+      }
     } catch (e) {
       return [];
     }

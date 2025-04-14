@@ -27,7 +27,7 @@ class ApiClient {
     dio.interceptors.addAll([
       AuthInterceptor(),
       RemoveCacheControlInterceptor(),
-      // CacheInterceptor.dioCacheInterceptor,
+      CacheInterceptor.dioCacheInterceptor,
       PrettyDioLogger(
         requestHeader: true,
         requestBody: true,
@@ -38,7 +38,6 @@ class ApiClient {
         maxWidth: 90,
         enabled: kDebugMode,
       ),
-      CacheInterceptor.dioCacheInterceptor,
     ]);
   }
 

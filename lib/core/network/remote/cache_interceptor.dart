@@ -2,23 +2,28 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
 class CacheInterceptor {
-  static final CacheOptions cacheOptions = CacheOptions(
-    store: MemCacheStore(),
-    policy: CachePolicy.forceCache,
-    priority: CachePriority.high,
-    maxStale: const Duration(days: 7),
-    hitCacheOnErrorCodes: [401, 403],
-    allowPostMethod: false,
-    hitCacheOnNetworkFailure: true,
-  );
+  static late final DioCacheInterceptor dioCacheInterceptor;
+  static late final CacheOptions cacheOptions;
 
+  static Future<void> init() async {
+    cacheOptions = CacheOptions(
+      store: MemCacheStore(),
+      policy: CachePolicy.forceCache,
+      priority: CachePriority.high,
+      maxStale: const Duration(days: 7),
+      hitCacheOnErrorCodes: [401, 403],
+      allowPostMethod: false,
+      hitCacheOnNetworkFailure: true,
+      keyBuilder: ({headers, required url}) => 'subjects',
+    );
+
+    dioCacheInterceptor = DioCacheInterceptor(options: cacheOptions);
+  }
   static final CacheOptions noCacheOptions = CacheOptions(
     policy: CachePolicy.noCache,
     store: MemCacheStore(),
   );
 
-  static final DioCacheInterceptor dioCacheInterceptor =
-      DioCacheInterceptor(options: cacheOptions);
 }
 
 class RemoveCacheControlInterceptor extends Interceptor {

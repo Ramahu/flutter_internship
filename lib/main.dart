@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/network/local/cache_helper.dart';
+import 'core/network/remote/cache_interceptor.dart';
 import 'core/router/app_router.dart';
 import 'core/theme_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await CacheInterceptor.init();
   await CacheHelper.init();
-  //  await Hive.initFlutter(); 
 
   runApp(const ProviderScope(child: MyApp()));
 }

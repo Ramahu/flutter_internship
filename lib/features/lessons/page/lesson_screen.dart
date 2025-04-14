@@ -31,7 +31,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
 
     Future.microtask(() async {
       await lessonNotifier.initial();
-      
+
       final allSubject = SubjectModel(id: null, name: 'الكل');
       if (!lessonNotifier.subjects.any((s) => s.id == null)) {
         lessonNotifier.subjects.insert(0, allSubject);
