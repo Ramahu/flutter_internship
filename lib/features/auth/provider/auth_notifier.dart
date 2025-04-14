@@ -33,6 +33,11 @@ class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
     state = const AsyncValue.data(false);
   }
 
+  void clearCache() async {
+    final authRequests = AuthRequests();
+    await authRequests.clearCache();
+  }
+
   Future<void> setLoggedIn(bool value) async {
     state = AsyncData(value);
   }

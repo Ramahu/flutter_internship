@@ -79,30 +79,33 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: SizedBox(
             height: 48,
-            child: DropdownButtonFormField<SubjectModel>(
-              value: selectedSubject,
-              hint: const Text('Select Subject'),
-              items: lessonNotifier.subjects.map((subject) {
-                return DropdownMenuItem<SubjectModel>(
-                  value: subject,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      subject.name,
-                      textDirection: TextDirection.rtl,
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: DropdownButtonFormField<SubjectModel>(
+                value: selectedSubject,
+                hint: const Text('اختر مادة'),
+                items: lessonNotifier.subjects.map((subject) {
+                  return DropdownMenuItem<SubjectModel>(
+                    value: subject,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        subject.name,
+                        textDirection: TextDirection.rtl,
+                      ),
                     ),
+                  );
+                }).toList(),
+                onChanged: (subject) {
+                  setState(() => selectedSubject = subject);
+                  lessonNotifier.setSubjectFilter(subject?.id);
+                },
+                decoration: const InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                );
-              }).toList(),
-              onChanged: (subject) {
-                setState(() => selectedSubject = subject);
-                lessonNotifier.setSubjectFilter(subject?.id);
-              },
-              decoration: const InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
               ),
             ),
@@ -116,20 +119,23 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
           // search text field
           Padding(
             padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 16.0),
-            child: TextField(
-              controller: searchController,
-              decoration: InputDecoration(
-                labelText: 'Search lessons',
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: TextField(
+                controller: searchController,
+                decoration: InputDecoration(
+                  labelText: 'ابحث هنا',
+                  border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  prefixIcon: const Icon(search),
+                  suffixIcon: searchController.text.isNotEmpty
+                      ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: searchController.clear,
+                        )
+                      : null,
                 ),
-                prefixIcon: const Icon(search),
-                suffixIcon: searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: searchController.clear,
-                      )
-                    : null,
               ),
             ),
           ),

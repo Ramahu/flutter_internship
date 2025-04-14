@@ -37,4 +37,12 @@ class AuthRequests {
       };
     }
   }
+
+  Future<void> clearCache() async {
+    try {
+      await apiClient.clearCache();
+    } catch (e) {
+      //
+    }
+  }
 }

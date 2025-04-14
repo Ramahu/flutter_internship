@@ -60,6 +60,14 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
           ),
           const SizedBox(height: 10),
           ListTile(
+            leading: const Icon(delete),
+            title: const Text('Clear cache'),
+            onTap: () {
+              ref.read(authProvider.notifier).clearCache();
+            },
+          ),
+          const SizedBox(height: 10),
+          ListTile(
             leading: const Icon(logout),
             title: const Text('Logout'),
             onTap: () {
@@ -72,8 +80,6 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
 
 Widget lessonsCard(WidgetRef ref, BuildContext context) => GestureDetector(
       onTap: () {
-        // final lessonNotifier = ref.read(lessonProvider.notifier);
-        // lessonNotifier.getSubjects();
         context.push(AppRoutes.lessons);
       },
       child: Card(
