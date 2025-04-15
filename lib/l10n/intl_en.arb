@@ -26,6 +26,5 @@
     "skip": "Skip",
     "getStarted": "Get Started",
     "next": "Next",
-    "error": "Error",
-    "somethingWentWrong": "Something went wrong"
+    "settings": "Settings"
 }

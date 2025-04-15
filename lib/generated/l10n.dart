@@ -245,19 +245,9 @@ class AppLocalizations {
     return Intl.message('Next', name: 'next', desc: '', args: []);
   }
 
-  /// `Error`
-  String get error {
-    return Intl.message('Error', name: 'error', desc: '', args: []);
-  }
-
-  /// `Something went wrong`
-  String get somethingWentWrong {
-    return Intl.message(
-      'Something went wrong',
-      name: 'somethingWentWrong',
-      desc: '',
-      args: [],
-    );
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
   }
 }
 

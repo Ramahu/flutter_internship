@@ -26,7 +26,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "clearCache": MessageLookupByLibrary.simpleMessage("Clear cache"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
-    "error": MessageLookupByLibrary.simpleMessage("Error"),
     "fastPerformance": MessageLookupByLibrary.simpleMessage("Fast Performance"),
     "fastSubtitle": MessageLookupByLibrary.simpleMessage(
       "Enjoy blazing fast speed across all platforms.",
@@ -55,11 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Your data is safe with us at all times.",
     ),
     "selectSubject": MessageLookupByLibrary.simpleMessage("Select subject"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
-    "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
-      "Something went wrong",
-    ),
     "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "Experience our app with a clean and fast UI.",

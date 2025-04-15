@@ -61,12 +61,14 @@ The app uses [`go_router`](https://pub.dev/packages/go_router) for navigation ma
 #### How to Add a New Route
 
 1. Define the Route Path :
+
 All route paths are defined in `core/router/app_routes.dart`
 To add a new route, define a new static constant in the `AppRoutes` class
 ```dart
   static const String home = '/home';
 ```
 2. Register the Route in the routes list:
+
 Routes are registered in core/router/app_router.dart using GoRoute
 ```dart
 GoRoute(
@@ -84,7 +86,8 @@ context.push(AppRoutes.lessons);
 ```
 Or use named navigation if defined.
 
-4. Add Conditional Redirects (Optional)
+4. Add Conditional Redirects (Optional) :
+
 Redirect logic can be applied in the router configuration
 
 ```dart
@@ -136,6 +139,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 ```
 
 3. Create the Notifier Class:
+
 Create a StateNotifier class that will manage the state. This class should extend StateNotifier<AsyncValue<-->>, where AsyncValue<--> represents the loading, success, or error state of the process.
 ```dart
 class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
@@ -143,6 +147,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
 }
 ```
 4. Add Function:
+
 Inside the Notifier class, define a function that handles the logic (e.g., login, fetchData, etc).
 The state is updated to reflect loading, success, or error based on the result.
 You can call your request class inside this function to make the API call.
@@ -165,6 +170,7 @@ You can call your request class inside this function to make the API call.
 ```
 
 5. Define the Provider:
+
 Finally, define a StateNotifierProvider to expose the Notifier to the rest of the app. This provider can be accessed in your UI code to manage state.
 ```dart
 final authProvider =

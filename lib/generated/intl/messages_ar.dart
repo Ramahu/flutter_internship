@@ -26,7 +26,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "clearCache": MessageLookupByLibrary.simpleMessage("مسح الذاكرة المؤقتة"),
     "darkMode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "emailAddress": MessageLookupByLibrary.simpleMessage(" البريد الإلكتروني"),
-    "error": MessageLookupByLibrary.simpleMessage("خطأ"),
     "fastPerformance": MessageLookupByLibrary.simpleMessage("أداء سريع"),
     "fastSubtitle": MessageLookupByLibrary.simpleMessage(
       "استمتع بسرعة فائقة على جميع المنصات.",
@@ -55,9 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "بياناتك آمنة معنا في جميع الأوقات.",
     ),
     "selectSubject": MessageLookupByLibrary.simpleMessage("اختر المادة"),
+    "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
     "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
-    "somethingWentWrong": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
     "welcome": MessageLookupByLibrary.simpleMessage("مرحبًا"),
   };
 }

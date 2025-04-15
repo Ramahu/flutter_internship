@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:intern/core/localization_notifier.dart';
 import 'package:intern/generated/l10n.dart';
 
 import '../core/router/app_routes.dart';
-import '../core/theme_notifier.dart';
 import '../core/util/colors.dart';
 import '../core/util/icons.dart';
-
-import 'auth/provider/auth_notifier.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -49,47 +45,11 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
             ),
           ),
           const SizedBox(height: 10),
-          DropdownButton<String>(
-            padding: const EdgeInsets.all(10.0),
-            value: ref.watch(languageProvider).languageCode,
-            items: const [
-              DropdownMenuItem(value: 'en', child: Text('English')),
-              DropdownMenuItem(value: 'ar', child: Text('العربية')),
-            ],
-            onChanged: (value) {
-              if (value != null) {
-                ref.read(languageProvider.notifier).setLocale(value);
-              }
-            },
-            underline: const SizedBox(),
-            menuWidth : MediaQuery.of(context).size.width * 0.7
-          ),
-          const SizedBox(height: 10),
           ListTile(
-            leading: Icon(
-              ref.watch(themeProvider) == ThemeMode.dark
-                  ? darkMode
-                  : darkModeOutlined,
-            ),
-            title: Text(AppLocalizations.of(context).darkMode),
+            leading: const Icon(settings),
+            title: Text(AppLocalizations.of(context).settings),
             onTap: () {
-              ref.read(themeProvider.notifier).toggleTheme();
-            },
-          ),
-          const SizedBox(height: 10),
-          ListTile(
-            leading: const Icon(delete),
-            title: Text(AppLocalizations.of(context).clearCache),
-            onTap: () {
-              ref.read(authProvider.notifier).clearCache();
-            },
-          ),
-          const SizedBox(height: 10),
-          ListTile(
-            leading: const Icon(logout),
-            title: Text(AppLocalizations.of(context).logout),
-            onTap: () {
-              ref.read(authProvider.notifier).logout();
+              context.push(AppRoutes.settings);
             },
           ),
         ],
