@@ -260,4 +260,3 @@ lib/
 │   ├── home_screen.dart
 ├── main.dart
 
-lib/ ├── core/ │ ├── network/ # Handles API and caching logic │ ├── router/ # App routing configuration │ ├── util/ # Utility functions and constants │ ├── locale_notifier.dart # Manages app localization │ └── theme_notifier.dart # Manages theme switching │ ├── features/ │ ├── auth/ # Authentication screens and logic │ ├── lessons/ # Online lessons module │ ├── onboarding/ # Onboarding flow │ ├── splash/ # Splash screen logic │ ├── settings/ # Settings screen (language, theme, etc.) │ └── home_screen.dart # Main home screen │ └── main.dart # App entry point
