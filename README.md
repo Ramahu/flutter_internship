@@ -11,7 +11,6 @@ A Flutter application that provides lessons for students.
 - [Features](#-features)
 - [Usage](#-usage)
 - [Folder Structure](#-folder-structure)
-- [License](#-license)
 
 ## Features
 
@@ -39,10 +38,64 @@ Make sure you have the following installed:
 
 ## Installation
 
+This project uses [FVM (Flutter Version Management)](https://fvm.app/) to manage the Flutter SDK version.
+
+1. Clone the repository:
+
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/Ramahu/flutter_internship.git
+cd flutter_internship
+```
+
+2. Make sure you have FVM installed:
+
+```bash
+dart pub global activate fvm
+```
+Install the required Flutter SDK version:
+```bash
+fvm install 3.27.4
+```
+Get the project dependencies:
+```bash
 flutter pub get 
+```
+You can also run Flutter commands using fvm flutter instead of flutter.
+
+3. Recommended Extensions:
+
+This project includes a `.vscode/extensions.json` file that suggests helpful VS Code extensions for development.  
+To install them:
+
+1. Open the project in [Visual Studio Code](https://code.visualstudio.com/)
+2. When prompted, click **"Install All"** to install the recommended extensions
+3. Or open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run:
+
+```bash
+Extensions: Show Recommended Extensions (Workspace)
+```
+
+## Run
+
+To run the project locally, use the following command:
+
+```bash
+flutter run
+```
+Ensure you have a device/emulator connected and the Flutter environment properly set up.
+
+## Build
+
+You can build the project for different platforms using Flutter and FVM.
+
+### Common Build Commands
+
+```bash
+# Build for Android
+fvm flutter build apk --release
+
+# Build for iOS (on macOS)
+fvm flutter build ios --release
 ```
 
 ## Usage
@@ -206,3 +259,5 @@ lib/
 │   ├── splash/
 │   ├── home_screen.dart
 ├── main.dart
+
+lib/ ├── core/ │ ├── network/ # Handles API and caching logic │ ├── router/ # App routing configuration │ ├── util/ # Utility functions and constants │ ├── locale_notifier.dart # Manages app localization │ └── theme_notifier.dart # Manages theme switching │ ├── features/ │ ├── auth/ # Authentication screens and logic │ ├── lessons/ # Online lessons module │ ├── onboarding/ # Onboarding flow │ ├── splash/ # Splash screen logic │ ├── settings/ # Settings screen (language, theme, etc.) │ └── home_screen.dart # Main home screen │ └── main.dart # App entry point
