@@ -20,9 +20,10 @@ A Flutter application that provides lessons for students.
 - onboarding
 - Lessons
 - Theme
+- Localization
 - State Management
 - Routing
-- log
+- Log
 - API calls
 - storage
 
@@ -76,7 +77,10 @@ GoRoute(
 3. Navigate to the Route :
 ```dart
 // Using the path
+// go
 context.go( AppRoutes.home);
+// OR push
+context.push(AppRoutes.lessons);
 ```
 Or use named navigation if defined.
 
@@ -170,6 +174,7 @@ final authProvider =
 ```
 
 6. Call Notifier Functions :
+
 In Riverpod, `ref` is a reference object passed to your providers and widgets that gives you access to other providers and utilities like `read`, `watch`, and `listen`.
 
 | Method             | Description                                           | Rebuilds Widget | Recommended Usage                  |
