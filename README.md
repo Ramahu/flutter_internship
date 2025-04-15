@@ -53,10 +53,6 @@ flutter pub get
   - Filter by subject
   - Scroll to fetch more
 
-### State Management
-- `Riverpod` with `StateNotifier` is used.
-- Each feature has its own provider and notifier.
-
 ### Routing
 
 The app uses [`go_router`](https://pub.dev/packages/go_router) for navigation management.
@@ -113,7 +109,8 @@ redirect: (context, state) {
 
 ### State Management
 
-The app uses [`flutter_riverpod`](https://pub.dev/packages/flutter_riverpod) for managing state, providing a robust and scalable approach to handle UI updates and business logic.
+The app uses [`flutter_riverpod`](https://pub.dev/packages/flutter_riverpod)  with `StateNotifier` is used.
+-Each feature has its own provider and notifier.
 
 
 #### How to Add a New Notifier

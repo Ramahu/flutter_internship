@@ -7,6 +7,7 @@ import '../../../core/router/app_routes.dart';
 import '../../../core/util/colors.dart';
 import '../../../core/util/icons.dart';
 import '../../../generated/assets.dart';
+import '../../../generated/l10n.dart';
 import '../provider/auth_notifier.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/text_form.dart';
@@ -61,9 +62,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     image: AssetImage(Assets.assetsOnboarding1),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                   Text(
+                    AppLocalizations.of(context).login,
+                    style: const TextStyle(fontSize: 30,
+                     fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 30),
                   defaultTextForm(
@@ -74,7 +76,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     autofillHints: [AutofillHints.email],
                     textInputAction: TextInputAction.next,
                     maxLines: 1,
-                    label: 'Email Address',
+                    label: AppLocalizations.of(context).emailAddress,
                     labelStyle: const TextStyle(
                       fontSize: 18,
                       color: grey,
@@ -88,7 +90,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     },
                     validate: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter email address';
+                        return AppLocalizations.of(context).pleaseEnterEmail;
                       }
                       return null;
                     },
@@ -104,7 +106,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     type: TextInputType.visiblePassword,
                     focusNode: passwordFocusNode,
                     textInputAction: TextInputAction.done,
-                    label: 'Password',
+                    label: AppLocalizations.of(context).password,
                     labelStyle: const TextStyle(
                       fontSize: 18,
                       color: grey,
@@ -125,7 +127,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     autofillHints: [AutofillHints.password],
                     validate: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter password';
+                        return AppLocalizations.of(context).pleaseEnterPassword;
                       }
                       return null;
                     },
@@ -135,7 +137,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   const SizedBox(height: 20),
                   defaultGradientButton(
-                    text: ' Log In',
+                    text: AppLocalizations.of(context).login,
                     width: 280,
                     height: 50,
                     color1: indigoAccent,
@@ -151,8 +153,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Need an account ?',
-                          style: TextStyle(
+                      Text(AppLocalizations.of(context).needAccount,
+                          style: const TextStyle(
                             fontSize: 15,
                           )),
                       Flexible(
@@ -160,7 +162,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           onPressed: () {
                             GoRouter.of(context).push(AppRoutes.signup);
                           },
-                          child: const Text('Sign Up'),
+                          child: Text(AppLocalizations.of(context).signUp),
                         ),
                       ),
                     ],

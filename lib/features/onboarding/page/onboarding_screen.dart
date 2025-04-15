@@ -9,6 +9,7 @@ import 'package:intern/core/util/storage_keys.dart';
 import '../../../core/network/local/cache_helper.dart';
 import '../../../core/util/colors.dart';
 import '../../../generated/assets.dart';
+import '../../../generated/l10n.dart';
 import '../widgets/onboarding_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -41,21 +42,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onLastPage = (index == 2);
               });
             },
-            children: const [
+            children: [
               OnboardingPage(
                 imagePath: Assets.assetsOnboarding1,
-                title: 'Welcome',
-                description: 'Experience our app with a clean and fast UI.',
+                title: AppLocalizations.of(context).welcome,
+                description: AppLocalizations.of(context).welcomeSubtitle,
               ),
               OnboardingPage(
                 imagePath: Assets.assetsOnboarding2,
-                title: 'Secure',
-                description: 'Your data is safe with us at all times.',
+                title: AppLocalizations.of(context).secure,
+                description: AppLocalizations.of(context).secureSubtitle,
               ),
               OnboardingPage(
                 imagePath: Assets.assetsOnboarding3,
-                title: 'Fast Performance',
-                description: 'Enjoy blazing fast speed across all platforms.',
+                title: AppLocalizations.of(context).fastPerformance,
+                description: AppLocalizations.of(context).fastSubtitle,
               ),
             ],
           ),
@@ -83,14 +84,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onPressed: () {
                         _controller.jumpToPage(2);
                       },
-                      child: const Text('Skip'),
+                      child: Text(AppLocalizations.of(context).skip),
                     ),
                     onLastPage
                         ? ElevatedButton(
                             onPressed: () {
                               _completeOnboarding(context);
                             },
-                            child: const Text('Get Started'),
+                            child:
+                                Text(AppLocalizations.of(context).getStarted),
                           )
                         : ElevatedButton(
                             onPressed: () {
@@ -99,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 curve: Curves.easeInOut,
                               );
                             },
-                            child: const Text('Next'),
+                            child: Text(AppLocalizations.of(context).next),
                           ),
                   ],
                 ),

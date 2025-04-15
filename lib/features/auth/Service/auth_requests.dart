@@ -33,7 +33,7 @@ class AuthRequests {
     } on DioException catch (e) {
       return {
         'success': false,
-        'message': e.response?.data['message'],
+        'message': e.response?.data['message'] ?? 'Something went wrong',
       };
     }
   }

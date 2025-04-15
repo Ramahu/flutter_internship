@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:intern/core/localization_notifier.dart';
+import 'package:intern/generated/l10n.dart';
+
 import '../core/router/app_routes.dart';
 import '../core/theme_notifier.dart';
 import '../core/util/colors.dart';
@@ -17,7 +20,6 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
         elevation: 2,
       ),
       drawer: drawer(ref, context),
@@ -36,15 +38,31 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const SizedBox(
+          SizedBox(
             height: 95,
             child: DrawerHeader(
-              decoration: BoxDecoration(color: defaultBlue2),
+              decoration: const BoxDecoration(color: defaultBlue2),
               child: Text(
-                'Menu',
-                style: TextStyle(color: white, fontSize: 24),
+                AppLocalizations.of(context).menu,
+                style: const TextStyle(color: white, fontSize: 24),
               ),
             ),
+          ),
+          const SizedBox(height: 10),
+          DropdownButton<String>(
+            padding: const EdgeInsets.all(10.0),
+            value: ref.watch(languageProvider).languageCode,
+            items: const [
+              DropdownMenuItem(value: 'en', child: Text('English')),
+              DropdownMenuItem(value: 'ar', child: Text('العربية')),
+            ],
+            onChanged: (value) {
+              if (value != null) {
+                ref.read(languageProvider.notifier).setLocale(value);
+              }
+            },
+            underline: const SizedBox(),
+            menuWidth : MediaQuery.of(context).size.width * 0.7
           ),
           const SizedBox(height: 10),
           ListTile(
@@ -53,7 +71,7 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
                   ? darkMode
                   : darkModeOutlined,
             ),
-            title: const Text('Dark Mode'),
+            title: Text(AppLocalizations.of(context).darkMode),
             onTap: () {
               ref.read(themeProvider.notifier).toggleTheme();
             },
@@ -61,7 +79,7 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
           const SizedBox(height: 10),
           ListTile(
             leading: const Icon(delete),
-            title: const Text('Clear cache'),
+            title: Text(AppLocalizations.of(context).clearCache),
             onTap: () {
               ref.read(authProvider.notifier).clearCache();
             },
@@ -69,7 +87,7 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
           const SizedBox(height: 10),
           ListTile(
             leading: const Icon(logout),
-            title: const Text('Logout'),
+            title: Text(AppLocalizations.of(context).logout),
             onTap: () {
               ref.read(authProvider.notifier).logout();
             },
@@ -85,16 +103,16 @@ Widget lessonsCard(WidgetRef ref, BuildContext context) => GestureDetector(
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: const Padding(
-          padding: EdgeInsets.all(20),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
           child: Row(
             children: [
-              Icon(book, size: 40),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Expanded(
                 child: Text(
-                  'Online Lessons',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context).onlineLessons,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

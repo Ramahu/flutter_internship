@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intern/features/lessons/widget/lesson_list_widget.dart';
 
 import '../../../core/util/icons.dart';
+import '../../../generated/l10n.dart';
 import '../model/subject_model.dart';
 import '../provider/lesson_notifier.dart';
 import '../widget/state_widget.dart';
@@ -31,8 +32,10 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
 
     Future.microtask(() async {
       await lessonNotifier.initial();
+      final allSubject =
+          // ignore: use_build_context_synchronously
+          SubjectModel(id: null, name: AppLocalizations.of(context).all);
 
-      final allSubject = SubjectModel(id: null, name: 'الكل');
       if (!lessonNotifier.subjects.any((s) => s.id == null)) {
         lessonNotifier.subjects.insert(0, allSubject);
       }
@@ -79,33 +82,30 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: SizedBox(
             height: 48,
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: DropdownButtonFormField<SubjectModel>(
-                value: selectedSubject,
-                hint: const Text('اختر مادة'),
-                items: lessonNotifier.subjects.map((subject) {
-                  return DropdownMenuItem<SubjectModel>(
-                    value: subject,
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        subject.name,
-                        textDirection: TextDirection.rtl,
-                      ),
+            child: DropdownButtonFormField<SubjectModel>(
+              value: selectedSubject,
+              hint: Text(AppLocalizations.of(context).selectSubject),
+              items: lessonNotifier.subjects.map((subject) {
+                return DropdownMenuItem<SubjectModel>(
+                  value: subject,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      subject.name,
+                      textDirection: TextDirection.rtl,
                     ),
-                  );
-                }).toList(),
-                onChanged: (subject) {
-                  setState(() => selectedSubject = subject);
-                  lessonNotifier.setSubjectFilter(subject?.id);
-                },
-                decoration: const InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
+                );
+              }).toList(),
+              onChanged: (subject) {
+                setState(() => selectedSubject = subject);
+                lessonNotifier.setSubjectFilter(subject?.id);
+              },
+              decoration: const InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
               ),
             ),
@@ -119,23 +119,20 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
           // search text field
           Padding(
             padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 16.0),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: TextField(
-                controller: searchController,
-                decoration: InputDecoration(
-                  labelText: 'ابحث هنا',
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  prefixIcon: const Icon(search),
-                  suffixIcon: searchController.text.isNotEmpty
-                      ? IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: searchController.clear,
-                        )
-                      : null,
+            child: TextField(
+              controller: searchController,
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).searchHere,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
+                prefixIcon: const Icon(search),
+                suffixIcon: searchController.text.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: searchController.clear,
+                      )
+                    : null,
               ),
             ),
           ),
@@ -147,7 +144,9 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
               error: (e, _) => errorWidget(e),
               data: (lessons) {
                 if (lessons.isEmpty) {
-                  return const Center(child: Text('No lessons available.'));
+                  return Center(
+                      child: Text(
+                          AppLocalizations.of(context).noLessonsAvailable));
                 }
                 return lessonsListWidget(_scrollController, lessons, ref);
               },

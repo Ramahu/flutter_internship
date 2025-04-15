@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intern/features/lessons/provider/lesson_notifier.dart';
 import 'package:intern/features/lessons/widget/state_widget.dart';
 
+import '../../../generated/l10n.dart';
 import '../model/lesson_model.dart';
 
 Widget lessonsListWidget(
@@ -31,9 +32,11 @@ Widget lessonsListWidget(
               child: loadingWidget(),
             );
           } else if (!hasMore) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Center(child: Text('No more lessons.')),
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Center(
+                child: Text(AppLocalizations.of(context).noMoreLessons),
+              ),
             );
           } else {
             return const SizedBox.shrink();
@@ -62,4 +65,3 @@ Widget lessonItem(LessonModel lesson) => Card(
         ),
       ),
     );
-
