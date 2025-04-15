@@ -252,11 +252,12 @@ lib/
 │   ├── router/
 │   ├── util/
 │   ├── theme_notifier.dart
+│   ├── localization_notifier.dart
 ├── features/
 │   ├── auth/
 │   ├── lessons/
 │   ├── onboarding/
 │   ├── splash/
-│   ├── home_screen.dart
-├── main.dart
-
+│   ├── settings/
+│   └── home_screen.dart
+└── main.dart
