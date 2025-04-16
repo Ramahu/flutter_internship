@@ -19,11 +19,11 @@ A Flutter application that provides lessons for students.
 - onboarding
 - Lessons
 - Theme
-- Localization
-- State Management
-- Routing
+- [Localization](#-Localization)
+- [State Management](#-State-Management)
+- [Routing](#-Routing)
+- [API Integration](#-API-Integration)
 - Log
-- API Integration
 - storage
 
 
