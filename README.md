@@ -100,12 +100,6 @@ fvm flutter build ios --release
 
 ## Usage
 
-### Lessons
-- Automatically fetches and paginates online lessons.
-- You can:
-  - Search by text
-  - Filter by subject
-  - Scroll to fetch more
 
 ### Routing
 
@@ -244,9 +238,11 @@ In Riverpod, `ref` is a reference object passed to your providers and widgets th
 | `ref.invalidate()` | Invalidates the provider and forces refresh           | ❌               | On logout or to refresh manually   |
 
 
-## API Integration
+### API Integration
 
 This project uses `ApiClient` class (located at `lib/core/network/remote/api_client.dart`) to handle all HTTP requests using the Dio package.
+
+#### How to Add a New API Requests
 
 1. Create a Service File :
 
@@ -341,24 +337,24 @@ if (response['success']) {
 ```
 
 
-## Localization
+### Localization
 
 This project supports **English** and **Arabic** using `.arb` files and the `flutter_localizations` package.
 
-### How Localization Works
+#### How Localization Works
 
 - The app automatically uses the **device's locale** when launched for the first time.
 - Users can manually switch languages in the **Settings** screen.
 - The selected language is saved locally and persists between app launches.
 - We use **Riverpod** for managing and reacting to locale changes.
 
-### Prerequisite
+#### Prerequisite
 
 Make sure you have the **Flutter Intl** extension installed in VSCode for easy management of translation files.
 
 > VSCode Extension: [Flutter Intl](https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl)
 
-### How to Add New Localized Text
+#### How to Add New Localized Text
 
 To add a new translatable string:
 
@@ -387,6 +383,14 @@ import 'package:intern/generated/l10n.dart';
 
 Text(AppLocalizations.of(context)!.welcome)
 ```
+
+
+### Lessons
+- Automatically fetches and paginates online lessons.
+- You can:
+  - Search by text
+  - Filter by subject
+  - Scroll to fetch more
 
 
 
