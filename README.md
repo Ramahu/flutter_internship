@@ -23,7 +23,7 @@ A Flutter application that provides lessons for students.
 - State Management
 - Routing
 - Log
-- API calls
+- API Integration
 - storage
 
 
@@ -242,6 +242,152 @@ In Riverpod, `ref` is a reference object passed to your providers and widgets th
 | `ref.read()`       | Reads the provider once without listening             | ❌               | Inside callbacks or one-time usage |
 | `ref.listen()`     | Listens to provider changes to perform side effects   | ❌               | Inside `initState()` or logic code |
 | `ref.invalidate()` | Invalidates the provider and forces refresh           | ❌               | On logout or to refresh manually   |
+
+
+## API Integration
+
+This project uses `ApiClient` class (located at `lib/core/network/remote/api_client.dart`) to handle all HTTP requests using the Dio package.
+
+1. Create a Service File :
+
+- Inside your feature folder (e.g., `features/auth`), create a `service/` folder if it doesn't already exist.
+- Inside `service/`, create a Dart file (e.g., `auth_requests.dart`).
+
+2. create a class : 
+
+In that file, create a class (e.g., `AuthRequests`)  and an instance of `ApiClient` to perform HTTP operations.
+
+```dart
+  final ApiClient apiClient = ApiClient();
+```
+
+3. Create a method :
+
+inside that class to call one of the base HTTP methods
+```dart
+  Response response = await apiClient.postRequest(
+        endpoint: AppConfigs.login,
+        data: data,
+      );
+```
+You can replace postRequest with getRequest, putRequest, or deleteRequest based on the use case.
+
+4. Create a Model :
+
+If the API returns structured data (e.g., user profile, list of lessons), it’s a good practice to create a model class to deserialize the response.
+
+- Create a model/ folder inside your feature directory if it doesn’t exist (e.g., features/auth/model/).
+
+- Inside the model/ folder, create a file like user_model.dart.
+
+- Define a Dart class that maps to the API response.
+
+5. parse the model :
+
+Back in your service class, parse the model after the API call:
+
+```dart
+  UserModel user = UserModel.fromJson(response.data);
+```
+
+6. Handle Response and Return Result : 
+
+Return a consistent response format from the service method, for example
+
+```dart
+  return {
+        'success': true,
+        'message': response.data['message'],
+      };
+```
+
+In case of errors, catch the exception and return:
+
+```dart
+  return {
+  'success': false,
+  'message': e.response?.data['message'] ?? 'Something went wrong',
+};
+
+```
+
+7. Call the Service from a Notifier :
+
+Inside your Riverpod StateNotifier , import the service class.
+
+- Create an instance of your request class
+
+```dart
+  final authRequests = AuthRequests();
+```
+- Call the function you wrote in the service class:
+
+```dart
+final response = await authRequests.login(
+  email: email,
+  password: password,
+);
+```
+- Handle the returned result:
+
+```dart
+if (response['success']) {
+  // Success logic 
+  state = const AsyncValue.data(true);
+} else {
+  // Error logic 
+  state = const AsyncValue.data(false);
+}
+```
+
+
+## Localization
+
+This project supports **English** and **Arabic** using `.arb` files and the `flutter_localizations` package.
+
+### How Localization Works
+
+- The app automatically uses the **device's locale** when launched for the first time.
+- Users can manually switch languages in the **Settings** screen.
+- The selected language is saved locally and persists between app launches.
+- We use **Riverpod** for managing and reacting to locale changes.
+
+### Prerequisite
+
+Make sure you have the **Flutter Intl** extension installed in VSCode for easy management of translation files.
+
+> VSCode Extension: [Flutter Intl](https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl)
+
+### How to Add New Localized Text
+
+To add a new translatable string:
+
+1. Open the localization files:
+   - `lib/l10n/intl_en.arb` (for English)
+   - `lib/l10n/intl_ar.arb` (for Arabic)
+
+2. Add your new key-value pair to each file. For example:
+
+   ```json
+   // intl_en.arb
+   {
+     "welcome": "Welcome"
+   }
+
+   // intl_ar.arb
+   {
+     "welcome": "مرحبا"
+   }
+
+
+3. Use the generated string in your widgets:
+
+```dart
+import 'package:intern/generated/l10n.dart';
+
+Text(AppLocalizations.of(context)!.welcome)
+```
+
 
 
 ## Folder Structure
