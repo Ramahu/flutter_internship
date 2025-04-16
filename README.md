@@ -4,8 +4,8 @@ A Flutter application that provides lessons for students.
 
 ## Table of Contents
 
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
 - [Run](#-run)
 - [Build](#-build)
 - [Features](#-features)
@@ -19,10 +19,10 @@ A Flutter application that provides lessons for students.
 - onboarding
 - Lessons
 - Theme
-- [Localization](#-Localization)
-- [State Management](#-State-Management)
-- [Routing](#-Routing)
-- [API Integration](#-API-Integration)
+- [Localization](#-localization)
+- [State Management](#-state-management)
+- [Routing](#-routing)
+- [API Integration](#-aPI-integration)
 - Log
 - storage
 
