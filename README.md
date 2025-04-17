@@ -420,13 +420,13 @@ final cacheOptions = CacheOptions(
   keyBuilder: CacheOptions.defaultCacheKeyBuilder,
 );
 ```
-The _mergeOptions method is used to apply caching based on a bool isCached flag
+The `_mergeOptions` method is used to apply caching based on a bool isCached flag
 
 ##### How to Use : 
 
 If you want to cache a GET request:
 
-Pass isCached: true when calling the request 
+Pass `isCached: true` when calling the request 
 
 ```dart
 final response = await apiClient.getRequest(
@@ -447,9 +447,9 @@ This file contains a CacheHelper class with the saveData , getData, remove metho
 
 ##### How to Use SharedPreferences
 
-1. Define the storage key : 
+1. Define the `storage key` : 
 
-Add your storage key inside 'lib/core/util/storage_keys.dart'
+Add your storage key inside `lib/core/util/storage_keys.dart`
 
 ```dart
 const String localeKey = 'locale';
@@ -509,7 +509,7 @@ The following interceptor is added to Dio:
 To add a new onboarding screen:
 
 1. Navigate to the following file:
-lib/features/onboarding/page/onboarding_screen.dart
+`lib/features/onboarding/page/onboarding_screen.dart`
 
 2. Inside that file, locate the `children` list of onboarding pages inside PageView.
 
@@ -524,7 +524,7 @@ OnboardingPage(
 ```
 Make sure you add your new localized strings to the appropriate .arb files. 
 
-4. Update onPageChanged logic to match the last index:
+4. Update `onPageChanged` logic to match the last index:
 
 ```dart
 onPageChanged: (index) {
@@ -534,7 +534,7 @@ onPageChanged: (index) {
 },
 ```
 
-5. Update SmoothPageIndicator to the new page count:
+5. Update `SmoothPageIndicator` to the new page count:
 
 ```dart
 SmoothPageIndicator(
@@ -548,7 +548,7 @@ SmoothPageIndicator(
 ),
 ```
 
-6. Update the skip button to jump to the last page:
+6. Update the `skip button` to jump to the last page:
 
 ```dart
 TextButton(
