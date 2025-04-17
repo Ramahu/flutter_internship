@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 // icons used in this app
 
 const book = Icons.book;
-const settings = Icons.settings;
 const search = Icons.search;
 const logout = Icons.logout;
+const settings = Icons.settings;
 const darkMode = Icons.dark_mode;
 const visibility = Icons.visibility;
 const keyOutlined = Icons.key_outlined;
