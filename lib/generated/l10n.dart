@@ -249,6 +249,31 @@ class AppLocalizations {
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);
   }
+
+  /// `Accessories`
+  String get accessories {
+    return Intl.message('Accessories', name: 'accessories', desc: '', args: []);
+  }
+
+  /// `No more Accessories`
+  String get noAccessoryMore {
+    return Intl.message(
+      'No more Accessories',
+      name: 'noAccessoryMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Accessories available`
+  String get noAccessoryAvailable {
+    return Intl.message(
+      'No Accessories available',
+      name: 'noAccessoryAvailable',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

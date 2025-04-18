@@ -23,7 +23,13 @@ class HomeScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: [lessonsCard(ref, context)],
+          children: [
+            lessonsCard(ref, context),
+            const SizedBox(
+              height: 5.0,
+            ),
+            accessoriesCard(ref, context),
+          ],
         ),
       ),
     );
@@ -71,6 +77,31 @@ Widget lessonsCard(WidgetRef ref, BuildContext context) => GestureDetector(
               Expanded(
                 child: Text(
                   AppLocalizations.of(context).onlineLessons,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+Widget accessoriesCard(WidgetRef ref, BuildContext context) => GestureDetector(
+      onTap: () {
+        context.push(AppRoutes.accessories);
+      },
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context).accessories,
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold),
                 ),

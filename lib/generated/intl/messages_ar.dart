@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accessories": MessageLookupByLibrary.simpleMessage("ملحقات"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "clearCache": MessageLookupByLibrary.simpleMessage("مسح الذاكرة المؤقتة"),
     "darkMode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
@@ -36,10 +37,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "menu": MessageLookupByLibrary.simpleMessage("القائمة"),
     "needAccount": MessageLookupByLibrary.simpleMessage("هل تحتاج حساب؟"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
-    "noLessonsAvailable": MessageLookupByLibrary.simpleMessage(
-      "لا توجد دروس متاحة",
+    "noAccessoryAvailable": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد ملحقات متاحة",
     ),
-    "noMoreLessons": MessageLookupByLibrary.simpleMessage("لا توجد دروس أخرى"),
+    "noAccessoryMore": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد ملحقات أخرى",
+    ),
+    "noLessonsAvailable": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد دروس متاحة",
+    ),
+    "noMoreLessons": MessageLookupByLibrary.simpleMessage("لا يوجد دروس أخرى"),
     "onlineLessons": MessageLookupByLibrary.simpleMessage("دروس مباشرة "),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "pleaseEnterEmail": MessageLookupByLibrary.simpleMessage(

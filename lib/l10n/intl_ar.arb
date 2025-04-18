@@ -9,8 +9,8 @@
     "searchHere": "ابحث هنا",
     "onlineLessons": "دروس مباشرة ",
     "selectSubject": "اختر المادة",
-    "noMoreLessons": "لا توجد دروس أخرى",
-    "noLessonsAvailable": "لا توجد دروس متاحة",
+    "noMoreLessons": "لا يوجد دروس أخرى",
+    "noLessonsAvailable": "لا يوجد دروس متاحة",
     "emailAddress": " البريد الإلكتروني",
     "password": "كلمة المرور",
     "pleaseEnterEmail": "يرجى إدخال البريد الإلكتروني",
@@ -26,5 +26,8 @@
     "skip": "تخطي",
     "getStarted": "ابدأ الآن",
     "next": "التالي",
-    "settings": "الاعدادات"
+    "settings": "الاعدادات",
+    "accessories": "ملحقات",
+    "noAccessoryMore": "لا يوجد ملحقات أخرى",
+    "noAccessoryAvailable": "لا يوجد ملحقات متاحة"
 }

@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intern/core/network/local/cache_helper.dart';
 import 'package:intern/core/util/storage_keys.dart';
 
+import '../../features/accessory/page/accessory_screen.dart';
 import '../../features/auth/page/login_screen.dart';
 import '../../features/auth/page/signup_screen.dart';
 import '../../features/auth/provider/auth_notifier.dart';
@@ -60,6 +61,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.settings,
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.accessories,
+        builder: (context, state) => const AccessoryScreen(),
       ),
     ],
     refreshListenable: isAuth,

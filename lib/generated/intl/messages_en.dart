@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accessories": MessageLookupByLibrary.simpleMessage("Accessories"),
     "all": MessageLookupByLibrary.simpleMessage("All"),
     "clearCache": MessageLookupByLibrary.simpleMessage("Clear cache"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
@@ -36,6 +37,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "menu": MessageLookupByLibrary.simpleMessage("Menu"),
     "needAccount": MessageLookupByLibrary.simpleMessage("Need an account ?"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "noAccessoryAvailable": MessageLookupByLibrary.simpleMessage(
+      "No Accessories available",
+    ),
+    "noAccessoryMore": MessageLookupByLibrary.simpleMessage(
+      "No more Accessories",
+    ),
     "noLessonsAvailable": MessageLookupByLibrary.simpleMessage(
       "No lessons available.",
     ),

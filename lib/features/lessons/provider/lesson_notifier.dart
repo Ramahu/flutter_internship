@@ -8,7 +8,6 @@ class LessonNotifier extends StateNotifier<AsyncValue<List<LessonModel>>> {
   LessonNotifier() : super(const AsyncLoading());
 
   final lessons = <LessonModel>[];
-  final filterdLessons = <LessonModel>[];
   final subjects = <SubjectModel>[];
 
   int currentPage = 1;

@@ -26,5 +26,8 @@
     "skip": "Skip",
     "getStarted": "Get Started",
     "next": "Next",
-    "settings": "Settings"
+    "settings": "Settings",
+    "accessories": "Accessories",
+    "noAccessoryMore": "No more Accessories",
+    "noAccessoryAvailable": "No Accessories available"
 }
