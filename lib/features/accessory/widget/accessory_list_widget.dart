@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:go_router/go_router.dart';
+
 import 'package:intern/features/lessons/widget/state_widget.dart';
 
 import '../../../generated/l10n.dart';
@@ -20,7 +22,7 @@ Widget accessoryListWidget(ScrollController scrollController,
       itemBuilder: (context, index) {
         if (index < accessories.length) {
           final accessory = accessories[index];
-          return accessoryItem(accessory);
+          return accessoryItem(accessory, context);
         } else {
           final accessoryNotifier = ref.read(accessoryProvider.notifier);
           final isLoadingMore = accessoryNotifier.isFetching;
@@ -45,23 +47,54 @@ Widget accessoryListWidget(ScrollController scrollController,
       },
     );
 
-Widget accessoryItem(AccessoryModel accessory) => Card(
+Widget accessoryItem(AccessoryModel accessory, context) => Card(
       child: Padding(
         padding: const EdgeInsets.all(6.0),
         child: Directionality(
           textDirection: TextDirection.rtl,
-          child: ListTile(
-            title: Text(
-              accessory.topic,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+          child: Row(children: [
+            Expanded(
+              child: Text(
+                accessory.topic,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17.0,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            // subtitle: Text(
-            //   '${accessory.subject.name}\n'
-            //   'Start: ${lesson.startTime}\n'
-            //   'End: ${lesson.endTime}',
-            // ),
-            onTap: () {},
-          ),
+            const Spacer(),
+            if (_isValid(accessory.images))
+              IconButton(
+                icon: const Icon(Icons.image_outlined),
+                tooltip: AppLocalizations.of(context).viewImage,
+                onPressed: () => GoRouter.of(context).pushNamed(
+                  'imageViewer',
+                  queryParameters: {'url': accessory.images},
+                ),
+              ),
+            if (_isValid(accessory.videos))
+              IconButton(
+                icon: const Icon(Icons.play_circle_outline),
+                tooltip:AppLocalizations.of(context).watchVideo,
+                onPressed: () => {},
+              ),
+            if (_isValid(accessory.file))
+              IconButton(
+                  icon: const Icon(Icons.picture_as_pdf_outlined),
+                  tooltip: AppLocalizations.of(context).openPDF,
+                  onPressed: () => {}),
+            if (_isValid(accessory.url))
+              IconButton(
+                icon: const Icon(Icons.link),
+                tooltip:AppLocalizations.of(context).openLink,
+                onPressed: () => {},
+              ),
+          ]),
         ),
       ),
     );
+
+bool _isValid(dynamic content) {
+  return content != null && content.toString().isNotEmpty;
+}

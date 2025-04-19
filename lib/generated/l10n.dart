@@ -274,6 +274,36 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Select Type`
+  String get selectType {
+    return Intl.message('Select Type', name: 'selectType', desc: '', args: []);
+  }
+
+  /// `Image`
+  String get image {
+    return Intl.message('Image', name: 'image', desc: '', args: []);
+  }
+
+  /// `View Image`
+  String get viewImage {
+    return Intl.message('View Image', name: 'viewImage', desc: '', args: []);
+  }
+
+  /// `Watch Video`
+  String get watchVideo {
+    return Intl.message('Watch Video', name: 'watchVideo', desc: '', args: []);
+  }
+
+  /// `Open PDF`
+  String get openPDF {
+    return Intl.message('Open PDF', name: 'openPDF', desc: '', args: []);
+  }
+
+  /// `Open Link`
+  String get openLink {
+    return Intl.message('Open Link', name: 'openLink', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

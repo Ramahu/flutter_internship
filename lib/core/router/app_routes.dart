@@ -7,4 +7,5 @@ class AppRoutes {
   static const String lessons = '/lessons';
   static const String settings = '/settings';
   static const String accessories = '/accessories';
+  static const String imageViewer = '/image_viewer';
 }

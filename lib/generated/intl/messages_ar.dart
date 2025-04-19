@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "استمتع بسرعة فائقة على جميع المنصات.",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
+    "image": MessageLookupByLibrary.simpleMessage("صورة"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "menu": MessageLookupByLibrary.simpleMessage("القائمة"),
@@ -48,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noMoreLessons": MessageLookupByLibrary.simpleMessage("لا يوجد دروس أخرى"),
     "onlineLessons": MessageLookupByLibrary.simpleMessage("دروس مباشرة "),
+    "openLink": MessageLookupByLibrary.simpleMessage("فتح الرابط"),
+    "openPDF": MessageLookupByLibrary.simpleMessage("فتح الملف"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "pleaseEnterEmail": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال البريد الإلكتروني",
@@ -61,9 +64,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "بياناتك آمنة معنا في جميع الأوقات.",
     ),
     "selectSubject": MessageLookupByLibrary.simpleMessage("اختر المادة"),
+    "selectType": MessageLookupByLibrary.simpleMessage("اختر النوع"),
     "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
     "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
+    "viewImage": MessageLookupByLibrary.simpleMessage("عرض الصورة"),
+    "watchVideo": MessageLookupByLibrary.simpleMessage("مشاهدة الفيديو"),
     "welcome": MessageLookupByLibrary.simpleMessage("مرحبًا"),
   };
 }

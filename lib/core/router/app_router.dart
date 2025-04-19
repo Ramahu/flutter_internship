@@ -7,6 +7,7 @@ import 'package:intern/core/network/local/cache_helper.dart';
 import 'package:intern/core/util/storage_keys.dart';
 
 import '../../features/accessory/page/accessory_screen.dart';
+import '../../features/accessory/page/image_viewer_screen.dart';
 import '../../features/auth/page/login_screen.dart';
 import '../../features/auth/page/signup_screen.dart';
 import '../../features/auth/provider/auth_notifier.dart';
@@ -65,6 +66,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.accessories,
         builder: (context, state) => const AccessoryScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.imageViewer,
+        name: 'imageViewer',
+        builder: (context, state) {
+          final imageUrl = state.uri.queryParameters['url']!;
+          return ImageViewerScreen(imageUrl: imageUrl);
+        },
       ),
     ],
     refreshListenable: isAuth,

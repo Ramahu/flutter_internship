@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/util/icons.dart';
 import '../../../generated/l10n.dart';
 import '../../lessons/widget/state_widget.dart';
 import '../provider/accessory_notifier.dart';
@@ -30,16 +29,16 @@ class _AccessoryScreenState extends ConsumerState<AccessoryScreen> {
 
     Future.microtask(() async {
       await accessoryNotifier.initial();
-      final allType =
+      // final allType =
           // ignore: use_build_context_synchronously
-          AppLocalizations.of(context).all;
+      //     AppLocalizations.of(context).all;
 
-      if (!accessoryNotifier.contentTypes.any((s) => s.isEmpty)) {
-        accessoryNotifier.contentTypes.insert(0, allType);
-      }
-      setState(() {
-        selectedType = allType;
-      });
+      // if (!accessoryNotifier.contentTypes.any((s) => s.isEmpty)) {
+      //   accessoryNotifier.contentTypes.insert(0, allType);
+      // }
+      // setState(() {
+      //   selectedType = allType;
+      // });
     });
 
     _scrollController.addListener(() {
@@ -77,12 +76,12 @@ class _AccessoryScreenState extends ConsumerState<AccessoryScreen> {
       // subject drop down
       appBar: AppBar(
         title: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.all(8.0),
           child: SizedBox(
             height: 48,
             child: DropdownButtonFormField<String>(
               value: selectedType,
-              hint: Text(AppLocalizations.of(context).selectSubject),
+              hint: Text(AppLocalizations.of(context).selectType),
               items: accessoryNotifier.contentTypes.map((type) {
                 return DropdownMenuItem<String>(
                   value: type,
@@ -113,26 +112,6 @@ class _AccessoryScreenState extends ConsumerState<AccessoryScreen> {
 
       body: Column(
         children: [
-          // search text field
-          Padding(
-            padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 16.0),
-            child: TextField(
-              controller: searchController,
-              decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).searchHere,
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                prefixIcon: const Icon(search),
-                suffixIcon: searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: searchController.clear,
-                      )
-                    : null,
-              ),
-            ),
-          ),
           const SizedBox(height: 5),
           // Accessory list
           Expanded(

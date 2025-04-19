@@ -29,5 +29,11 @@
     "settings": "الاعدادات",
     "accessories": "ملحقات",
     "noAccessoryMore": "لا يوجد ملحقات أخرى",
-    "noAccessoryAvailable": "لا يوجد ملحقات متاحة"
+    "noAccessoryAvailable": "لا يوجد ملحقات متاحة",
+    "selectType": "اختر النوع",
+    "image": "صورة",
+    "viewImage": "عرض الصورة",
+    "watchVideo": "مشاهدة الفيديو",
+    "openPDF": "فتح الملف",
+    "openLink": "فتح الرابط"
 }

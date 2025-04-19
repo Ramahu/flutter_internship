@@ -29,5 +29,11 @@
     "settings": "Settings",
     "accessories": "Accessories",
     "noAccessoryMore": "No more Accessories",
-    "noAccessoryAvailable": "No Accessories available"
+    "noAccessoryAvailable": "No Accessories available",
+    "selectType": "Select Type",
+    "image": "Image",
+    "viewImage": "View Image",
+    "watchVideo": "Watch Video",
+    "openPDF": "Open PDF",
+    "openLink": "Open Link"
 }
