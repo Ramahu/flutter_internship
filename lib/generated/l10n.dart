@@ -300,9 +300,39 @@ class AppLocalizations {
     return Intl.message('Open PDF', name: 'openPDF', desc: '', args: []);
   }
 
-  /// `Open Link`
-  String get openLink {
-    return Intl.message('Open Link', name: 'openLink', desc: '', args: []);
+  /// `Play Audio`
+  String get playAudio {
+    return Intl.message('Play Audio', name: 'playAudio', desc: '', args: []);
+  }
+
+  /// `Audio Player`
+  String get audioPlayer {
+    return Intl.message(
+      'Audio Player',
+      name: 'audioPlayer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speed`
+  String get speed {
+    return Intl.message('Speed', name: 'speed', desc: '', args: []);
+  }
+
+  /// `Volume`
+  String get Volume {
+    return Intl.message('Volume', name: 'Volume', desc: '', args: []);
+  }
+
+  /// `Video Player`
+  String get videoPlayer {
+    return Intl.message(
+      'Video Player',
+      name: 'videoPlayer',
+      desc: '',
+      args: [],
+    );
   }
 }
 

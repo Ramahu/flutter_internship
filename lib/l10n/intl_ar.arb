@@ -35,5 +35,9 @@
     "viewImage": "عرض الصورة",
     "watchVideo": "مشاهدة الفيديو",
     "openPDF": "فتح الملف",
-    "openLink": "فتح الرابط"
+    "playAudio": "شغل الصوت",
+    "audioPlayer":" مشغل الصوت",
+    "speed":"السرعة",
+    "Volume":"شدة الصوت",
+    "videoPlayer":"مشغل الفيديو"
 }

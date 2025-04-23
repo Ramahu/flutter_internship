@@ -22,8 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "Volume": MessageLookupByLibrary.simpleMessage("Volume"),
     "accessories": MessageLookupByLibrary.simpleMessage("Accessories"),
     "all": MessageLookupByLibrary.simpleMessage("All"),
+    "audioPlayer": MessageLookupByLibrary.simpleMessage("Audio Player"),
     "clearCache": MessageLookupByLibrary.simpleMessage("Clear cache"),
     "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
@@ -49,9 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noMoreLessons": MessageLookupByLibrary.simpleMessage("No more lessons."),
     "onlineLessons": MessageLookupByLibrary.simpleMessage("Online Lessons"),
-    "openLink": MessageLookupByLibrary.simpleMessage("Open Link"),
     "openPDF": MessageLookupByLibrary.simpleMessage("Open PDF"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "playAudio": MessageLookupByLibrary.simpleMessage("Play Audio"),
     "pleaseEnterEmail": MessageLookupByLibrary.simpleMessage(
       "Please enter email address",
     ),
@@ -68,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "speed": MessageLookupByLibrary.simpleMessage("Speed"),
+    "videoPlayer": MessageLookupByLibrary.simpleMessage("Video Player"),
     "viewImage": MessageLookupByLibrary.simpleMessage("View Image"),
     "watchVideo": MessageLookupByLibrary.simpleMessage("Watch Video"),
     "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),

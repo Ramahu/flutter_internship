@@ -35,5 +35,9 @@
     "viewImage": "View Image",
     "watchVideo": "Watch Video",
     "openPDF": "Open PDF",
-    "openLink": "Open Link"
+    "playAudio": "Play Audio",
+    "audioPlayer":"Audio Player",
+    "speed":"Speed",
+    "Volume":"Volume",
+    "videoPlayer":"Video Player"
 }

@@ -7,7 +7,9 @@ import 'package:intern/core/network/local/cache_helper.dart';
 import 'package:intern/core/util/storage_keys.dart';
 
 import '../../features/accessory/page/accessory_screen.dart';
+import '../../features/accessory/page/audio_player_screen.dart';
 import '../../features/accessory/page/image_viewer_screen.dart';
+import '../../features/accessory/page/video_player_screen.dart';
 import '../../features/auth/page/login_screen.dart';
 import '../../features/auth/page/signup_screen.dart';
 import '../../features/auth/provider/auth_notifier.dart';
@@ -73,6 +75,25 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) {
           final imageUrl = state.uri.queryParameters['url']!;
           return ImageViewerScreen(imageUrl: imageUrl);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.audioPlayer,
+        name: AppRoutes.audioPlayerName,
+        builder: (context, state) {
+          final encodedUrl = state.uri.queryParameters['url']!;
+          final audioUrl = Uri.decodeComponent(encodedUrl);
+          return AudioPlayerScreen(url: audioUrl);
+          // final audioUrl = state.uri.queryParameters['url']!;
+          // return AudioPlayerScreen(url: audioUrl);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.videoPlayer,
+        name:  AppRoutes.videoPlayerName,
+        builder: (context, state) {
+          final videoId = state.uri.queryParameters['url']!;
+          return VideoPlayerScreen(videoId: videoId);
         },
       ),
     ],

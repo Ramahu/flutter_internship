@@ -22,8 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "Volume": MessageLookupByLibrary.simpleMessage("شدة الصوت"),
     "accessories": MessageLookupByLibrary.simpleMessage("ملحقات"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
+    "audioPlayer": MessageLookupByLibrary.simpleMessage(" مشغل الصوت"),
     "clearCache": MessageLookupByLibrary.simpleMessage("مسح الذاكرة المؤقتة"),
     "darkMode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "emailAddress": MessageLookupByLibrary.simpleMessage(" البريد الإلكتروني"),
@@ -49,9 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noMoreLessons": MessageLookupByLibrary.simpleMessage("لا يوجد دروس أخرى"),
     "onlineLessons": MessageLookupByLibrary.simpleMessage("دروس مباشرة "),
-    "openLink": MessageLookupByLibrary.simpleMessage("فتح الرابط"),
     "openPDF": MessageLookupByLibrary.simpleMessage("فتح الملف"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "playAudio": MessageLookupByLibrary.simpleMessage("شغل الصوت"),
     "pleaseEnterEmail": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال البريد الإلكتروني",
     ),
@@ -68,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
     "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
+    "speed": MessageLookupByLibrary.simpleMessage("السرعة"),
+    "videoPlayer": MessageLookupByLibrary.simpleMessage("مشغل الفيديو"),
     "viewImage": MessageLookupByLibrary.simpleMessage("عرض الصورة"),
     "watchVideo": MessageLookupByLibrary.simpleMessage("مشاهدة الفيديو"),
     "welcome": MessageLookupByLibrary.simpleMessage("مرحبًا"),

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:intern/features/lessons/widget/state_widget.dart';
 
+import '../../../core/router/app_routes.dart';
 import '../../../generated/l10n.dart';
 import '../model/accessory_model.dart';
 import '../provider/accessory_notifier.dart';
@@ -52,45 +53,52 @@ Widget accessoryItem(AccessoryModel accessory, context) => Card(
         padding: const EdgeInsets.all(6.0),
         child: Directionality(
           textDirection: TextDirection.rtl,
-          child: Row(children: [
-            Expanded(
-              child: Text(
-                accessory.topic,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17.0,
-                ),
-                overflow: TextOverflow.ellipsis,
+          child: ListTile(
+            title: Text(
+              accessory.topic,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17.0,
               ),
             ),
-            const Spacer(),
-            if (_isValid(accessory.images))
-              IconButton(
-                icon: const Icon(Icons.image_outlined),
-                tooltip: AppLocalizations.of(context).viewImage,
-                onPressed: () => GoRouter.of(context).pushNamed(
-                  'imageViewer',
-                  queryParameters: {'url': accessory.images},
+            subtitle: Wrap(spacing: 10, children: [
+              if (_isValid(accessory.images))
+                IconButton(
+                  icon: const Icon(Icons.image_outlined),
+                  tooltip: AppLocalizations.of(context).viewImage,
+                  onPressed: () => GoRouter.of(context).pushNamed(
+                    'imageViewer',
+                    queryParameters: {'url': accessory.images},
+                  ),
                 ),
-              ),
-            if (_isValid(accessory.videos))
-              IconButton(
-                icon: const Icon(Icons.play_circle_outline),
-                tooltip:AppLocalizations.of(context).watchVideo,
-                onPressed: () => {},
-              ),
-            if (_isValid(accessory.file))
-              IconButton(
-                  icon: const Icon(Icons.picture_as_pdf_outlined),
-                  tooltip: AppLocalizations.of(context).openPDF,
-                  onPressed: () => {}),
-            if (_isValid(accessory.url))
-              IconButton(
-                icon: const Icon(Icons.link),
-                tooltip:AppLocalizations.of(context).openLink,
-                onPressed: () => {},
-              ),
-          ]),
+              if (_isValid(accessory.videos))
+                IconButton(
+                  icon: const Icon(Icons.play_circle_outline),
+                  tooltip: AppLocalizations.of(context).watchVideo,
+                  onPressed: () => GoRouter.of(context).pushNamed(
+                    AppRoutes.videoPlayerName,
+                    queryParameters: {'url': 'UDVtMYqUAyw'},
+                  ),
+                ),
+              if (_isValid(accessory.file))
+                IconButton(
+                    icon: const Icon(Icons.picture_as_pdf_outlined),
+                    tooltip: AppLocalizations.of(context).openPDF,
+                    onPressed: () => {}),
+              if (_isValid(accessory.audio))
+                IconButton(
+                  icon: const Icon(Icons.audio_file_outlined),
+                  tooltip: AppLocalizations.of(context).playAudio,
+                  onPressed: () => GoRouter.of(context).pushNamed(
+                    AppRoutes.audioPlayerName,
+                    queryParameters: {
+                      // 'url':accessory.audio
+                      'url': Uri.encodeComponent(accessory.audio)
+                    },
+                  ),
+                ),
+            ]),
+          ),
         ),
       ),
     );
