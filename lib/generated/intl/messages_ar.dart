@@ -34,7 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "استمتع بسرعة فائقة على جميع المنصات.",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
-    "image": MessageLookupByLibrary.simpleMessage("صورة"),
+    "image": MessageLookupByLibrary.simpleMessage("عارض الصور"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "menu": MessageLookupByLibrary.simpleMessage("القائمة"),
@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "onlineLessons": MessageLookupByLibrary.simpleMessage("دروس مباشرة "),
     "openPDF": MessageLookupByLibrary.simpleMessage("فتح الملف"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "pdfViewer": MessageLookupByLibrary.simpleMessage("عارض الملفات"),
     "playAudio": MessageLookupByLibrary.simpleMessage("شغل الصوت"),
     "pleaseEnterEmail": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال البريد الإلكتروني",

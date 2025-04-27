@@ -9,6 +9,7 @@ import 'package:intern/core/util/storage_keys.dart';
 import '../../features/accessory/page/accessory_screen.dart';
 import '../../features/accessory/page/audio_player_screen.dart';
 import '../../features/accessory/page/image_viewer_screen.dart';
+import '../../features/accessory/page/pdf_viewer_screen.dart';
 import '../../features/accessory/page/video_player_screen.dart';
 import '../../features/auth/page/login_screen.dart';
 import '../../features/auth/page/signup_screen.dart';
@@ -90,12 +91,20 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AppRoutes.videoPlayer,
-        name:  AppRoutes.videoPlayerName,
+        name: AppRoutes.videoPlayerName,
         builder: (context, state) {
           final videoId = state.uri.queryParameters['url']!;
           return VideoPlayerScreen(videoId: videoId);
         },
       ),
+      // GoRoute(
+      //   path: AppRoutes.pdfViewer,
+      //   name: AppRoutes.pdfViewerName,
+      //   builder: (context, state) {
+      //     final pdfUrl = state.uri.queryParameters['url']!;
+      //     return PdfViewerScreen(pdfUrl: pdfUrl);
+      //   },
+      // ),
     ],
     refreshListenable: isAuth,
     redirect: (context, state) async {

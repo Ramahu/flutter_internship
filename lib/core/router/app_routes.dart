@@ -12,4 +12,6 @@ class AppRoutes {
   static const String audioPlayerName = 'audioPlayer';
   static const String videoPlayer = '/videoPlayer';
   static const String videoPlayerName = 'videoPlayer';
+  static const String pdfViewer = '/pdfViewer';
+  static const String pdfViewerName = 'pdfViewer';
 }

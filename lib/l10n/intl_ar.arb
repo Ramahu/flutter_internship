@@ -31,7 +31,7 @@
     "noAccessoryMore": "لا يوجد ملحقات أخرى",
     "noAccessoryAvailable": "لا يوجد ملحقات متاحة",
     "selectType": "اختر النوع",
-    "image": "صورة",
+    "image": "عارض الصور",
     "viewImage": "عرض الصورة",
     "watchVideo": "مشاهدة الفيديو",
     "openPDF": "فتح الملف",
@@ -39,5 +39,6 @@
     "audioPlayer":" مشغل الصوت",
     "speed":"السرعة",
     "Volume":"شدة الصوت",
-    "videoPlayer":"مشغل الفيديو"
+    "videoPlayer":"مشغل الفيديو",
+    "pdfViewer": "عارض الملفات"
 }

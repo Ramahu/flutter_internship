@@ -51,7 +51,9 @@ class _AudioPlayerScreenState extends ConsumerState<AudioPlayerScreen> {
           },
         ),
       )
-      ..loadRequest(Uri.parse('https://file-examples.com/wp-content/storage/2017/11/file_example_MP3_700KB.mp3'));
+      ..loadRequest(Uri.parse(
+          // widget.url
+          'https://file-examples.com/wp-content/storage/2017/11/file_example_MP3_700KB.mp3'));
   }
 
   @override

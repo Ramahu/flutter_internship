@@ -82,9 +82,13 @@ Widget accessoryItem(AccessoryModel accessory, context) => Card(
                 ),
               if (_isValid(accessory.file))
                 IconButton(
-                    icon: const Icon(Icons.picture_as_pdf_outlined),
-                    tooltip: AppLocalizations.of(context).openPDF,
-                    onPressed: () => {}),
+                  icon: const Icon(Icons.picture_as_pdf_outlined),
+                  tooltip: AppLocalizations.of(context).openPDF,
+                  onPressed: () => GoRouter.of(context).pushNamed(
+                    AppRoutes.pdfViewerName,
+                    queryParameters: {'url': accessory.file},
+                  ),
+                ),
               if (_isValid(accessory.audio))
                 IconButton(
                   icon: const Icon(Icons.audio_file_outlined),

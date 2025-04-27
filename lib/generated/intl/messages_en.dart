@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "onlineLessons": MessageLookupByLibrary.simpleMessage("Online Lessons"),
     "openPDF": MessageLookupByLibrary.simpleMessage("Open PDF"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "pdfViewer": MessageLookupByLibrary.simpleMessage("PDF Viewer"),
     "playAudio": MessageLookupByLibrary.simpleMessage("Play Audio"),
     "pleaseEnterEmail": MessageLookupByLibrary.simpleMessage(
       "Please enter email address",

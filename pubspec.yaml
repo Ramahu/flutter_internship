@@ -30,6 +30,7 @@ dependencies:
   youtube_player_flutter: ^9.1.1
   webview_flutter: ^4.11.0
 
+
 flutter_native_splash:
   color: "#FFFFFF"
   image: 'assets/logo.png'

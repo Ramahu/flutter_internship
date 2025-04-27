@@ -39,5 +39,6 @@
     "audioPlayer":"Audio Player",
     "speed":"Speed",
     "Volume":"Volume",
-    "videoPlayer":"Video Player"
+    "videoPlayer":"Video Player",
+    "pdfViewer": "PDF Viewer"
 }
