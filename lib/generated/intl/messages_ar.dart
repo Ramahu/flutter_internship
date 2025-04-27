@@ -75,5 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "viewImage": MessageLookupByLibrary.simpleMessage("عرض الصورة"),
     "watchVideo": MessageLookupByLibrary.simpleMessage("مشاهدة الفيديو"),
     "welcome": MessageLookupByLibrary.simpleMessage("مرحبًا"),
+    "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
+      "استمتع بتجربة تطبيقنا بواجهة نظيفة وسريعة.",
+    ),
   };
 }
