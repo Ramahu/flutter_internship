@@ -339,6 +339,16 @@ class AppLocalizations {
   String get pdfViewer {
     return Intl.message('PDF Viewer', name: 'pdfViewer', desc: '', args: []);
   }
+
+  /// `3D Model Viewer`
+  String get modelViewer {
+    return Intl.message(
+      '3D Model Viewer',
+      name: 'modelViewer',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

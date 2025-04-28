@@ -240,7 +240,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       Flexible(
                         child: TextButton(
                           onPressed: () {
-                            context.go(AppRoutes.login);
+                            context.go(AppRoutes.login.name);
                           },
                           child: const Text('Login'),
                         ),

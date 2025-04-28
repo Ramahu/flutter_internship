@@ -160,7 +160,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Flexible(
                         child: TextButton(
                           onPressed: () {
-                            GoRouter.of(context).push(AppRoutes.signup);
+                            GoRouter.of(context).push(AppRoutes.signup.name);
                           },
                           child: Text(AppLocalizations.of(context).signUp),
                         ),

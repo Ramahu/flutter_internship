@@ -38,6 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "menu": MessageLookupByLibrary.simpleMessage("القائمة"),
+    "modelViewer": MessageLookupByLibrary.simpleMessage(
+      "عارض نموذج ثلاثي الأبعاد",
+    ),
     "needAccount": MessageLookupByLibrary.simpleMessage("هل تحتاج حساب؟"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "noAccessoryAvailable": MessageLookupByLibrary.simpleMessage(

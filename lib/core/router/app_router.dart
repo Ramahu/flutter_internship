@@ -9,6 +9,7 @@ import 'package:intern/core/util/storage_keys.dart';
 import '../../features/accessory/page/accessory_screen.dart';
 import '../../features/accessory/page/audio_player_screen.dart';
 import '../../features/accessory/page/image_viewer_screen.dart';
+import '../../features/accessory/page/model_viewer_screen.dart';
 import '../../features/accessory/page/pdf_viewer_screen.dart';
 import '../../features/accessory/page/video_player_screen.dart';
 import '../../features/auth/page/login_screen.dart';
@@ -35,72 +36,85 @@ final routerProvider = Provider<GoRouter>((ref) {
   );
 
   return GoRouter(
-    initialLocation: AppRoutes.splash,
+    initialLocation: AppRoutes.splash.path,
     navigatorKey: rootNavigatorKey,
     routes: [
       GoRoute(
-        path: AppRoutes.splash,
+        path: AppRoutes.splash.path,
+        name: AppRoutes.splash.name,
         builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
-        path: AppRoutes.onboarding,
+        path: AppRoutes.onboarding.path,
+        name: AppRoutes.onboarding.name,
         builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
-        path: AppRoutes.login,
+        path: AppRoutes.login.path,
+        name: AppRoutes.login.name,
         builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
-        path: AppRoutes.signup,
+        path: AppRoutes.signup.path,
+        name: AppRoutes.signup.name,
         builder: (context, state) => const SignupScreen(),
       ),
       GoRoute(
-        path: AppRoutes.home,
+        path: AppRoutes.home.path,
+        name: AppRoutes.home.name,
         builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
-        path: AppRoutes.lessons,
+        path: AppRoutes.lessons.path,
+        name: AppRoutes.lessons.name,
         builder: (context, state) => const LessonScreen(),
       ),
       GoRoute(
-        path: AppRoutes.settings,
+        path: AppRoutes.settings.path,
+        name: AppRoutes.settings.name,
         builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
-        path: AppRoutes.accessories,
+        path: AppRoutes.accessories.path,
+        name: AppRoutes.accessories.name,
         builder: (context, state) => const AccessoryScreen(),
       ),
       GoRoute(
-        path: AppRoutes.imageViewer,
-        name: 'imageViewer',
+        path: AppRoutes.imageViewer.path,
+        name: AppRoutes.imageViewer.name,
         builder: (context, state) {
           final imageUrl = state.uri.queryParameters['url']!;
           return ImageViewerScreen(imageUrl: imageUrl);
         },
       ),
       GoRoute(
-        path: AppRoutes.audioPlayer,
-        name: AppRoutes.audioPlayerName,
+        path: AppRoutes.audioPlayer.path,
+        name: AppRoutes.audioPlayer.name,
         builder: (context, state) {
           final audioUrl = state.uri.queryParameters['url']!;
           return AudioPlayerScreen(url: audioUrl);
         },
       ),
       GoRoute(
-        path: AppRoutes.videoPlayer,
-        name: AppRoutes.videoPlayerName,
+        path: AppRoutes.videoPlayer.path,
+        name: AppRoutes.videoPlayer.name,
         builder: (context, state) {
           final videoId = state.uri.queryParameters['url']!;
           return VideoPlayerScreen(videoId: videoId);
         },
       ),
       GoRoute(
-        path: AppRoutes.pdfViewer,
-        name: AppRoutes.pdfViewerName,
+        path: AppRoutes.pdfViewer.path,
+        name: AppRoutes.pdfViewer.name,
         builder: (context, state) {
           final pdfUrl = state.uri.queryParameters['url']!;
           return PdfViewerScreen(pdfUrl: pdfUrl);
         },
+      ),
+      GoRoute(
+        path: AppRoutes.modelViewer.path,
+        name: AppRoutes.modelViewer.name,
+        builder: (context, state) => const ModelViewerScreen(),
       ),
     ],
     refreshListenable: isAuth,
@@ -110,12 +124,14 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       final loggedIn = authValue.value ?? false;
 
-      if (state.fullPath == AppRoutes.splash) return null;
-      if (onboardingDone && !loggedIn && state.fullPath != AppRoutes.login) {
-        return AppRoutes.login;
+      if (state.fullPath == AppRoutes.splash.path) return null;
+      if (onboardingDone &&
+          !loggedIn &&
+          state.fullPath != AppRoutes.login.path) {
+        return AppRoutes.login.path;
       }
-      if (loggedIn && state.fullPath == AppRoutes.login) {
-        return AppRoutes.home;
+      if (loggedIn && state.fullPath == AppRoutes.login.path) {
+        return AppRoutes.home.path;
       }
       return null;
     },

@@ -37,11 +37,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
     if (!mounted) return;
     if (!onboardingDone) {
-      context.go(AppRoutes.onboarding);
+      context.go(AppRoutes.onboarding.path);
     } else if (isLoggedIn) {
-      context.go(AppRoutes.home);
+      context.go(AppRoutes.home.path);
     } else {
-      context.go(AppRoutes.login);
+      context.go(AppRoutes.login.path);
     }
   }
 

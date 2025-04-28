@@ -68,29 +68,24 @@ Widget accessoryItem(AccessoryModel accessory, context) => Card(
                   tooltip: AppLocalizations.of(context).viewImage,
                   onPressed: () => GoRouter.of(context).pushNamed(
                     'imageViewer',
-                    queryParameters: {
-                      'url':
-                          // accessory.images
-
-                          'https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png'
-                    },
+                    queryParameters: {'url': accessory.images},
                   ),
                 ),
               // if (_isValid(accessory.videos))
-                IconButton(
-                  icon: const Icon(Icons.play_circle_outline),
-                  tooltip: AppLocalizations.of(context).watchVideo,
-                  onPressed: () => GoRouter.of(context).pushNamed(
-                    AppRoutes.videoPlayerName,
-                    queryParameters: {'url': 'UDVtMYqUAyw'},
-                  ),
+              IconButton(
+                icon: const Icon(Icons.play_circle_outline),
+                tooltip: AppLocalizations.of(context).watchVideo,
+                onPressed: () => GoRouter.of(context).pushNamed(
+                  AppRoutes.videoPlayer.name,
+                  queryParameters: {'url': 'UDVtMYqUAyw'},
                 ),
+              ),
               if (_isValid(accessory.file))
                 IconButton(
                   icon: const Icon(Icons.picture_as_pdf_outlined),
                   tooltip: AppLocalizations.of(context).openPDF,
                   onPressed: () => GoRouter.of(context).pushNamed(
-                    AppRoutes.pdfViewerName,
+                    AppRoutes.pdfViewer.name,
                     queryParameters: {'url': accessory.file},
                   ),
                 ),
@@ -99,12 +94,19 @@ Widget accessoryItem(AccessoryModel accessory, context) => Card(
                 icon: const Icon(Icons.audio_file_outlined),
                 tooltip: AppLocalizations.of(context).playAudio,
                 onPressed: () => GoRouter.of(context).pushNamed(
-                  AppRoutes.audioPlayerName,
+                  AppRoutes.audioPlayer.name,
                   queryParameters: {
                     // 'url':accessory.audio
                     'url':
                         'https://file-examples.com/wp-content/storage/2017/11/file_example_MP3_700KB.mp3'
                   },
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.view_in_ar),
+                tooltip: AppLocalizations.of(context).modelViewer,
+                onPressed: () => GoRouter.of(context).pushNamed(
+                  AppRoutes.modelViewer.name,
                 ),
               ),
             ]),

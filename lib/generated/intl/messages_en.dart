@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "menu": MessageLookupByLibrary.simpleMessage("Menu"),
+    "modelViewer": MessageLookupByLibrary.simpleMessage("3D Model Viewer"),
     "needAccount": MessageLookupByLibrary.simpleMessage("Need an account ?"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "noAccessoryAvailable": MessageLookupByLibrary.simpleMessage(

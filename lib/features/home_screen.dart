@@ -55,7 +55,7 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
             leading: const Icon(settings),
             title: Text(AppLocalizations.of(context).settings),
             onTap: () {
-              context.push(AppRoutes.settings);
+              context.push(AppRoutes.settings.path);
             },
           ),
         ],
@@ -64,7 +64,7 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
 
 Widget lessonsCard(WidgetRef ref, BuildContext context) => GestureDetector(
       onTap: () {
-        context.push(AppRoutes.lessons);
+        context.push(AppRoutes.lessons.path);
       },
       child: Card(
         elevation: 4,
@@ -89,7 +89,7 @@ Widget lessonsCard(WidgetRef ref, BuildContext context) => GestureDetector(
 
 Widget accessoriesCard(WidgetRef ref, BuildContext context) => GestureDetector(
       onTap: () {
-        context.push(AppRoutes.accessories);
+        context.push(AppRoutes.accessories.path);
       },
       child: Card(
         elevation: 4,

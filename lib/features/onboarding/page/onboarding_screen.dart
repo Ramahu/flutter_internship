@@ -26,7 +26,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _completeOnboarding(BuildContext context) async {
     await CacheHelper.saveData(key: onboardingDoneKey, value: true);
     if (context.mounted) {
-      context.go(AppRoutes.login);
+      context.go(AppRoutes.login.path);
     }
   }
 

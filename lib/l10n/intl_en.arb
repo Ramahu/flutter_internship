@@ -40,5 +40,6 @@
     "speed":"Speed",
     "Volume":"Volume",
     "videoPlayer":"Video Player",
-    "pdfViewer": "PDF Viewer"
+    "pdfViewer": "PDF Viewer",
+    "modelViewer": "3D Model Viewer"
 }
