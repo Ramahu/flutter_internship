@@ -82,11 +82,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.audioPlayer,
         name: AppRoutes.audioPlayerName,
         builder: (context, state) {
-          final encodedUrl = state.uri.queryParameters['url']!;
-          final audioUrl = Uri.decodeComponent(encodedUrl);
+          final audioUrl = state.uri.queryParameters['url']!;
           return AudioPlayerScreen(url: audioUrl);
-          // final audioUrl = state.uri.queryParameters['url']!;
-          // return AudioPlayerScreen(url: audioUrl);
         },
       ),
       GoRoute(
@@ -97,14 +94,14 @@ final routerProvider = Provider<GoRouter>((ref) {
           return VideoPlayerScreen(videoId: videoId);
         },
       ),
-      // GoRoute(
-      //   path: AppRoutes.pdfViewer,
-      //   name: AppRoutes.pdfViewerName,
-      //   builder: (context, state) {
-      //     final pdfUrl = state.uri.queryParameters['url']!;
-      //     return PdfViewerScreen(pdfUrl: pdfUrl);
-      //   },
-      // ),
+      GoRoute(
+        path: AppRoutes.pdfViewer,
+        name: AppRoutes.pdfViewerName,
+        builder: (context, state) {
+          final pdfUrl = state.uri.queryParameters['url']!;
+          return PdfViewerScreen(pdfUrl: pdfUrl);
+        },
+      ),
     ],
     refreshListenable: isAuth,
     redirect: (context, state) async {

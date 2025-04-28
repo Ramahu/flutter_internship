@@ -1,15 +1,15 @@
 class AccessoryModel {
   AccessoryModel({
-    required this.id,
-    required this.classId,
-    required this.sectionId,
-    required this.topic,
-    required this.file,
-    required this.images,
-    required this.videos,
-    required this.url,
-    required this.ar,
-    required this.audio,
+     required this.id,
+     required this.classId,
+     required this.sectionId,
+     required this.topic,
+     this.file,
+     this.images,
+     this.videos,
+     this.url,
+     this.ar,
+     this.audio,
   });
 
   factory AccessoryModel.fromJson(Map<String, dynamic> json) {
@@ -31,10 +31,10 @@ class AccessoryModel {
   final int classId;
   final int sectionId;
   final String topic;
-  final String file;
-  final String images;
-  final String videos;
-  final String url;
-  final String ar;
-  final String audio;
+  final String? file;
+  final String? images;
+  final String? videos;
+  final String? url;
+  final String? ar;
+  final String? audio;
 }

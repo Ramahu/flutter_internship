@@ -76,7 +76,7 @@ class AudioPlayerNotifier extends StateNotifier<AsyncValue<AudioState>> {
   }
 }
 
-final audioPlayerProvider = StateNotifierProvider<
-    AudioPlayerNotifier, AsyncValue<AudioState>>(
+final audioPlayerProvider =
+    StateNotifierProvider<AudioPlayerNotifier, AsyncValue<AudioState>>(
   (ref) => AudioPlayerNotifier(),
 );

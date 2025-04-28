@@ -18,7 +18,7 @@ class ImageViewerScreen extends ConsumerWidget {
       ),
       body: Center(
         child: PhotoView(
-          imageProvider: const NetworkImage('https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png'),
+          imageProvider: NetworkImage(imageUrl),
           backgroundDecoration: BoxDecoration(
             color: Theme.of(context).scaffoldBackgroundColor,
           ),

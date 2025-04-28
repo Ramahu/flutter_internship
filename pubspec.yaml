@@ -29,6 +29,7 @@ dependencies:
   just_audio: ^0.10.0
   youtube_player_flutter: ^9.1.1
   webview_flutter: ^4.11.0
+  syncfusion_flutter_pdfviewer: ^29.1.38
 
 
 flutter_native_splash:

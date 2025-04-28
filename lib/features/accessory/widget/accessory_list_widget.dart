@@ -68,10 +68,15 @@ Widget accessoryItem(AccessoryModel accessory, context) => Card(
                   tooltip: AppLocalizations.of(context).viewImage,
                   onPressed: () => GoRouter.of(context).pushNamed(
                     'imageViewer',
-                    queryParameters: {'url': accessory.images},
+                    queryParameters: {
+                      'url':
+                          // accessory.images
+
+                          'https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png'
+                    },
                   ),
                 ),
-              if (_isValid(accessory.videos))
+              // if (_isValid(accessory.videos))
                 IconButton(
                   icon: const Icon(Icons.play_circle_outline),
                   tooltip: AppLocalizations.of(context).watchVideo,
@@ -89,18 +94,19 @@ Widget accessoryItem(AccessoryModel accessory, context) => Card(
                     queryParameters: {'url': accessory.file},
                   ),
                 ),
-              if (_isValid(accessory.audio))
-                IconButton(
-                  icon: const Icon(Icons.audio_file_outlined),
-                  tooltip: AppLocalizations.of(context).playAudio,
-                  onPressed: () => GoRouter.of(context).pushNamed(
-                    AppRoutes.audioPlayerName,
-                    queryParameters: {
-                      // 'url':accessory.audio
-                      'url': Uri.encodeComponent(accessory.audio)
-                    },
-                  ),
+              // if (_isValid(accessory.audio))
+              IconButton(
+                icon: const Icon(Icons.audio_file_outlined),
+                tooltip: AppLocalizations.of(context).playAudio,
+                onPressed: () => GoRouter.of(context).pushNamed(
+                  AppRoutes.audioPlayerName,
+                  queryParameters: {
+                    // 'url':accessory.audio
+                    'url':
+                        'https://file-examples.com/wp-content/storage/2017/11/file_example_MP3_700KB.mp3'
+                  },
                 ),
+              ),
             ]),
           ),
         ),
