@@ -6,17 +6,19 @@ import 'package:model_viewer_plus/model_viewer_plus.dart';
 import '../../../generated/l10n.dart';
 
 class ModelViewerScreen extends ConsumerWidget {
-  const ModelViewerScreen({super.key});
+  const ModelViewerScreen({super.key, required this.modelUrl});
+  final String modelUrl;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).modelViewer)),
-      body: const Center(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).modelViewer),
+        elevation: 2,
+      ),
+      body: Center(
         child: ModelViewer(
-          src:
-              'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-          alt: 'A 3D model of an astronaut',
+          src: modelUrl,
           ar: true,
           autoRotate: true,
           cameraControls: true,

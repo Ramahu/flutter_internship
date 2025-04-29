@@ -114,7 +114,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.modelViewer.path,
         name: AppRoutes.modelViewer.name,
-        builder: (context, state) => const ModelViewerScreen(),
+        builder: (context, state) {
+          final modelUrl = state.uri.queryParameters['url']!;
+          return ModelViewerScreen(modelUrl: modelUrl);
+        },
       ),
     ],
     refreshListenable: isAuth,

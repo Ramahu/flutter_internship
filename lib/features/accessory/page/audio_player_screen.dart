@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../core/util/colors.dart';
 import '../../../generated/assets.dart';
@@ -18,45 +17,18 @@ class AudioPlayerScreen extends ConsumerStatefulWidget {
 }
 
 class _AudioPlayerScreenState extends ConsumerState<AudioPlayerScreen> {
-  bool _isLoading = true;
-  String? _redirectedUrl;
-
-  late final WebViewController _webViewController;
-
   @override
   void initState() {
     super.initState();
-
-    _webViewController = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onNavigationRequest: (request) {
-            debugPrint('Redirected URL: ${request.url}');
-            if (_redirectedUrl == null) {
-              _redirectedUrl = request.url;
-
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                if (mounted) {
-                  ref
-                      .read(audioPlayerProvider.notifier)
-                      .setAudioSource(_redirectedUrl!);
-                  setState(() => _isLoading = false);
-                }
-              });
-
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..loadRequest(Uri.parse(widget.url));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        ref.read(audioPlayerProvider.notifier).setAudioSource(widget.url);
+      }
+    });
   }
 
   @override
   void dispose() {
-    _webViewController.clearCache();
     super.dispose();
   }
 
@@ -72,126 +44,123 @@ class _AudioPlayerScreenState extends ConsumerState<AudioPlayerScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: _isLoading
-            ? loadingWidget()
-            : playerState.when(
-                loading: loadingWidget,
-                error: (e, _) => errorWidget(e),
-                data: (state) => Column(
+        child: playerState.when(
+          loading: loadingWidget,
+          error: (e, _) => errorWidget(e),
+          data: (state) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Image(
+                height: 190,
+                image: AssetImage(Assets.assetsLogo),
+              ),
+              const SizedBox(height: 35),
+              Row(
+                children: [
+                  IconButton(
+                    iconSize: 36,
+                    icon: Icon(
+                      state.isPlaying ? Icons.pause : Icons.play_arrow,
+                    ),
+                    onPressed: () {
+                      state.isPlaying
+                          ? playerNotifier.pause()
+                          : playerNotifier.play();
+                    },
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Slider(
+                      value: state.position.inSeconds
+                          .clamp(0, state.total.inSeconds)
+                          .toDouble(),
+                      max: state.total.inSeconds
+                          .toDouble()
+                          .clamp(1, double.infinity),
+                      onChanged: (value) {
+                        playerNotifier.seek(Duration(seconds: value.toInt()));
+                      },
+                      activeColor: defaultBlue2,
+                      thumbColor: defaultBlue2,
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    Text(formatDuration(state.position),
+                        style: const TextStyle(fontSize: 18)),
+                    const Spacer(),
+                    Text(formatDuration(state.total),
+                        style: const TextStyle(fontSize: 18)),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Image(
-                      height: 190,
-                      image: AssetImage(Assets.assetsLogo),
-                    ),
-                    const SizedBox(height: 35),
-                    Row(
-                      children: [
-                        IconButton(
-                          iconSize: 36,
-                          icon: Icon(
-                            state.isPlaying ? Icons.pause : Icons.play_arrow,
-                          ),
-                          onPressed: () {
-                            state.isPlaying
-                                ? playerNotifier.pause()
-                                : playerNotifier.play();
-                          },
-                        ),
-                        const SizedBox(width: 20),
-                        Expanded(
-                          child: Slider(
-                            value: state.position.inSeconds
-                                .clamp(0, state.total.inSeconds)
-                                .toDouble(),
-                            max: state.total.inSeconds
-                                .toDouble()
-                                .clamp(1, double.infinity),
-                            onChanged: (value) {
-                              playerNotifier
-                                  .seek(Duration(seconds: value.toInt()));
+                    Text(AppLocalizations.of(context).speed),
+                    const SizedBox(width: 10),
+                    DropdownButton<double>(
+                      value: state.speed,
+                      items: playerNotifier.speedOptions.map((speed) {
+                        return DropdownMenuItem(
+                          value: speed,
+                          child: Text('${speed}x'),
+                        );
+                      }).toList(),
+                      onChanged: state.isLoading
+                          ? null
+                          : (speed) {
+                              if (speed != null) {
+                                playerNotifier.setSpeed(speed);
+                              }
                             },
-                            activeColor: defaultBlue2,
-                            thumbColor: defaultBlue2,
+                    ),
+                    const Spacer(),
+                    PopupMenuButton(
+                      tooltip: AppLocalizations.of(context).Volume,
+                      itemBuilder: (_) => [
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: Consumer(
+                            builder: (context, ref, _) {
+                              final state =
+                                  ref.watch(audioPlayerProvider).value!;
+                              final notifier =
+                                  ref.read(audioPlayerProvider.notifier);
+                              return SizedBox(
+                                child: RotatedBox(
+                                  quarterTurns: -1,
+                                  child: Slider(
+                                    activeColor: defaultBlue2,
+                                    thumbColor: defaultBlue2,
+                                    value: state.volume,
+                                    min: 0.0,
+                                    max: 1.0,
+                                    divisions: 10,
+                                    label:
+                                        (state.volume * 100).toStringAsFixed(0),
+                                    onChanged: notifier.setVolume,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Row(
-                        children: [
-                          Text(formatDuration(state.position),
-                              style: const TextStyle(fontSize: 18)),
-                          const Spacer(),
-                          Text(formatDuration(state.total),
-                              style: const TextStyle(fontSize: 18)),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(AppLocalizations.of(context).speed),
-                          const SizedBox(width: 10),
-                          DropdownButton<double>(
-                            value: state.speed,
-                            items: playerNotifier.speedOptions.map((speed) {
-                              return DropdownMenuItem(
-                                value: speed,
-                                child: Text('${speed}x'),
-                              );
-                            }).toList(),
-                            onChanged: state.isLoading
-                                ? null
-                                : (speed) {
-                                    if (speed != null) {
-                                      playerNotifier.setSpeed(speed);
-                                    }
-                                  },
-                          ),
-                          const Spacer(),
-                          PopupMenuButton(
-                            tooltip: AppLocalizations.of(context).Volume,
-                            itemBuilder: (_) => [
-                              PopupMenuItem(
-                                padding: EdgeInsets.zero,
-                                child: Consumer(
-                                  builder: (context, ref, _) {
-                                    final state =
-                                        ref.watch(audioPlayerProvider).value!;
-                                    final notifier =
-                                        ref.read(audioPlayerProvider.notifier);
-                                    return SizedBox(
-                                      child: RotatedBox(
-                                        quarterTurns: -1,
-                                        child: Slider(
-                                          activeColor: defaultBlue2,
-                                          thumbColor: defaultBlue2,
-                                          value: state.volume,
-                                          min: 0.0,
-                                          max: 1.0,
-                                          divisions: 10,
-                                          label: (state.volume * 100)
-                                              .toStringAsFixed(0),
-                                          onChanged: notifier.setVolume,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                            child: const Icon(Icons.volume_up),
-                          ),
-                        ],
-                      ),
+                      child: const Icon(Icons.volume_up),
                     ),
                   ],
                 ),
               ),
+            ],
+          ),
+        ),
       ),
     );
   }
