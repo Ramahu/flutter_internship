@@ -76,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "videoPlayer": MessageLookupByLibrary.simpleMessage("Video Player"),
     "viewImage": MessageLookupByLibrary.simpleMessage("View Image"),
     "watchVideo": MessageLookupByLibrary.simpleMessage("Watch Video"),
+    "watchYoutube": MessageLookupByLibrary.simpleMessage("Watch Youtube"),
     "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "Experience our app with a clean and fast UI.",

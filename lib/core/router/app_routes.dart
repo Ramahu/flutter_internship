@@ -21,6 +21,8 @@ class AppRoutes {
       AppRoute(name: 'audioPlayer', path: '/audioPlayer');
   static const videoPlayer =
       AppRoute(name: 'videoPlayer', path: '/videoPlayer');
+  static const youtubePlayer =
+      AppRoute(name: 'YoutubePlayer', path: '/YoutubePlayer');
   static const pdfViewer = AppRoute(name: 'pdfViewer', path: '/pdfViewer');
   static const modelViewer =
       AppRoute(name: 'modelViewer', path: '/modelViewer');

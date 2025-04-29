@@ -77,6 +77,15 @@ Widget accessoryItem(AccessoryModel accessory, context) => Card(
                   tooltip: AppLocalizations.of(context).watchVideo,
                   onPressed: () => GoRouter.of(context).pushNamed(
                     AppRoutes.videoPlayer.name,
+                    queryParameters: {'url': accessory.videos},
+                  ),
+                ),
+              if (_isValid(accessory.videos))
+                IconButton(
+                  icon: const Icon(Icons.video_collection),
+                  tooltip: AppLocalizations.of(context).watchYoutube,
+                  onPressed: () => GoRouter.of(context).pushNamed(
+                    AppRoutes.youtubePlayer.name,
                     queryParameters: {'url': 'UDVtMYqUAyw'},
                   ),
                 ),

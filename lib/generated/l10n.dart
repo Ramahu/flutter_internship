@@ -295,6 +295,16 @@ class AppLocalizations {
     return Intl.message('Watch Video', name: 'watchVideo', desc: '', args: []);
   }
 
+  /// `Watch Youtube`
+  String get watchYoutube {
+    return Intl.message(
+      'Watch Youtube',
+      name: 'watchYoutube',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Open PDF`
   String get openPDF {
     return Intl.message('Open PDF', name: 'openPDF', desc: '', args: []);

@@ -12,6 +12,7 @@ import '../../features/accessory/page/image_viewer_screen.dart';
 import '../../features/accessory/page/model_viewer_screen.dart';
 import '../../features/accessory/page/pdf_viewer_screen.dart';
 import '../../features/accessory/page/video_player_screen.dart';
+import '../../features/accessory/page/youtube_player_screen.dart';
 import '../../features/auth/page/login_screen.dart';
 import '../../features/auth/page/signup_screen.dart';
 import '../../features/auth/provider/auth_notifier.dart';
@@ -96,11 +97,19 @@ final routerProvider = Provider<GoRouter>((ref) {
         },
       ),
       GoRoute(
+        path: AppRoutes.youtubePlayer.path,
+        name: AppRoutes.youtubePlayer.name,
+        builder: (context, state) {
+          final videoId = state.uri.queryParameters['url']!;
+          return YoutubePlayerScreen(videoId: videoId);
+        },
+      ),
+      GoRoute(
         path: AppRoutes.videoPlayer.path,
         name: AppRoutes.videoPlayer.name,
         builder: (context, state) {
-          final videoId = state.uri.queryParameters['url']!;
-          return VideoPlayerScreen(videoId: videoId);
+          final videoUrl = state.uri.queryParameters['url']!;
+          return VideoPlayerScreen(videoUrl: videoUrl);
         },
       ),
       GoRoute(
