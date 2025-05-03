@@ -63,10 +63,18 @@ flutter:
 
   assets:
     - assets/
+
+flutter_assets:
+  assets_path: assets/
+  output_path: lib/core/constants/
+  filename: images.dart
+  classname: AppImages
+  ignore_comments: true
+  field_prefix:
+
 flutter_intl:
   enabled: true
   class_name: AppLocalizations
-
-#  git add .
-#  git commit -m ""
-#  git push origin main
+  arb_dir: lib/core/locale
+  # output_dir: lib/core/locale/generated
+  # use_deferred_loading: false

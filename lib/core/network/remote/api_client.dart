@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../../../app_configs.dart';
+import '../../configs/app_configs.dart';
 import '../../../features/auth/service/auth_interceptor.dart';
 
 final cacheOptions = CacheOptions(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:intern/core/util/storage_keys.dart';
+import 'package:intern/core/keys/keys.dart';
 
 import 'network/local/cache_helper.dart';
 

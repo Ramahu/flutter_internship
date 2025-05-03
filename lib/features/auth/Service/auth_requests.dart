@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../app_configs.dart';
+import '../../../core/configs/app_configs.dart';
 import '../../../core/network/remote/api_client.dart';
 import '../model/user_model.dart';
 

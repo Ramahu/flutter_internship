@@ -6,8 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/network/local/cache_helper.dart';
 import '../../../core/network/local/secure_storage.dart';
 import '../../../core/router/app_routes.dart';
-import '../../../core/util/colors.dart';
-import '../../../core/util/storage_keys.dart';
+import '../../../core/themes/app_colors.dart';
+import '../../../core/keys/keys.dart';
 import '../../../generated/assets.dart';
 import '../../auth/provider/auth_notifier.dart';
 
@@ -48,7 +48,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor : white,
+      backgroundColor : AppColors.white,
       body: Center(
         child: Image(
           height: 160,

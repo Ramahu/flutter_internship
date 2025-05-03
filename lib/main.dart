@@ -7,8 +7,8 @@ import 'package:intern/core/localization_notifier.dart';
 
 import 'core/network/local/cache_helper.dart';
 import 'core/router/app_router.dart';
-import 'core/theme_notifier.dart';
-import 'core/util/storage_keys.dart';
+import 'core/themes/theme_notifier.dart';
+import 'core/keys/keys.dart';
 import 'generated/l10n.dart';
 
 void main() async {

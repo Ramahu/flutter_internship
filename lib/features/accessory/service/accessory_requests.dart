@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../../../core/network/remote/api_client.dart';
-import '../../../app_configs.dart';
+import '../../../core/configs/app_configs.dart';
 import '../../lessons/model/lesson_model.dart';
 import '../model/accessory_model.dart';
 

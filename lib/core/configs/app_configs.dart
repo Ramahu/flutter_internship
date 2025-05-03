@@ -5,4 +5,6 @@ class AppConfigs {
   static const String lesson = '/student/online-lesson';
   static const String subject = '/student/my-subjects';
   static const String accessory = '/student/accessories';
+
+  static const int perPage = 10;
 }

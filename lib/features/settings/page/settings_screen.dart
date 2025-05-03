@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/localization_notifier.dart';
-import '../../../core/theme_notifier.dart';
+import '../../../core/themes/theme_notifier.dart';
 import '../../../core/util/icons.dart';
 import '../../../generated/l10n.dart';
 import '../../auth/provider/auth_notifier.dart';

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'network/local/cache_helper.dart';
-import 'util/storage_keys.dart';
+import '../network/local/cache_helper.dart';
+import '../keys/keys.dart';
 
 class ThemeNotifier extends StateNotifier<ThemeMode> {
   ThemeNotifier() : super(ThemeMode.light) {

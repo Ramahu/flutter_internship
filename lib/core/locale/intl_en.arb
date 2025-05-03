@@ -37,10 +37,10 @@
     "watchYoutube": "Watch Youtube",
     "openPDF": "Open PDF",
     "playAudio": "Play Audio",
-    "audioPlayer":"Audio Player",
-    "speed":"Speed",
-    "Volume":"Volume",
-    "videoPlayer":"Video Player",
+    "audioPlayer": "Audio Player",
+    "speed": "Speed",
+    "Volume": "Volume",
+    "videoPlayer": "Video Player",
     "pdfViewer": "PDF Viewer",
     "modelViewer": "3D Model Viewer"
 }

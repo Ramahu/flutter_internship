@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:intern/core/util/storage_keys.dart';
+import 'package:intern/core/keys/keys.dart';
 
 import '../../../core/network/local/secure_storage.dart';
 import '../service/auth_requests.dart';

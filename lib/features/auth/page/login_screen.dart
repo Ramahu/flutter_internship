@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_routes.dart';
-import '../../../core/util/colors.dart';
+import '../../../core/themes/app_colors.dart';
 import '../../../core/util/icons.dart';
 import '../../../generated/assets.dart';
 import '../../../generated/l10n.dart';
@@ -32,7 +32,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   InputBorder outlineBorder = const OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(25)),
     borderSide: BorderSide(
-      color: defaultBlue2,
+      color: AppColors.defaultBlue2,
     ),
   );
 
@@ -79,11 +79,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     label: AppLocalizations.of(context).emailAddress,
                     labelStyle: const TextStyle(
                       fontSize: 18,
-                      color: grey,
+                      color: AppColors.grey,
                     ),
                     prefix: const Icon(
                       mailOutlineOutlined,
-                      color: indigoAccent,
+                      color: AppColors.indigoAccent,
                     ),
                     onSubmit: (_) {
                       FocusScope.of(context).requestFocus(passwordFocusNode);
@@ -109,11 +109,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     label: AppLocalizations.of(context).password,
                     labelStyle: const TextStyle(
                       fontSize: 18,
-                      color: grey,
+                      color: AppColors.grey,
                     ),
                     prefix: const Icon(
                       keyOutlined,
-                      color: indigoAccent,
+                      color: AppColors.indigoAccent,
                     ),
                     suffix: isVisible ? visibility : visibilityOff,
                     suffixPressed: () {
@@ -140,8 +140,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     text: AppLocalizations.of(context).login,
                     width: 280,
                     height: 50,
-                    color1: indigoAccent,
-                    color2: defaultBlue2,
+                    color1: AppColors.indigoAccent,
+                    color2: AppColors.defaultBlue2,
                     function: () {
                       if (formKey.currentState!.validate()) {
                         ref.read(authProvider.notifier).login(

@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:intern/core/router/app_routes.dart';
-import 'package:intern/core/util/storage_keys.dart';
+import 'package:intern/core/keys/keys.dart';
 
 import '../../../core/network/local/cache_helper.dart';
-import '../../../core/util/colors.dart';
+import '../../../core/themes/app_colors.dart';
 import '../../../generated/assets.dart';
 import '../../../generated/l10n.dart';
 import '../widgets/onboarding_widget.dart';
@@ -73,7 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   effect: const WormEffect(
                     dotHeight: 12,
                     dotWidth: 12,
-                    activeDotColor: defaultBlue2,
+                    activeDotColor: AppColors.defaultBlue2,
                   ),
                 ),
                 const SizedBox(height: 20),

@@ -34,13 +34,13 @@
     "image": "عارض الصور",
     "viewImage": "عرض الصورة",
     "watchVideo": "مشاهدة الفيديو",
-    "watchYoutube": " مشاهدة فيديو اليوتيوب" ,
+    "watchYoutube": " مشاهدة فيديو اليوتيوب",
     "openPDF": "فتح الملف",
     "playAudio": "شغل الصوت",
-    "audioPlayer":" مشغل الصوت",
-    "speed":"السرعة",
-    "Volume":"شدة الصوت",
-    "videoPlayer":"مشغل الفيديو",
+    "audioPlayer": " مشغل الصوت",
+    "speed": "السرعة",
+    "Volume": "شدة الصوت",
+    "videoPlayer": "مشغل الفيديو",
     "pdfViewer": "عارض الملفات",
     "modelViewer": "عارض نموذج ثلاثي الأبعاد"
 }

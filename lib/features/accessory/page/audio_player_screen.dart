@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/util/colors.dart';
+import '../../../core/themes/app_colors.dart';
 import '../../../generated/assets.dart';
 import '../../../generated/l10n.dart';
 import '../../lessons/widget/state_widget.dart';
@@ -80,8 +80,8 @@ class _AudioPlayerScreenState extends ConsumerState<AudioPlayerScreen> {
                       onChanged: (value) {
                         playerNotifier.seek(Duration(seconds: value.toInt()));
                       },
-                      activeColor: defaultBlue2,
-                      thumbColor: defaultBlue2,
+                      activeColor: AppColors.defaultBlue2,
+                      thumbColor: AppColors.defaultBlue2,
                     ),
                   ),
                 ],
@@ -137,8 +137,8 @@ class _AudioPlayerScreenState extends ConsumerState<AudioPlayerScreen> {
                                 child: RotatedBox(
                                   quarterTurns: -1,
                                   child: Slider(
-                                    activeColor: defaultBlue2,
-                                    thumbColor: defaultBlue2,
+                                    activeColor: AppColors.defaultBlue2,
+                                    thumbColor: AppColors.defaultBlue2,
                                     value: state.volume,
                                     min: 0.0,
                                     max: 1.0,

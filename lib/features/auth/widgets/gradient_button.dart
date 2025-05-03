@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/util/colors.dart';
+import '../../../core/themes/app_colors.dart';
 
 Widget defaultGradientButton({
   required double width,
@@ -19,8 +19,8 @@ Widget defaultGradientButton({
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius),
         ),
-        backgroundColor: transparent,
-        shadowColor: transparent,
+        backgroundColor: AppColors.transparent,
+        shadowColor: AppColors.transparent,
         padding: EdgeInsets.zero,
       ).copyWith(
         backgroundColor: WidgetStateProperty.resolveWith((states) {
@@ -41,7 +41,7 @@ Widget defaultGradientButton({
           alignment: Alignment.center,
           child: Text(
             text,
-            style: const TextStyle(color: white, fontSize: 23),
+            style: const TextStyle(color: AppColors.white, fontSize: 23),
           ),
         ),
       ),

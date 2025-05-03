@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intern/generated/l10n.dart';
 
 import '../core/router/app_routes.dart';
-import '../core/util/colors.dart';
+import '../core/themes/app_colors.dart';
 import '../core/util/icons.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -43,10 +43,10 @@ Widget drawer(WidgetRef ref, BuildContext context) => Drawer(
           SizedBox(
             height: 95,
             child: DrawerHeader(
-              decoration: const BoxDecoration(color: defaultBlue2),
+              decoration: const BoxDecoration(color: AppColors.defaultBlue2),
               child: Text(
                 AppLocalizations.of(context).menu,
-                style: const TextStyle(color: white, fontSize: 24),
+                style: const TextStyle(color: AppColors.white, fontSize: 24),
               ),
             ),
           ),

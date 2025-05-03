@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_routes.dart';
-import '../../../core/util/colors.dart';
+import '../../../core/themes/app_colors.dart';
 import '../../../core/util/icons.dart';
 import '../../../generated/assets.dart';
 import '../widgets/gradient_button.dart';
@@ -34,7 +34,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   InputBorder outlineBorder = const OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(25)),
     borderSide: BorderSide(
-      color: defaultBlue2,
+      color: AppColors.defaultBlue2,
     ),
   );
 
@@ -84,11 +84,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     label: 'Full Name',
                     labelStyle: const TextStyle(
                       fontSize: 18,
-                      color: grey,
+                      color: AppColors.grey,
                     ),
                     prefix: const Icon(
                       mailOutlineOutlined,
-                      color: indigoAccent,
+                      color: AppColors.indigoAccent,
                     ),
                     onSubmit: (_) {
                       FocusScope.of(context).requestFocus(emailFocusNode);
@@ -116,11 +116,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     label: 'Email Address',
                     labelStyle: const TextStyle(
                       fontSize: 18,
-                      color: grey,
+                      color: AppColors.grey,
                     ),
                     prefix: const Icon(
                       mailOutlineOutlined,
-                      color: indigoAccent,
+                      color: AppColors.indigoAccent,
                     ),
                     onSubmit: (_) {
                       FocusScope.of(context).requestFocus(passwordFocusNode);
@@ -146,11 +146,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     label: 'Password',
                     labelStyle: const TextStyle(
                       fontSize: 18,
-                      color: grey,
+                      color: AppColors.grey,
                     ),
                     prefix: const Icon(
                       keyOutlined,
-                      color: indigoAccent,
+                      color: AppColors.indigoAccent,
                     ),
                     onSubmit: (_) {
                       FocusScope.of(context).requestFocus(verPasswordFocusNode);
@@ -189,11 +189,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     label: 'confirm Password',
                     labelStyle: const TextStyle(
                       fontSize: 18,
-                      color: grey,
+                      color: AppColors.grey,
                     ),
                     prefix: const Icon(
                       keyOutlined,
-                      color: indigoAccent,
+                      color: AppColors.indigoAccent,
                     ),
                     suffix: isVisible ? visibility : visibilityOff,
                     suffixPressed: () {
@@ -223,8 +223,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     text: ' Sign Up',
                     width: 280,
                     height: 50,
-                    color1: indigoAccent,
-                    color2: defaultBlue2,
+                    color1: AppColors.indigoAccent,
+                    color2: AppColors.defaultBlue2,
                     function: () {
                       if (formKey.currentState!.validate()) {}
                     },

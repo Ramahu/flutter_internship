@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:video_player/video_player.dart';
 
-import '../../../core/util/colors.dart';
+import '../../../core/themes/app_colors.dart';
 import '../../../generated/l10n.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -88,7 +88,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                   : Icons.play_arrow,
                               key: ValueKey<bool>(_controller.value.isPlaying),
                               size: 80,
-                              color: white,
+                              color: AppColors.white,
                             ),
                           )
                       ],
