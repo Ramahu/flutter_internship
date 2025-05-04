@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:intern/core/keys/keys.dart';
 import 'package:intern/core/network/local/cache_helper.dart';
@@ -11,39 +10,61 @@ import '../../features/auth/provider/auth_notifier.dart';
 import 'app_routes.dart';
 import 'routes.dart';
 
-
-final isAuth = ValueNotifier<AsyncValue<bool>>(const AsyncLoading());
-final onboardingDone = CacheHelper.getData(key: onboardingDoneKey) ?? false;
-
 final routerProvider = Provider<GoRouter>((ref) {
-  ref.onDispose(isAuth.dispose);
+  final isAuth = ValueNotifier<AsyncValue<bool>>(const AsyncLoading());
 
-  ref.listen<AsyncValue<bool>>(
-    authProvider,
-    (_, next) => isAuth.value = next,
-  );
+  ref
+    ..onDispose(isAuth.dispose)
+    ..listen(
+      authProvider.select(
+        (val) => val.whenData((val) => val),
+      ),
+      (_, next) {
+        isAuth.value = AsyncValue.data(next.value ?? false);
+      },
+    );
 
-  return GoRouter(
+  final router = GoRouter(
     initialLocation: AppRoutes.splash.path,
     navigatorKey: rootNavigatorKey,
     routes: routes,
     refreshListenable: isAuth,
     redirect: (context, state) async {
+      final currentPath = state.uri.path;
+      final onboardingDone =
+          CacheHelper.getData(key: onboardingDoneKey) ?? false;
       final authValue = isAuth.value;
-      if (authValue.isLoading) return null;
+      final loggedIn = authValue.requireValue;
 
-      final loggedIn = authValue.value ?? false;
+      if (authValue.isLoading || !authValue.hasValue) {
+        return AppRoutes.splash.path;
+      }
 
-      if (state.fullPath == AppRoutes.splash.path) return null;
-      if (onboardingDone &&
-          !loggedIn &&
-          state.fullPath != AppRoutes.login.path) {
+      if (!onboardingDone) {
+        return AppRoutes.onboarding.path;
+      }
+
+      final allowedUnauthPaths = [
+        AppRoutes.splash.path,
+        AppRoutes.onboarding.path,
+        AppRoutes.login.path,
+        AppRoutes.signup.path,
+      ];
+
+      if (!loggedIn) {
+        if (allowedUnauthPaths.contains(currentPath)) {
+          return null;
+        }
         return AppRoutes.login.path;
       }
-      if (loggedIn && state.fullPath == AppRoutes.login.path) {
+      if (loggedIn && currentPath == AppRoutes.login.path) {
         return AppRoutes.home.path;
       }
       return null;
     },
   );
+
+  ref.onDispose(router.dispose);
+
+  return router;
 });

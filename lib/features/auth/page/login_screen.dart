@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_routes.dart';
 import '../../../core/themes/app_colors.dart';
@@ -160,7 +159,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Flexible(
                         child: TextButton(
                           onPressed: () {
-                            GoRouter.of(context).push(AppRoutes.signup.name);
+                            GoRouter.of(context).push(AppRoutes.signup.path);
                           },
                           child: Text(AppLocalizations.of(context).signUp),
                         ),

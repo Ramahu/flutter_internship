@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'package:intern/core/router/app_routes.dart';
 import 'package:intern/core/keys/keys.dart';
+import 'package:intern/core/router/app_routes.dart';
 
 import '../../../core/network/local/cache_helper.dart';
 import '../../../core/themes/app_colors.dart';

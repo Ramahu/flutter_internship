@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../core/network/local/cache_helper.dart';
+import '../../../core/keys/keys.dart';
 import '../../../core/network/local/secure_storage.dart';
 import '../../../core/router/app_routes.dart';
 import '../../../core/themes/app_colors.dart';
-import '../../../core/keys/keys.dart';
 import '../../../generated/assets.dart';
 import '../../auth/provider/auth_notifier.dart';
 
@@ -27,7 +25,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   Future<void> _initApp() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    final onboardingDone = CacheHelper.getData(key: onboardingDoneKey) ?? false;
     final secureStorage = SecureStorage();
     final token = await secureStorage.getData(key: tokenKey);
 
@@ -36,9 +33,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     await ref.read(authProvider.notifier).setLoggedIn(isLoggedIn);
 
     if (!mounted) return;
-    if (!onboardingDone) {
-      context.go(AppRoutes.onboarding.path);
-    } else if (isLoggedIn) {
+    if (isLoggedIn) {
       context.go(AppRoutes.home.path);
     } else {
       context.go(AppRoutes.login.path);
@@ -48,7 +43,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor : AppColors.white,
+      backgroundColor: AppColors.white,
       body: Center(
         child: Image(
           height: 160,

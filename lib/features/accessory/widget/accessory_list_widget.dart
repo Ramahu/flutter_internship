@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:go_router/go_router.dart';
-
 import 'package:intern/features/lessons/widget/state_widget.dart';
 
 import '../../../core/router/app_routes.dart';

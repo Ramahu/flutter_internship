@@ -1,3 +1,5 @@
+export 'package:go_router/go_router.dart';
+
 enum AppRoutes {
   splash('/', 'splash'),
   onboarding('/onboarding', 'onboarding'),
