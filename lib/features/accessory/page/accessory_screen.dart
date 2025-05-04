@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/util/error_widget.dart';
 import '../../../core/util/icons.dart';
+import '../../../core/util/loading_widget.dart';
 import '../../../generated/l10n.dart';
-import '../../lessons/widget/state_widget.dart';
 import '../provider/accessory_notifier.dart';
 import '../widget/accessory_list_widget.dart';
 

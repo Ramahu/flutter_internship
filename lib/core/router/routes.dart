@@ -7,7 +7,7 @@ import '../../features/accessory/page/video_player_screen.dart';
 import '../../features/accessory/page/youtube_player_screen.dart';
 import '../../features/auth/page/login_screen.dart';
 import '../../features/auth/page/signup_screen.dart';
-import '../../features/home_screen.dart';
+import '../../features/home/page/home_screen.dart';
 import '../../features/lessons/page/lesson_screen.dart';
 import '../../features/onboarding/page/onboarding_screen.dart';
 import '../../features/settings/page/settings_screen.dart';

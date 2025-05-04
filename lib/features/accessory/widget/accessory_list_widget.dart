@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:intern/features/lessons/widget/state_widget.dart';
-
 import '../../../core/router/app_routes.dart';
+import '../../../core/util/loading_widget.dart';
 import '../../../generated/l10n.dart';
 import '../model/accessory_model.dart';
 import '../provider/accessory_notifier.dart';
@@ -65,7 +64,7 @@ Widget accessoryItem(AccessoryModel accessory, context) => Card(
                   icon: const Icon(Icons.image_outlined),
                   tooltip: AppLocalizations.of(context).viewImage,
                   onPressed: () => GoRouter.of(context).pushNamed(
-                    'imageViewer',
+                    AppRoutes.imageViewer.name,
                     queryParameters: {'url': accessory.images},
                   ),
                 ),

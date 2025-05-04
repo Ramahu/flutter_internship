@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:intern/generated/l10n.dart';
 
-import '../core/router/app_routes.dart';
-import '../core/themes/app_colors.dart';
-import '../core/util/icons.dart';
+import '../../../core/router/app_routes.dart';
+import '../../../core/themes/app_colors.dart';
+import '../../../core/util/icons.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

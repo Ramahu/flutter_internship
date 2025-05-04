@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:intern/features/lessons/provider/lesson_notifier.dart';
-import 'package:intern/features/lessons/widget/state_widget.dart';
 
+import '../../../core/util/loading_widget.dart';
 import '../../../generated/l10n.dart';
 import '../model/lesson_model.dart';
 

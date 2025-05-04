@@ -6,11 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:intern/features/lessons/widget/lesson_list_widget.dart';
 
+import '../../../core/util/error_widget.dart';
 import '../../../core/util/icons.dart';
+import '../../../core/util/loading_widget.dart';
 import '../../../generated/l10n.dart';
 import '../model/subject_model.dart';
 import '../provider/lesson_notifier.dart';
-import '../widget/state_widget.dart';
 
 class LessonScreen extends ConsumerStatefulWidget {
   const LessonScreen({super.key});

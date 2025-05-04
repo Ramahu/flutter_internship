@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/themes/app_colors.dart';
+import '../../../core/util/error_widget.dart';
+import '../../../core/util/loading_widget.dart';
 import '../../../generated/assets.dart';
 import '../../../generated/l10n.dart';
-import '../../lessons/widget/state_widget.dart';
 import '../provider/audio_player_notifier.dart';
 
 class AudioPlayerScreen extends ConsumerStatefulWidget {
