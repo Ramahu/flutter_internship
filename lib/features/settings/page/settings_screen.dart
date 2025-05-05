@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/localization_notifier.dart';
-import '../../../core/themes/theme_notifier.dart';
 import '../../../core/util/icons.dart';
 import '../../../generated/l10n.dart';
 import '../../auth/provider/auth_notifier.dart';
+import '../provider/locale_provider.dart';
+import '../provider/theme_notifier.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -26,11 +26,11 @@ class SettingsScreen extends ConsumerWidget {
           cardWidget(
             DropdownButton<String>(
               padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-              value: ref.watch(languageProvider).languageCode,
+              value: ref.watch(localeProvider).languageCode,
               underline: const SizedBox(),
               onChanged: (value) {
                 if (value != null) {
-                  ref.read(languageProvider.notifier).setLocale(value);
+                  ref.read(localeProvider.notifier).setLocale(value);
                 }
               },
               items: const [
