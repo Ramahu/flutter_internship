@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/keys/keys.dart';
-import '../../../core/network/local/secure_storage.dart';
 import '../../../core/router/app_routes.dart';
+import '../../../core/services/local_storage/secure_storage.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../generated/assets.dart';
 import '../../auth/provider/auth_notifier.dart';
@@ -30,7 +30,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
     final isLoggedIn = token != null && token.isNotEmpty;
 
-    await ref.read(authProvider.notifier).setLoggedIn(isLoggedIn);
+    await ref.read(authNotifierProvider.notifier).setLoggedIn(isLoggedIn);
 
     if (!mounted) return;
     if (isLoggedIn) {

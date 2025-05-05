@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-import '../../../core/configs/app_configs.dart';
-import '../../../core/network/remote/api_client.dart';
+import '../../../configs/app_configs.dart';
+import '../../../core/client/api_client.dart';
 import '../model/lesson_model.dart';
 import '../model/subject_model.dart';
 
@@ -63,5 +63,4 @@ class LessonRequests {
       return [];
     }
   }
-  
 }

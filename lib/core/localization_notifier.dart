@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:intern/core/keys/keys.dart';
 
-import 'network/local/cache_helper.dart';
+import 'services/local_storage/cache_helper.dart';
 
 class LanguageNotifier extends StateNotifier<Locale> {
   LanguageNotifier() : super(const Locale('en')) {

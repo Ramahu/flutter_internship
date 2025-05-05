@@ -7,28 +7,14 @@ import '../../../core/themes/app_colors.dart';
 import '../../../core/util/icons.dart';
 import '../../../generated/assets.dart';
 import '../../../generated/l10n.dart';
-import '../provider/auth_notifier.dart';
+import '../provider/login_notifier.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/text_form.dart';
 
-class LoginScreen extends ConsumerStatefulWidget {
+class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
-  @override
-  ConsumerState<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends ConsumerState<LoginScreen> {
-  final FocusNode emailFocusNode = FocusNode();
-  final FocusNode passwordFocusNode = FocusNode();
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  var formKey = GlobalKey<FormState>();
-
-  bool isVisible = false;
-  InputBorder outlineBorder = const OutlineInputBorder(
+  final outlineBorder = const OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(25)),
     borderSide: BorderSide(
       color: AppColors.defaultBlue2,
@@ -36,23 +22,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   );
 
   @override
-  void dispose() {
-    emailFocusNode.dispose();
-    passwordFocusNode.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final loginState = ref.watch(loginProvider);
+    final loginNotifier = ref.read(loginProvider.notifier);
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: SingleChildScrollView(
             child: Form(
-              key: formKey,
+              key: loginState.formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -61,16 +41,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     image: AssetImage(Assets.assetsOnboarding1),
                   ),
                   const SizedBox(height: 16),
-                   Text(
+                  Text(
                     AppLocalizations.of(context).login,
-                    style: const TextStyle(fontSize: 30,
-                     fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 30),
                   defaultTextForm(
-                    controller: emailController,
+                    controller: loginState.emailController,
                     type: TextInputType.emailAddress,
-                    focusNode: emailFocusNode,
+                    focusNode: loginState.emailFocusNode,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     autofillHints: [AutofillHints.email],
                     textInputAction: TextInputAction.next,
@@ -85,7 +65,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       color: AppColors.indigoAccent,
                     ),
                     onSubmit: (_) {
-                      FocusScope.of(context).requestFocus(passwordFocusNode);
+                      FocusScope.of(context)
+                          .requestFocus(loginState.passwordFocusNode);
                     },
                     validate: (value) {
                       if (value!.isEmpty) {
@@ -101,9 +82,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     height: 20,
                   ),
                   defaultTextForm(
-                    controller: passwordController,
+                    controller: loginState.passwordController,
                     type: TextInputType.visiblePassword,
-                    focusNode: passwordFocusNode,
+                    focusNode: loginState.passwordFocusNode,
                     textInputAction: TextInputAction.done,
                     label: AppLocalizations.of(context).password,
                     labelStyle: const TextStyle(
@@ -114,13 +95,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       keyOutlined,
                       color: AppColors.indigoAccent,
                     ),
-                    suffix: isVisible ? visibility : visibilityOff,
-                    suffixPressed: () {
-                      setState(() {
-                        isVisible = !isVisible;
-                      });
-                    },
-                    isPassword: isVisible ? false : true,
+                    suffix: loginState.isPasswordVisible
+                        ? visibility
+                        : visibilityOff,
+                    suffixPressed: loginNotifier.togglePasswordVisibility,
+                    isPassword: loginState.isPasswordVisible ? false : true,
                     maxLines: 1,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     autofillHints: [AutofillHints.password],
@@ -141,12 +120,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     height: 50,
                     color1: AppColors.indigoAccent,
                     color2: AppColors.defaultBlue2,
-                    function: () {
-                      if (formKey.currentState!.validate()) {
-                        ref.read(authProvider.notifier).login(
-                            emailController.text, passwordController.text);
-                      }
-                    },
+                    function: loginNotifier.login,
                   ),
                   const SizedBox(height: 30),
                   Row(

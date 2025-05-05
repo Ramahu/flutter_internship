@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:intern/core/localization_notifier.dart';
 
-import 'core/network/local/cache_helper.dart';
-import 'core/router/app_router.dart';
-import 'core/themes/theme_notifier.dart';
 import 'core/keys/keys.dart';
+import 'core/router/app_router.dart';
+import 'core/services/local_storage/cache_helper.dart';
+import 'core/themes/theme_notifier.dart';
 import 'generated/l10n.dart';
 
 void main() async {

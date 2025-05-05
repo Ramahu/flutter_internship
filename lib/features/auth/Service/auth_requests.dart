@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 
-import '../../../core/configs/app_configs.dart';
-import '../../../core/network/remote/api_client.dart';
+import '../../../configs/app_configs.dart';
+import '../../../core/client/api_client.dart';
+import '../../../core/log/app_log.dart';
 import '../model/user_model.dart';
 
 class AuthRequests {
@@ -23,6 +24,7 @@ class AuthRequests {
       );
       UserModel user = UserModel.fromJson(response.data);
       String token = response.data['token'];
+      AppLog.debug('token: $token');
 
       return {
         'success': true,
@@ -31,6 +33,7 @@ class AuthRequests {
         'user': user,
       };
     } on DioException catch (e) {
+      
       return {
         'success': false,
         'message': e.response?.data['message'] ?? 'Something went wrong',

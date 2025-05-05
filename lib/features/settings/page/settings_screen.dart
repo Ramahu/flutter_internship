@@ -13,7 +13,7 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authNotifier = ref.read(authProvider.notifier);
+    final authNotifier = ref.read(authNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(

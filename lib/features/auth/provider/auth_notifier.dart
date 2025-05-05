@@ -2,17 +2,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:intern/core/keys/keys.dart';
 
-import '../../../core/network/local/secure_storage.dart';
+import '../../../core/log/app_log.dart';
+import '../../../core/services/local_storage/secure_storage.dart';
 import '../service/auth_requests.dart';
 
 class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
   AuthNotifier() : super(const AsyncValue.loading());
   final secureStorage = SecureStorage();
+  final authRequests = AuthRequests();
 
   Future<void> login(String email, String password) async {
     state = const AsyncValue.loading();
     try {
-      final authRequests = AuthRequests();
       var response = await authRequests.login(
         email: email,
         password: password,
@@ -29,12 +30,17 @@ class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
   }
 
   void logout() async {
-    await secureStorage.delete(key: tokenKey);
-    state = const AsyncValue.data(false);
+    try {
+      await secureStorage.delete(key: tokenKey);
+      AppLog.success('Logged out successfully');
+      state = const AsyncValue.data(false);
+    } catch (e, st) {
+      AppLog.error('Error logging out: $e');
+      state = AsyncValue.error(e, st);
+    }
   }
 
   void clearCache() async {
-    final authRequests = AuthRequests();
     await authRequests.clearCache();
   }
 
@@ -43,7 +49,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<bool>> {
   }
 }
 
-final authProvider =
+final authNotifierProvider =
     StateNotifierProvider<AuthNotifier, AsyncValue<bool>>((ref) {
   return AuthNotifier();
 });

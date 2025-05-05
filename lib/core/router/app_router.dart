@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:intern/core/keys/keys.dart';
-import 'package:intern/core/network/local/cache_helper.dart';
+import 'package:intern/core/services/local_storage/cache_helper.dart';
 
 import '../../features/auth/provider/auth_notifier.dart';
 
@@ -16,7 +16,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   ref
     ..onDispose(isAuth.dispose)
     ..listen(
-      authProvider.select(
+      authNotifierProvider.select(
         (val) => val.whenData((val) => val),
       ),
       (_, next) {
@@ -34,7 +34,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       final onboardingDone =
           CacheHelper.getData(key: onboardingDoneKey) ?? false;
       final authValue = isAuth.value;
-      final loggedIn = authValue.requireValue;
+      final loggedIn = authValue.value ?? false;
 
       if (authValue.isLoading || !authValue.hasValue) {
         return AppRoutes.splash.path;

@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/keys/keys.dart';
-import '../../../core/network/local/secure_storage.dart';
-import '../provider/auth_notifier.dart';
+import '../../keys/keys.dart';
+import '../../services/local_storage/secure_storage.dart';
+import '../../../features/auth/provider/auth_notifier.dart';
 
 class AuthInterceptor extends Interceptor {
   final secureStorage = SecureStorage();
@@ -23,7 +23,7 @@ class AuthInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
       ProviderScope.containerOf(rootNavigatorKey.currentContext!)
-          .read(authProvider.notifier)
+          .read(authNotifierProvider.notifier)
           .logout();
     }
     return handler.next(err);

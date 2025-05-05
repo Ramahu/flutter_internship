@@ -5,7 +5,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:intern/core/keys/keys.dart';
 import 'package:intern/core/router/app_routes.dart';
 
-import '../../../core/network/local/cache_helper.dart';
+import '../../../core/services/local_storage/cache_helper.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../generated/assets.dart';
 import '../../../generated/l10n.dart';

@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -9,7 +7,8 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../configs/app_configs.dart';
-import '../../../features/auth/service/auth_interceptor.dart';
+import 'interceptor/auth_interceptor.dart';
+import '../log/app_log.dart';
 
 final cacheOptions = CacheOptions(
     store: MemCacheStore(),
@@ -56,9 +55,9 @@ class ApiClient {
   Future<void> clearCache() async {
     try {
       await cacheOptions.store?.clean(); // Clears all cache
-      print('Cache cleared successfully');
+      AppLog.success('Cache cleared successfully');
     } catch (e) {
-      print('Error clearing cache: $e');
+      AppLog.error('Error clearing cache: $e');
     }
   }
 
