@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 
+import '../../../core/log/app_log.dart';
 import '../model/audio_player_state.dart';
 
 class AudioPlayerNotifier extends StateNotifier<AsyncValue<AudioState>> {
@@ -47,8 +48,7 @@ class AudioPlayerNotifier extends StateNotifier<AsyncValue<AudioState>> {
         total: _audioPlayer.duration ?? Duration.zero,
       ));
     } catch (e, st) {
-      // ignore: avoid_print
-      print('Audio load error: $e');
+      AppLog.error('Audio load error: $e');
       state = AsyncValue.error(e.toString(), st);
     }
   }

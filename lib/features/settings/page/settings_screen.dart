@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/util/icons.dart';
+import '../../../core/enums/alert_dialog_type.dart';
+import '../../../core/utils/confirm_dialog.dart';
+import '../../../core/utils/icons.dart';
 import '../../../generated/l10n.dart';
 import '../../auth/provider/auth_notifier.dart';
 import '../provider/locale_provider.dart';
@@ -67,10 +69,21 @@ class SettingsScreen extends ConsumerWidget {
           // Logout Button
           cardWidget(
             ListTile(
-              leading: const Icon(logout),
-              title: Text(AppLocalizations.of(context).logout),
-              onTap: authNotifier.logout,
-            ),
+                leading: const Icon(logout),
+                title: Text(AppLocalizations.of(context).logout),
+                onTap: () async {
+                  await showDialog<bool>(
+                    context: context,
+                    builder: (ctx) => CustomAlertDialog(
+                      title: AppLocalizations.of(context).logout,
+                      description: 'Are you sure you want to logout ?',
+                      acceptText: AppLocalizations.of(context).logout,
+                      cancelText: 'Cancel',
+                      type: AlertDialogType.success,
+                      onAccept: authNotifier.logout,
+                    ),
+                  );
+                }),
           ),
           const SizedBox(height: 10),
         ],

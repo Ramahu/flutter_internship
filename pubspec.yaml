@@ -77,4 +77,4 @@ flutter_intl:
   class_name: AppLocalizations
   arb_dir: lib/core/locale
   # output_dir: lib/core/locale/generated
-  # use_deferred_loading: false
+  use_deferred_loading: true

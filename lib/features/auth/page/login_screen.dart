@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/router/app_routes.dart';
 import '../../../core/themes/app_colors.dart';
-import '../../../core/util/icons.dart';
-import '../../../generated/assets.dart';
+import '../../../core/utils/icons.dart';
+import '../../../core/constants/assets.dart';
 import '../../../generated/l10n.dart';
 import '../provider/login_notifier.dart';
 import '../widgets/gradient_button.dart';

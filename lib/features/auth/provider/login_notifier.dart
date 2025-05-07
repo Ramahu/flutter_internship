@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/log/app_log.dart';
+import '../../../core/utils/snackbars.dart';
 
 import 'auth_notifier.dart';
 
@@ -40,7 +40,7 @@ class LoginNotifier extends ChangeNotifier {
         passwordController.text = '';
       }
     } catch (e) {
-      AppLog.error('error logging in: $e');
+      showErrorSnackbar(e.toString());
     }
   }
 }

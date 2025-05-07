@@ -6,7 +6,7 @@ import '../../../core/keys/keys.dart';
 import '../../../core/services/local_storage/cache_helper.dart';
 
 class ThemeNotifier extends StateNotifier<ThemeMode> {
-  ThemeNotifier() : super(ThemeMode.light) {
+  ThemeNotifier() : super(ThemeMode.system) {
     _loadTheme();
   }
 

@@ -7,8 +7,9 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../configs/app_configs.dart';
+import '../utils/snackbars.dart';
+
 import 'interceptor/auth_interceptor.dart';
-import '../log/app_log.dart';
 
 final cacheOptions = CacheOptions(
     store: MemCacheStore(),
@@ -55,9 +56,13 @@ class ApiClient {
   Future<void> clearCache() async {
     try {
       await cacheOptions.store?.clean(); // Clears all cache
-      AppLog.success('Cache cleared successfully');
+      showSuccessSnackbar(
+        'Cache cleared successfully',
+      );
     } catch (e) {
-      AppLog.error('Error clearing cache: $e');
+      showErrorSnackbar(
+        'Error clearing cache: $e',
+      );
     }
   }
 

@@ -6,9 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:intern/features/lessons/widget/lesson_list_widget.dart';
 
-import '../../../core/util/error_widget.dart';
-import '../../../core/util/icons.dart';
-import '../../../core/util/loading_widget.dart';
+import '../../../core/utils/error_widget.dart';
+import '../../../core/utils/icons.dart';
+import '../../../core/utils/loading_widget.dart';
 import '../../../generated/l10n.dart';
 import '../model/subject_model.dart';
 import '../provider/lesson_notifier.dart';

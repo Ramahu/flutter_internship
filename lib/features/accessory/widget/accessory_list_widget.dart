@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/router/app_routes.dart';
-import '../../../core/util/loading_widget.dart';
+import '../../../core/utils/loading_widget.dart';
 import '../../../generated/l10n.dart';
 import '../model/accessory_model.dart';
 import '../provider/accessory_notifier.dart';

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/constants/assets.dart';
 import '../../../core/themes/app_colors.dart';
-import '../../../core/util/error_widget.dart';
-import '../../../core/util/loading_widget.dart';
-import '../../../generated/assets.dart';
+import '../../../core/utils/error_widget.dart';
+import '../../../core/utils/loading_widget.dart';
 import '../../../generated/l10n.dart';
 import '../provider/audio_player_notifier.dart';
 
@@ -26,11 +26,6 @@ class _AudioPlayerScreenState extends ConsumerState<AudioPlayerScreen> {
         ref.read(audioPlayerProvider.notifier).setAudioSource(widget.url);
       }
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
